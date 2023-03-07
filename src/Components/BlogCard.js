@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom'
 
 const BlogCard = () => {
   return (
-    <div className='col-3'>
       <div className='blog-card'>
         <div className="cardimage">
-          <img src="images/blog-1.jpg"className='img-fluid' alt="blog" />
+          <img src="images/blog-1.jpg"className='img-fluid w-100' alt="blog" />
         </div>
         <div className="blog-content">
           <p className='date'>1 mar,2023</p>
@@ -18,7 +17,6 @@ const BlogCard = () => {
         </div>
       </div>
       
-    </div>
   )
 }
 

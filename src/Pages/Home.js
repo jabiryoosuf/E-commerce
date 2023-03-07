@@ -222,7 +222,11 @@ const Home = () => {
           <div className="row">
             <div className="col-3">
               <div className="famous-card position-relative">
-                <img src="images/famous-01.webp"className="img-fluid" alt="famous" />
+                <img
+                  src="images/famous-01.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
                 <div className="famous-content position-absolute">
                   <h5>big screen</h5>
                   <h6>smart watch series 7</h6>
@@ -232,7 +236,11 @@ const Home = () => {
             </div>
             <div className="col-3">
               <div className="famous-card position-relative">
-                <img src="images/famous-02.webp"className="img-fluid" alt="famous" />
+                <img
+                  src="images/famous-02.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
                 <div className="famous-content position-absolute">
                   <h5 className="text-dark">studio display</h5>
                   <h6 className="text-dark">600 nits of brightness</h6>
@@ -242,22 +250,34 @@ const Home = () => {
             </div>
             <div className="col-3">
               <div className="famous-card position-relative">
-                <img src="images/famous-03.webp"className="img-fluid" alt="famous" />
+                <img
+                  src="images/famous-03.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
                 <div className="famous-content position-absolute">
                   <h5 className="text-dark">smartphones</h5>
                   <h6 className="text-dark">Smartphone 13 Pro.</h6>
-                  <p className="text-dark">Now in Green. From $999.00 or $41.62/mo.
-for 24 mo. Footnote*</p>
+                  <p className="text-dark">
+                    Now in Green. From $999.00 or $41.62/mo. for 24 mo.
+                    Footnote*
+                  </p>
                 </div>
               </div>
             </div>
             <div className="col-3">
               <div className="famous-card position-relative">
-                <img src="images/famous-04.webp"className="img-fluid" alt="famous" />
+                <img
+                  src="images/famous-04.webp"
+                  className="img-fluid"
+                  alt="famous"
+                />
                 <div className="famous-content position-absolute">
                   <h5 className="text-dark">home speakers</h5>
                   <h6 className="text-dark">Room-filling sound.</h6>
-                  <p className="text-dark">From $699 or $116.58/mo. for 12 mo.*</p>
+                  <p className="text-dark">
+                    From $699 or $116.58/mo. for 12 mo.*
+                  </p>
                 </div>
               </div>
             </div>
@@ -333,10 +353,20 @@ for 24 mo. Footnote*</p>
             <div className="col-12">
               <h3 className="section-heading">Our Latest Blogs</h3>
             </div>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
+            <div className="col-3">
+              <BlogCard />
+            </div>
           </div>
         </div>
       </section>
