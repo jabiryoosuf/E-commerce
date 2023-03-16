@@ -5,11 +5,11 @@ import { BsSearch } from "react-icons/bs";
 const Header = () => {
   return (
     <>
-      <header className="header-top-strip py-3">
+      <header className="header-top-strip py-2">
         <div className="container-xxl">
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-6">
-              <p className="text-white mb-0">
+              <p className="text-white mb-0 ">
                 Free Shipping over $100 & Free Return
               </p>
             </div>
@@ -87,13 +87,13 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className="header-bottom py-3">
+      <header className="header-bottom py-2">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
               <div className="menu-bottom d-flex align-item-center gap-30">
                 <div>
-                  <div class="dropdown">
+                  <div class="dropdown  mt-2">
                     <button
                       className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex aliogn-item-center"
                       type="button"
@@ -123,7 +123,7 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="menu-link">
-                  <div className="d-flex align-item-center gap-15">
+                  <div className="d-flex align-item-center gap-5 mt-2">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/store">Our Store</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>
