@@ -10,7 +10,7 @@ import watch from "../images/watch.jpg";
 const Checkout = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Meta title={"Checkout"} />
       <BreadCrumb title="Checkout" />
       <div className="checkout-wrapper py-5 home-wrapper-2">
@@ -165,7 +165,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

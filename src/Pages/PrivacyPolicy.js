@@ -7,7 +7,7 @@ import Header from "../Components/Header";
 const PrivacyPolicy = () => {
   return (
     <>
- <Header />
+ {/* <Header /> */}
       <Meta title={"PrivacyPolicy"} />
       <BreadCrumb title="PrivacyPolicy" />  
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -19,7 +19,7 @@ const PrivacyPolicy = () => {
             </div>
         </div>
       </section>
-      <Footer/>    
+      {/* <Footer/>     */}
     </>
   )
 }

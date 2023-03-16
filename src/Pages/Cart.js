@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
@@ -107,7 +107,7 @@ const Cart = () => {
           </div>
         </div>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

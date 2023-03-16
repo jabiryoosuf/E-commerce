@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Forgotpassword = () => {
   return (
     <>
-    <Header />
+    {/* <Header /> */}
       <Meta title={"Forgot Password"} />
       <BreadCrumb title="Forgot Password" />
       <div className="login-wrapper home-wrapper-2 py-5">
@@ -43,7 +43,7 @@ const Forgotpassword = () => {
         </div>
        </div>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }

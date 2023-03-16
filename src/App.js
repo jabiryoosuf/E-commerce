@@ -19,13 +19,14 @@ import TremsAndContion from "./Pages/TremsAndContion";
 import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
+import Home from "./Pages/Home";
 function App() {
   return (
     <div className="App">
      <BrowserRouter>
      <Routes>
-      <Route path="/"element={<Layout/>}/>
-      {/* <Route path="/home"element={}/> */}
+      <Route element={<Layout/>}>
+      <Route path="/"element={<Home/>}></Route>
       <Route path="/about"element={<About/>} />
       <Route path="/contact"element={<Contact/>} />
       <Route path="/store"element={<OurStore/>} />
@@ -39,16 +40,16 @@ function App() {
       <Route path="/contact"element={<Contact/>} />
       <Route path="/compare-product"element={<CompareProduct/>} />
       <Route path="/wishlist"element={<Wishlist/>} />
-      <Route path="/login"element={<Login/>} />
-      <Route path="/forgot-password"element={<Forgotpassword/>} />
-      <Route path="/sign-up"element={<SignUp/>} />
-      <Route path="/reset-password"element={<ResetPassword/>} />
+      
       <Route path="/Privacy-policy"element={<PrivacyPolicy/>} />
       <Route path="/refund-policy"element={<RefundPolicy/>} />
       <Route path="/shipping-policy"element={<ShipingPolicy/>} />
       <Route path="/terms-condition"element={<TremsAndContion/>} />
-
-
+      </Route>
+      <Route path="/login"element={<Login/>} />
+      <Route path="/forgot-password"element={<Forgotpassword/>} />
+      <Route path="/sign-up"element={<SignUp/>} />
+      <Route path="/reset-password"element={<ResetPassword/>} />
 
 
      </Routes>
