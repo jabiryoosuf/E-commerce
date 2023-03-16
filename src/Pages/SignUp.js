@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 const SignUp = () => {
   return (
     <>
-      <Header />
+      {/* <Header />
       <Meta title={"Sign Up"} />
-      <BreadCrumb title="Sign Up" />
+      <BreadCrumb title="Sign Up" /> */}
       <div className="login-wrapper home-wrapper-2 py-5">
       <div className="container-xxl">
       <div className="row">
@@ -31,6 +31,14 @@ const SignUp = () => {
                     type="text"
                     name="Second Name"
                     placeholder="Second Name"
+                    className="form-control"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    name="email"
+                    placeholder="Email"
                     className="form-control"
                   />
                 </div>
