@@ -4,6 +4,11 @@ import Marquee from "react-fast-marquee";
 import BlogCard from "../Components/BlogCard";
 import ProductCard from "../Components/ProductCard";
 import SpecialProduct from "../Components/SpecialProduct";
+import service1 from "../images/service-02.png";
+import service2 from "../images/service-03.png";
+import service3 from "../images/service-04.png";
+import service4 from "../images/service-05.png";
+import service from "../images/service.png";
 
 const Home = () => {
   return (
@@ -35,7 +40,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -50,7 +55,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -65,7 +70,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -80,7 +85,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -99,35 +104,35 @@ const Home = () => {
             <div className="col-12">
               <div className="services d-flex align-item-center justify-content-between">
                 <div className="d-flex align-item-center gap-15">
-                  <img src="images/service.png" alt="services" />
+                  <img src={service} alt="services" />
                   <div>
                     <h6>Free Shipping</h6>
                     <p className="mb-0">From All Order Over $5</p>
                   </div>
                 </div>
                 <div className="d-flex align-item-center gap-15">
-                  <img src="images/service-02.png" alt="services" />
+                  <img src={service1} alt="services" />
                   <div>
                     <h6>Daily Surprice Offers</h6>
                     <p className="mb-0">Save upto 25% off</p>
                   </div>
                 </div>
                 <div className="d-flex align-item-center gap-15">
-                  <img src="images/service-03.png" alt="services" />
+                  <img src={service2} alt="services" />
                   <div>
                     <h6>Support 24/7</h6>
                     <p className="mb-0">Shop With an expert</p>
                   </div>
                 </div>
                 <div className="d-flex align-item-center gap-15">
-                  <img src="images/service-04.png" alt="services" />
+                  <img src={service3} alt="services" />
                   <div>
                     <h6>Afforadable prices</h6>
                     <p className="mb-0">Get Factory Default Price</p>
                   </div>
                 </div>
                 <div className="d-flex align-item-center gap-15">
-                  <img src="images/service-05.png" alt="services" />
+                  <img src={service4} alt="services" />
                   <div>
                     <h6>Secure Payments</h6>
                     <p className="mb-0">100% Protected Payment</p>
