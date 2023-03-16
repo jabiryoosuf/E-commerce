@@ -34,7 +34,6 @@ function App() {
       <Route path="/cart"element={<Cart/>} />
       <Route path="/checkout"element={<Checkout/>} />
 
-
       <Route path="/singleblogs/:id"element={<Singleblogs/>} />
 
       <Route path="/contact"element={<Contact/>} />
