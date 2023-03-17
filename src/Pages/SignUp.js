@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const SignUp = () => {
   return (
     <>
-      {/* <Header />
+      
       <Meta title={"Sign Up"} />
       <BreadCrumb title="Sign Up" /> */}
       <div className="login-wrapper home-wrapper-2 py-5">
@@ -69,7 +69,7 @@ const SignUp = () => {
         </div>
       </div>
       </div>
-      <Footer />
+     
     </>
   );
 };

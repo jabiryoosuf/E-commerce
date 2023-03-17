@@ -9,7 +9,7 @@ import BlogCard from '../Components/BlogCard';
 const Blogs = () => {
   return (
     <>
-    <Header />
+    
        <Meta title={"Blogs"} />
       <BreadCrumb title="Blogs" />
       <div className="blog-wrapper home-wrapper-2 py-5">
@@ -48,7 +48,7 @@ const Blogs = () => {
         </div>
 
       </div>
-      <Footer />
+      
     </>
   )
 }

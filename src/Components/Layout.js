@@ -8,9 +8,13 @@ const Layout = () => {
   return (
     <>
       <Header/>
+      
+      
       <Outlet/>
-      <Home/>
       <Footer/>
+     
+  
+     
     </>
   )
 }
