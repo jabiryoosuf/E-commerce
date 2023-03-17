@@ -8,9 +8,7 @@ const Login = () => {
 
 
 
-  //  const handleLoginSubmit=()=>{
-
-  //  }
+  
   return (
     <>
         
@@ -24,7 +22,7 @@ const Login = () => {
               <h3 className="text-center mb-3">Login</h3>
               <form  action="" className="d-flex flex-column gap-15">
                 <div>
-                  <input
+                  <input  
                     type="email"
                     name="email"
                     placeholder="Email"

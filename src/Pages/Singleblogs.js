@@ -11,11 +11,7 @@ import {HiOutlineArrowLeft} from "react-icons/hi"
 const Singleblogs = () => {
   return (
     <>
-<<<<<<< HEAD
       
-=======
-      {/* <Header /> */}
->>>>>>> c2a58e866767b5f1371df4d7e6395a7e5423d958
       <Meta title={"Single blogs"} />
       <BreadCrumb title="Single blogs" />
       <div className="blog-wrapper home-wrapper-2 py-5">
@@ -41,11 +37,7 @@ const Singleblogs = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
   
-=======
-      {/* <Footer /> */}
->>>>>>> c2a58e866767b5f1371df4d7e6395a7e5423d958
     </>
   );
 };

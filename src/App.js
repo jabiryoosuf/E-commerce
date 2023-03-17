@@ -20,7 +20,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Home from "./Pages/Home";
-import Home from "./Pages/Home";
+
 function App() {
   return (
     <div className="App">
