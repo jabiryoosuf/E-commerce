@@ -1,11 +1,18 @@
 import React from "react";
+import Meta from "../Components/Meta";
+import BreadCrumb from "../Components/BreadCrumb";
+import Header from "../Components/Header";
+import Footer from "../Components/Footer";
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import watch from "../images/watch.jpg"
+import watch from "../images/watch.jpg";
 
 const Checkout = () => {
   return (
     <>
+      {/* <Header /> */}
+      <Meta title={"Checkout"} />
+      <BreadCrumb title="Checkout" />
       <div className="checkout-wrapper py-5 home-wrapper-2">
         <div className="conteainer-xxl">
           <div className="row">
@@ -18,25 +25,27 @@ const Checkout = () => {
                 >
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link className="text-dark" to="/cart">
+                      <Link className="text-dark total-price" to="/cart">
                         Cart
                       </Link>
+                      &nbsp;/
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
+                    <li className="breadcrumb-item total-price active" aria-current="page">
                       Information
                     </li>
-                    <li className="breadcrumb-item">
-                      <a className="text-dark" href="#">
-                        Shipping
-                      </a>
+                    &nbsp; /
+                    <li className="breadcrumb-item total-price active" aria-current="page">
+                      Shipping
                     </li>
-                    <li className="breadcrumb-item active" aria-current="page">
+                    &nbsp;/
+                    <li className="breadcrumb-item total-price active" aria-current="page">
                       Payment
                     </li>
                   </ol>
                 </nav>
-                <h4 className="title">Contact Information</h4>
-                <p className="user-details">jabirollakal@gmail.com</p>
+                <h4 className="title total">Contact Information</h4>
+                <p className="user-details total">jabirollakal@gmail.com</p>
+                <h4 className="mb-3"> Shipping Address</h4>
                 <form
                   action=""
                   className="d-flex gap-15 flex-wrap justify-content-between"
@@ -85,7 +94,6 @@ const Checkout = () => {
                   </div>
                   <div>
                     <select name="" className="form-control form-select" id="">
-                      {" "}
                       <option value="" selected disabled>
                         select state
                       </option>
@@ -114,24 +122,32 @@ const Checkout = () => {
             </div>
             <div className="col-5">
               <div className="border-bottom py-4">
-            <div className="d-flex gap-10 mb-2 align-items-center">
-          <div className="w-75 d-flex gap-10">
-          <div className="w-25 position-relative">
-            <span style={{top:"-10px",right:"2px"}} className="badge bg-secondary text-white rounded-circle p-2 position-absolute">1</span>
-                    <div>
+                <div className="d-flex gap-10 mb-2 align-items-center">
+                  <div className="w-75 d-flex gap-10">
+                    <div className="w-25 position-relative">
+                      <span
+                        style={{ top: "-10px", right: "2px" }}
+                        className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
+                      >
+                        1
+                      </span>
+                      <div>
                         <img src={watch} className="img-fluid" alt="product" />
-                    </div>
-                    <div>
-                        <h5 className="total-price">hdfiulkjehrnfildkjnsaifkdskj;alfn</h5>
+                      </div>
+                      <div>
+                        <h5 className="total-price">
+                          hdfiulkjehrnfildkjnsaifkdskj;alfn
+                        </h5>
                         <p className="total-price"> ewihriwhfje</p>
+                      </div>
                     </div>
-                </div>
-          </div>
-                <div>
+                  </div>
+                  <div>
                     <h5 className="flex-grow-1">$ 100</h5>
+                  </div>
                 </div>
-              </div></div>
-                <div className="border-bottom py-4">
+              </div>
+              <div className="border-bottom py-4">
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="total">Subtotal</p>
                   <p className="total-price">$ 1000</p>
@@ -149,6 +165,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
     </>
   );
 };

@@ -6,7 +6,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 const Wishlist = () => {
   return (
     <>
-   
+
       <Meta title={"WishList"} />
       <BreadCrumb title="wishList" />
       <div className="wishlist-wrapper home-wrapper-2 py-5">
