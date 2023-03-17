@@ -147,7 +147,7 @@ const Home = () => {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <div className="categories d-flex justify-content-between flex-wrap align-items-center ">
+              <div className="categories d-flex justify-content-between flex-wrap align-items-center">
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Cameras</h6>
