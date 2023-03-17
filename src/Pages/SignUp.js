@@ -5,11 +5,11 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerApi } from "../Store/authSlice";
+import { registerApi } from "../Store/AuthSlice";
 
 const SignUp = () => {
 
-  const [data,setData]=useState()
+  const [data,setData] = useState({})
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -18,20 +18,19 @@ const SignUp = () => {
     setData({...data,
       [e.target.name]:e.target.value
     })
-    console.log(data);
    }
-
+   console.log(data);
+   
    const handleRegister=(e)=>{
     e.preventDefault()
+    if(data){
     dispatch(registerApi({data,navigate}))
+    }
  }
 
 
   return (
     <>
-      
-      <Meta title={"Sign Up"} />
-      <BreadCrumb title="Sign Up" /> 
       <div className="login-wrapper home-wrapper-2 py-5">
       <div className="container-xxl">
       <div className="row">
@@ -42,7 +41,7 @@ const SignUp = () => {
                 <div>
                   <input onChange={handleChange}
                     type="text"
-                    name="Name"
+                    name="firstName"
                     placeholder="First Name"
                     className="form-control"
                   />
@@ -50,7 +49,7 @@ const SignUp = () => {
                 <div>
                   <input onChange={handleChange}
                     type="text"
-                    name="Second Name" 
+                    name="lastName" 
                     placeholder="Second Name"
                     className="form-control"
                   />
@@ -66,7 +65,7 @@ const SignUp = () => {
                 <div>
                   <input onChange={handleChange}
                     type="number"
-                    name="Mobile Number"
+                    name="phone"
                     placeholder="Mobile Number"
                     className="form-control"
                   />
@@ -90,7 +89,6 @@ const SignUp = () => {
         </div>
       </div>
       </div>
-     
     </>
   );
 };
