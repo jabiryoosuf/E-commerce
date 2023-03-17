@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import Header from "../Components/Header";
@@ -16,6 +16,10 @@ const SingleProduct = () => {
     zoomWidth: 400,
     img: "https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640",
   };
+useEffect(()=>{
+  window.scrollTo(0,0)
+},[])
+
 
   return (
     <>

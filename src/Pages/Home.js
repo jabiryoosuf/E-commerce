@@ -4,6 +4,11 @@ import Marquee from "react-fast-marquee";
 import BlogCard from "../Components/BlogCard";
 import ProductCard from "../Components/ProductCard";
 import SpecialProduct from "../Components/SpecialProduct";
+import service1 from "../images/service-02.png";
+import service2 from "../images/service-03.png";
+import service3 from "../images/service-04.png";
+import service4 from "../images/service-05.png";
+import service from "../images/service.png";
 
 const Home = () => {
   return (
@@ -35,7 +40,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -50,7 +55,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -65,7 +70,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />
@@ -80,7 +85,7 @@ const Home = () => {
                     alt="main banner"
                   />
                   <div className="small-banner-content position-absolute">
-                    <h4>SUPERCHARGED FOR PROS</h4>
+                    <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>
                     <p>
                       From $999.00 <br />

@@ -35,19 +35,19 @@ function App() {
       <Route path="/cart"element={<Cart/>} />
       <Route path="/checkout"element={<Checkout/>} />
 
-      <Route path="/singleblogs/:id"element={<Singleblogs/>} />
+      <Route path="/singleblogs/:id"element={<Singleblogs/>} ></Route>
 
-      <Route path="/contact"element={<Contact/>} />
-      <Route path="/compare-product"element={<CompareProduct/>} />
-      <Route path="/wishlist"element={<Wishlist/>} />
-      <Route path="/login"element={<Login/>} />
-      <Route path="/forgot-password"element={<Forgotpassword/>} />
-      <Route path="/sign-up"element={<SignUp/>} />
-      <Route path="/reset-password"element={<ResetPassword/>} />
-      <Route path="/Privacy-policy"element={<PrivacyPolicy/>} />
-      <Route path="/refund-policy"element={<RefundPolicy/>} />
-      <Route path="/shipping-policy"element={<ShipingPolicy/>} />
-      <Route path="/terms-condition"element={<TremsAndContion/>} />
+      <Route path="/contact"element={<Contact/>} ></Route>
+      <Route path="/compare-product"element={<CompareProduct/>} ></Route>
+      <Route path="/wishlist"element={<Wishlist/>} ></Route>
+      <Route path="/login"element={<Login/>} ></Route>
+      <Route path="/forgot-password"element={<Forgotpassword/>} ></Route>
+      <Route path="/sign-up"element={<SignUp/>} ></Route>
+      <Route path="/reset-password"element={<ResetPassword/>} ></Route>
+      <Route path="/Privacy-policy"element={<PrivacyPolicy/>} ></Route>
+      <Route path="/refund-policy"element={<RefundPolicy/>} ></Route>
+      <Route path="/shipping-policy"element={<ShipingPolicy/>} ></Route>
+      <Route path="/terms-condition"element={<TremsAndContion/>} ></Route>
 
 
       </Route>

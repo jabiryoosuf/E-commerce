@@ -1,8 +1,7 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
+
 
 const Wishlist = () => {
   return (

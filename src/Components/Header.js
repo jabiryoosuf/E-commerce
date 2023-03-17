@@ -3,9 +3,10 @@ import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 
 const Header = () => {
+ 
   return (
     <>
-      <header className="header-top-strip py-2">
+      <header className="header-top-strip py-1">
         <div className="container-xxl">
           <div className="row mt-1">
             <div className="col-6">
@@ -17,7 +18,7 @@ const Header = () => {
               <p className="text-end text-white">
                 Customer Care:
                 <a className="text-white" href="+91-9745747303">
-                  +91-9745747303
+                  +91-9987654123
                 </a>
               </p>
             </div>
@@ -47,9 +48,9 @@ const Header = () => {
               </div>
             </div>
             <div className="col-5">
-              <div className="header-upper-links d-flex align-item-center justify-content-between">
+              <div className="header-upper-links d-flex align-items-center justify-content-between">
                 <div>
-                  <Link to="/compare-product" className="d-flex align-item-center gap-10 text-white">
+                  <Link to="/compare-product" className="d-flex align-items-center gap-10 text-white">
                     <img src="images/compare.svg" alt="" />
                     <p className="mb-0">
                       Compare <br /> Products
@@ -57,7 +58,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/wishlist" className="d-flex align-item-center gap-10 text-white">
+                  <Link to="/wishlist" className="d-flex align-items-center gap-10 text-white">
                     <img src="images/wishlist.svg" alt="" />
                     <p className="mb-0">
                       Favourite <br /> Wishlist
@@ -65,7 +66,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/login" className="d-flex align-item-center gap-10 text-white">
+                  <Link to="/login" className="d-flex align-items-center gap-10 text-white">
                     <img src="images/user.svg" alt="" />
                     <p className="mb-0">
                       Log <br />
@@ -74,7 +75,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link to="/cart" className="d-flex align-item-center gap-10 text-white">
+                  <Link to="/cart" className="d-flex align-items-center gap-10 text-white">
                     <img src="images/cart.svg" alt="" />
                     <div className="d-flex flex-column gap-10">
                       <span className="badge bg-white text-dark">0</span>
@@ -91,11 +92,11 @@ const Header = () => {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <div className="menu-bottom d-flex align-item-center gap-30">
+              <div className="menu-bottom d-flex align-items-center gap-30">
                 <div>
                   <div class="dropdown  mt-2">
                     <button
-                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex aliogn-item-center"
+                      className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex aliogn-items-center"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -123,7 +124,9 @@ const Header = () => {
                   </div>
                 </div>
                 <div className="menu-link">
+
                   <div className="d-flex align-item-center gap-5 mt-2">
+
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/store">Our Store</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>

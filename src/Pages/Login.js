@@ -1,11 +1,14 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+  
 const Login = () => {
+
+
+
+  
   return (
     <>
 
@@ -16,9 +19,9 @@ const Login = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Login</h3>
-              <form action="" className="d-flex flex-column gap-15">
+              <form  action="" className="d-flex flex-column gap-15">
                 <div>
-                  <input
+                  <input  
                     type="email"
                     name="email"
                     placeholder="Email"
