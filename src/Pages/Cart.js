@@ -1,8 +1,6 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import watch from "../images/watch.jpg";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -10,7 +8,6 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   return (
     <>
-      {/* <Header /> */}
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
@@ -107,7 +104,6 @@ const Cart = () => {
           </div>
         </div>
       </section>
-      {/* <Footer /> */}
     </>
   );
 };

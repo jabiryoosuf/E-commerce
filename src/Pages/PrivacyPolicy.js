@@ -1,13 +1,10 @@
 import React from 'react'
-import Footer from '../Components/Footer'
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
 
 const PrivacyPolicy = () => {
   return (
     <>
- {/* <Header /> */}
       <Meta title={"PrivacyPolicy"} />
       <BreadCrumb title="PrivacyPolicy" />  
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -19,7 +16,6 @@ const PrivacyPolicy = () => {
             </div>
         </div>
       </section>
-      {/* <Footer/>     */}
     </>
   )
 }

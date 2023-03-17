@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
 import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
@@ -13,7 +11,6 @@ const OurStore = () => {
   // alert (grid)
   return (
     <div>
-      {/* <Header /> */}
       <Meta title={"Our Store"} />
       <BreadCrumb title="Our Store " />
       <div className="store-wrapper home-wrapper-2 py-5">
@@ -288,7 +285,6 @@ const OurStore = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

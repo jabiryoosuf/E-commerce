@@ -23,7 +23,6 @@ useEffect(()=>{
 
   return (
     <>
-      {/* <Header /> */}
       <Meta title={"SingleProduct"} />
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
@@ -303,7 +302,6 @@ useEffect(()=>{
           </div>
         </div>
       </section>
-      {/* <Footer /> */}
     </>
   );
 };

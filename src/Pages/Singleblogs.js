@@ -1,8 +1,6 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import blog from "../images/blog-1.jpg";
 
 import { Link } from "react-router-dom";
@@ -11,7 +9,6 @@ import {HiOutlineArrowLeft} from "react-icons/hi"
 const Singleblogs = () => {
   return (
     <>
-      {/* <Header /> */}
       <Meta title={"Single blogs"} />
       <BreadCrumb title="Single blogs" />
       <div className="blog-wrapper home-wrapper-2 py-5">
@@ -37,7 +34,6 @@ const Singleblogs = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };

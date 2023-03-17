@@ -1,6 +1,4 @@
 import React from "react";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import { AiOutlineHome } from "react-icons/ai";
@@ -11,7 +9,6 @@ import { BsInfoCircleFill } from "react-icons/bs";
 const Contact = () => {
   return (
     <>
-      {/* <Header /> */}
       <Meta title={"Contact Us"} />
       <BreadCrumb title="Contact Us" />
       <div className="contact-wrapper py-5 home-wrapper-2">
@@ -98,7 +95,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* <Footer /> */}
     </>
   );
 };

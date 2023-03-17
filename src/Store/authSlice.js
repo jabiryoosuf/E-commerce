@@ -10,6 +10,10 @@ export const loginApi =createAsyncThunk  ("auth/loginApi", async (input) => {
   }
   return result.data;
 });
+// export const registerationApi = createAsyncThunk ("auth/registerationApi"),async (input) => {
+//   const result = await axiosApi.post("/login/mail",input.login);
+//   console.log(result);
+
   const initialState={
     token:"",
   }
