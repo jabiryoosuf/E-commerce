@@ -7,7 +7,6 @@ import Footer from "../Components/Footer";
 const ShipingPolicy = () => {
   return (
     <>
-     <Header />
       <Meta title={"ShipingPolicy"} />
       <BreadCrumb title="ShipingPolicy" />
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -19,7 +18,6 @@ const ShipingPolicy = () => {
             </div>
         </div>
       </section>
-      <Footer/>
       
     </>
   )

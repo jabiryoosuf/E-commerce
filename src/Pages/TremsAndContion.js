@@ -6,7 +6,6 @@ import Footer from "../Components/Footer";
 const TremsAndContion = () => {
   return (
     <>
-     <Header />
       <Meta title={"TremsAndContion"} />
       <BreadCrumb title="TremsAndContion" />
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -18,7 +17,7 @@ const TremsAndContion = () => {
             </div>
         </div>
       </section>
-      <Footer/>
+
     </>
   )
 }

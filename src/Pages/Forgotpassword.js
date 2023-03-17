@@ -41,7 +41,7 @@ const Forgotpassword = () => {
         </div>
        </div>
       </div>
-      <Footer/>
+
     </>
   )
 }

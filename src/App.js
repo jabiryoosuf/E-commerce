@@ -19,13 +19,14 @@ import TremsAndContion from "./Pages/TremsAndContion";
 import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
+import Home from "./Pages/Home";
 function App() {
   return (
     <div className="App">
      <BrowserRouter>
      <Routes>
-      <Route path="/"element={<Layout/>}/>
-      {/* <Route path="/home"element={}/> */}
+      <Route element={<Layout/>}>
+      <Route path="/"element={<Home/>}/>
       <Route path="/about"element={<About/>} />
       <Route path="/contact"element={<Contact/>} />
       <Route path="/store"element={<OurStore/>} />
@@ -49,7 +50,7 @@ function App() {
       <Route path="/terms-condition"element={<TremsAndContion/>} />
 
 
-
+      </Route>
 
      </Routes>
      </BrowserRouter>

@@ -7,7 +7,7 @@ import Footer from "../Components/Footer";
 const Wishlist = () => {
   return (
     <>
-      <Header />
+
       <Meta title={"WishList"} />
       <BreadCrumb title="wishList" />
       <div className="wishlist-wrapper home-wrapper-2 py-5">
@@ -83,7 +83,6 @@ const Wishlist = () => {
         </div>
       </div>
 
-      <Footer />
     </>
   );
 };
