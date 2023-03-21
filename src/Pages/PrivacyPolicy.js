@@ -1,8 +1,6 @@
 import React from 'react'
-import Footer from '../Components/Footer'
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
 
 const PrivacyPolicy = () => {
   return (

@@ -1,8 +1,6 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import blog from "../images/blog-1.jpg";
 
 import { Link } from "react-router-dom";

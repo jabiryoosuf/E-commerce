@@ -44,7 +44,7 @@ function App() {
       <Route path="/login"element={<Login/>} ></Route>
       <Route path="/forgot-password"element={<Forgotpassword/>} ></Route>
       <Route path="/sign-up"element={<SignUp/>} ></Route>
-      <Route path="/reset-password"element={<ResetPassword/>} ></Route>
+     
       <Route path="/Privacy-policy"element={<PrivacyPolicy/>} ></Route>
       <Route path="/refund-policy"element={<RefundPolicy/>} ></Route>
       <Route path="/shipping-policy"element={<ShipingPolicy/>} ></Route>
@@ -52,7 +52,7 @@ function App() {
 
 
       </Route>
-      
+      <Route path="/resetpassword/:id"element={<ResetPassword/>} ></Route>
      </Routes>
      </BrowserRouter>
     </div>

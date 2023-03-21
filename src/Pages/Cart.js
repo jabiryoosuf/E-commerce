@@ -1,8 +1,6 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import watch from "../images/watch.jpg";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";

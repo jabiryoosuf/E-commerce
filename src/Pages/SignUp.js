@@ -5,11 +5,10 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerApi } from "../Store/authSlice";
+import { registerApi } from "../Store/AuthSlice";
 
 const SignUp = () => {
-
-  const [data,setData]=useState()
+  const [data,setData]=useState({});
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -21,9 +20,10 @@ const SignUp = () => {
     console.log(data);
    }
 
-   const handleRegister=(e)=>{
-    e.preventDefault()
-    dispatch(registerApi({data,navigate}))
+   const handleSubmit=(e)=>{
+    e.preventDefault();
+    dispatch(registerApi({data, navigate}));
+    // console.log("data not submited");
  }
 
 
@@ -38,11 +38,11 @@ const SignUp = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">Signup</h3>
-              <form onSubmit={handleRegister}  action="" className="d-flex flex-column gap-15">
+              <form onSubmit={handleSubmit}  action="" className="d-flex flex-column gap-15">
                 <div>
                   <input onChange={handleChange}
                     type="text"
-                    name="Name"
+                    name="firstName"
                     placeholder="First Name"
                     className="form-control"
                   />
@@ -50,7 +50,7 @@ const SignUp = () => {
                 <div>
                   <input onChange={handleChange}
                     type="text"
-                    name="Second Name" 
+                    name="lastName" 
                     placeholder="Second Name"
                     className="form-control"
                   />
@@ -66,7 +66,7 @@ const SignUp = () => {
                 <div>
                   <input onChange={handleChange}
                     type="number"
-                    name="Mobile Number"
+                    name="phone"
                     placeholder="Mobile Number"
                     className="form-control"
                   />

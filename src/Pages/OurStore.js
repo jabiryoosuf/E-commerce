@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import BreadCrumb from "../Components/BreadCrumb";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
 import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
