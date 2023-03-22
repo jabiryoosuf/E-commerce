@@ -10,11 +10,12 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, setLogin] = useState();
+  const [login, setLogin] = useState({});
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(loginApi({ login, navigate }));
+    dispatch(loginApi({login,navigate}));
+  }
   return (
     <>
       <Meta title={"Login"} />
@@ -26,7 +27,7 @@ const Login = () => {
               <h3 className="text-center mb-3">Login</h3>
               <form onSubmit={handleLogin}  action="" className="d-flex flex-column gap-15">
                 <div>
-                  <input onChange={(e) => setLogin({ ...login, email: e.target.value })}
+                  <input onChange={(e) => setLogin({...login,email:e.target.value })}
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -34,7 +35,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="mt-1">
-                  <input onChange={(e) => setLogin({ ...login, password: e.target.value })}
+                  <input onChange={(e) => setLogin({...login,password:e.target.value })}
                     type="password"
                     name="password"
                     placeholder="password"
@@ -60,5 +61,5 @@ const Login = () => {
     </>
   );
 };
-}
+
 export default Login
