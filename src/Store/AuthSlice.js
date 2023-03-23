@@ -84,7 +84,7 @@ const authSlice = createSlice({
     },
     [forgotpassowrdApi.pending]: (state) => {
      console.log("pending");
-    
+       
     //  toast.loading(("Sending email..."), { autoClose: true });
     //  toast.update(0, { render: "Email sent successfully!", type: "success", autoClose: 1000 });
         

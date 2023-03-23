@@ -20,11 +20,13 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Home from "./Pages/Home";
-
+import AdminLayout from "./Components/admin/AdminLayout";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchBar from "./Components/admin/SearchBar";
 function App() {
   return (
     <div className="App">
-     <BrowserRouter>
+      <BrowserRouter> 
      <Routes>
       <Route element={<Layout/>}>
       <Route path="/"element={ <Home/>}/>
@@ -53,8 +55,14 @@ function App() {
 
       </Route>
       <Route path="/resetpassword/:id"element={<ResetPassword/>} ></Route>
-     </Routes>
-     </BrowserRouter>
+       <Route element={<AdminLayout/>}>
+
+      </Route> 
+
+     </Routes> 
+     
+      </BrowserRouter>  
+       {/* <SearchBar/>  */}
     </div>
   );
 }
