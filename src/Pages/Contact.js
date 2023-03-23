@@ -1,6 +1,4 @@
 import React from "react";
-import Footer from "../Components/Footer";
-import Header from "../Components/Header";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import { AiOutlineHome } from "react-icons/ai";

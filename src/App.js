@@ -20,6 +20,8 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Home from "./Pages/Home";
+import SignUp from "./Pages/SignUp";
+import DashboardHome from "./Pages/Admin/Dashboard-home";
 function App() {
   return (
     <div className="App">
@@ -44,6 +46,8 @@ function App() {
       <Route path="/forgot-password"element={<Forgotpassword/>} ></Route>
       <Route path="/sign-up"element={<Register/>} ></Route>
       <Route path="/reset-password"element={<ResetPassword/>} ></Route>
+      <Route path="/sign-up"element={<SignUp/>} ></Route>
+     
       <Route path="/Privacy-policy"element={<PrivacyPolicy/>} ></Route>
       <Route path="/refund-policy"element={<RefundPolicy/>} ></Route>
       <Route path="/shipping-policy"element={<ShipingPolicy/>} ></Route>
@@ -51,7 +55,9 @@ function App() {
 
 
       </Route>
-
+      <Route path="/resetpassword/:id"element={<ResetPassword/>} ></Route>
+      <Route path="/admin" element={<DashboardHome/>}/>
+        {/* <Route path="/addproduct" element={<CustomForm/>}/> */}
      </Routes>
      </BrowserRouter>
     </div>

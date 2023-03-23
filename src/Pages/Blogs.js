@@ -1,7 +1,5 @@
 import React from 'react'
 import BreadCrumb from "../Components/BreadCrumb";
-import Footer from '../Components/Footer';
-import Header from '../Components/Header';
 import Meta from "../Components/Meta";
 import BlogCard from '../Components/BlogCard';
 

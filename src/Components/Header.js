@@ -1,11 +1,28 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
+import { ToastContainer, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = () => {
  
   return (
-    <>
+    <>  
+        <ToastContainer     
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          
+          transition={Zoom}
+        />
+
       <header className="header-top-strip py-1">
         <div className="container-xxl">
           <div className="row mt-1">
@@ -137,7 +154,9 @@ const Header = () => {
             </div>
           </div>
         </div>
+    
       </header>
+    
     </>
   );
 };

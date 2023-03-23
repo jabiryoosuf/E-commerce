@@ -1,8 +1,6 @@
 import React from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import watch from "../images/watch.jpg";
@@ -10,7 +8,6 @@ import watch from "../images/watch.jpg";
 const Checkout = () => {
   return (
     <>
-      {/* <Header /> */}
       <Meta title={"Checkout"} />
       <BreadCrumb title="Checkout" />
       <div className="checkout-wrapper py-5 home-wrapper-2">
@@ -165,7 +162,6 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
     </>
   );
 };

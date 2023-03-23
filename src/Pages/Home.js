@@ -10,6 +10,8 @@ import service3 from "../images/service-04.png";
 import service4 from "../images/service-05.png";
 import service from "../images/service.png";
 
+
+
 const Home = () => {
   return (
     <>
@@ -375,7 +377,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+  
     </>
+    
   );
 };
 
