@@ -1,34 +1,39 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import Meta from "../Components/Meta";
-import { resetpasswordApi } from '../Store/authSlice';
+import Header from "../Components/Header";
+import { useParams } from 'react-router-dom';
+import { resetpasswordApi } from '../Store/AuthSlice';
+import { useDispatch } from 'react-redux';
 import { ToastContainer, Zoom } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
+
 const ResetPassword = () => {
-  const params =useParams();
-  const id=params.id;
+   const parms=useParams()
+     const id=parms.id
+    const [password,setpassword]=useState({})
+ 
+  const dispatch= useDispatch()
+   
 
-  const dispatch = useDispatch();
-
-  const [password,setPassword]=useState ({})
-  
-   const handleChange =(e)=>{
-    setPassword({[e.target.name]:e.target.value})
-   }
-
-
-
-  const handlesubmitpassword=(e)=>{
-    e.preventDefault();
-    dispatch(resetpasswordApi({password,id}))
-    
-
+  const handleChange=(e)=>{
+    setpassword({...password,[e.target.name]:e.target.value})
+      
   }
+  console.log(password);
+
+
+    const handleSubmitpassword=(e)=>{
+      e.preventDefault();
+      dispatch(resetpasswordApi({password,id}))
+    }
+
+
+
   return (
     <>
-     <ToastContainer     
+    
+    <ToastContainer     
           position="top-right"
           autoClose={1000}
           hideProgressBar={false}
@@ -41,6 +46,7 @@ const ResetPassword = () => {
           theme="light"
           transition={Zoom}
         />
+      
       <Meta title={"Reset Password"} />
       <div className="login-wrapper home-wrapper-2 py-5">
        <div className="container-xxl">
@@ -48,7 +54,8 @@ const ResetPassword = () => {
           <div className="col-12">
             <div className="auth-card">
               <h3 className="text-center mb-3">ResetPassword</h3>
-              <form onSubmit={handlesubmitpassword} action="" className="d-flex flex-column gap-15">
+
+              <form onSubmit={handleSubmitpassword}  action="" className="d-flex flex-column gap-15">
         
               <div className="mt-1">
                   <input onChange={handleChange}
@@ -61,14 +68,14 @@ const ResetPassword = () => {
                 <div className="mt-1">
                   <input onChange={handleChange}
                     type="password"
-                    name="password"
+                    name="confirmPassword"
                     placeholder=" confirm password"
                     className="form-control"
                   />
                 </div>
                 <div>
                   <div className=" mt-3 d-flex justify-content-center gap-15 align-items-center">
-                    <button className="button border-0">OK</button>
+                    <button  type='submit'className="button border-0" >OK</button>
                   </div>
                 </div>
               </form>

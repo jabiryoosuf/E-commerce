@@ -15,6 +15,7 @@ const TremsAndContion = () => {
             </div>
         </div>
       </section>
+
     </>
   )
 }

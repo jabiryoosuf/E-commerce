@@ -10,6 +10,8 @@ import service3 from "../images/service-04.png";
 import service4 from "../images/service-05.png";
 import service from "../images/service.png";
 
+
+
 const Home = () => {
   return (
     <>
@@ -103,36 +105,36 @@ const Home = () => {
           <div className="row">
             <div className="col-12">
               <div className="services d-flex align-item-center justify-content-between">
-                <div className="d-flex align-item-center gap-15">
-                  <img src={service} alt="services" />
+                <div className="d-flex align-items-center gap-15">
+                  <img src="images/service.png" alt="services" />
                   <div>
                     <h6>Free Shipping</h6>
                     <p className="mb-0">From All Order Over $5</p>
                   </div>
                 </div>
-                <div className="d-flex align-item-center gap-15">
-                  <img src={service1} alt="services" />
+                <div className="d-flex align-items-center gap-15">
+                  <img src="images/service-02.png" alt="services" />
                   <div>
                     <h6>Daily Surprice Offers</h6>
                     <p className="mb-0">Save upto 25% off</p>
                   </div>
                 </div>
-                <div className="d-flex align-item-center gap-15">
-                  <img src={service2} alt="services" />
+                <div className="d-flex align-items-center gap-15">
+                  <img src="images/service-03.png" alt="services" />
                   <div>
                     <h6>Support 24/7</h6>
                     <p className="mb-0">Shop With an expert</p>
                   </div>
                 </div>
-                <div className="d-flex align-item-center gap-15">
-                  <img src={service3} alt="services" />
+                <div className="d-flex align-items-center gap-15">
+                  <img src="images/service-04.png" alt="services" />
                   <div>
                     <h6>Afforadable prices</h6>
                     <p className="mb-0">Get Factory Default Price</p>
                   </div>
                 </div>
-                <div className="d-flex align-item-center gap-15">
-                  <img src={service4} alt="services" />
+                <div className="d-flex align-items-center gap-15">
+                  <img src="images/service-05.png" alt="services" />
                   <div>
                     <h6>Secure Payments</h6>
                     <p className="mb-0">100% Protected Payment</p>
@@ -375,7 +377,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+  
     </>
+    
   );
 };
 

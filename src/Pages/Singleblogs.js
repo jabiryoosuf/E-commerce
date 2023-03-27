@@ -34,6 +34,7 @@ const Singleblogs = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };

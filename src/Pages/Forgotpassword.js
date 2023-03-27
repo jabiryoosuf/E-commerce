@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Meta from "../Components/Meta";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { forgotpasswordApi } from "../Store/authSlice";
+import { useDispatch } from 'react-redux';
+import { forgotpassowrdApi } from '../Store/AuthSlice';
 
 const Forgotpassword = () => {
   const [email, setMail] = useState({});
@@ -18,7 +18,7 @@ const Forgotpassword = () => {
   const handleForgotSubmit = (e) => {
     e.preventDefault();
     if (email) {
-      dispatch(forgotpasswordApi(email));
+      dispatch(forgotpassowrdApi(email));
     }
   };
   return (
