@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export const loginApi = createAsyncThunk(
   "auth/loginApi",
   async ({ login, navigate }) => {
-    const result = await axiosApi.post("admin/login", login);
+    const result = await axiosApi.post("/login/mail", login);
     console.log(result);
     if (result?.data?.token) {
       localStorage.setItem("token", result.data.token);
