@@ -8,7 +8,9 @@ import { useDispatch } from "react-redux";
 import { registerApi } from "../Store/AuthSlice";
 
 const SignUp = () => {
-  const [data,setData]=useState({});
+
+  const [data,setData] = useState({})
+
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -17,8 +19,15 @@ const SignUp = () => {
     setData({...data,
       [e.target.name]:e.target.value
     })
-    console.log(data);
    }
+   console.log(data);
+   
+   const handleRegister=(e)=>{
+    e.preventDefault()
+    if(data){
+    dispatch(registerApi({data,navigate}))
+    }
+ }
 
    const handleSubmit=(e)=>{
     e.preventDefault();
@@ -29,9 +38,6 @@ const SignUp = () => {
 
   return (
     <>
-      
-      <Meta title={"Sign Up"} />
-      <BreadCrumb title="Sign Up" /> 
       <div className="login-wrapper home-wrapper-2 py-5">
       <div className="container-xxl">
       <div className="row">
@@ -90,7 +96,6 @@ const SignUp = () => {
         </div>
       </div>
       </div>
-     
     </>
   );
 };

@@ -11,7 +11,7 @@ const OurStore = () => {
   // alert (grid)
   return (
     <div>
-      
+
       <Meta title={"Our Store"} />
       <BreadCrumb title="Our Store " />
       <div className="store-wrapper home-wrapper-2 py-5">
@@ -286,7 +286,6 @@ const OurStore = () => {
           </div>
         </div>
       </div>
-     
     </div>
   );
 };

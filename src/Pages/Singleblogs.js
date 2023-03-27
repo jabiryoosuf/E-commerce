@@ -9,7 +9,6 @@ import {HiOutlineArrowLeft} from "react-icons/hi"
 const Singleblogs = () => {
   return (
     <>
-      
       <Meta title={"Single blogs"} />
       <BreadCrumb title="Single blogs" />
       <div className="blog-wrapper home-wrapper-2 py-5">
@@ -35,7 +34,7 @@ const Singleblogs = () => {
           </div>
         </div>
       </div>
-  
+
     </>
   );
 };

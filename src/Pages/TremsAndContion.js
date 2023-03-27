@@ -4,7 +4,6 @@ import BreadCrumb from "../Components/BreadCrumb";
 const TremsAndContion = () => {
   return (
     <>
-     
       <Meta title={"TremsAndContion"} />
       <BreadCrumb title="TremsAndContion" />
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -16,7 +15,7 @@ const TremsAndContion = () => {
             </div>
         </div>
       </section>
-      
+
     </>
   )
 }

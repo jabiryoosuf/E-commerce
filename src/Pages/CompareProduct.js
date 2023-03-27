@@ -6,7 +6,6 @@ import Meta from "../Components/Meta";
 const CompareProduct = () => {
   return (
     <>
-   
           <Meta title={"Compare Products"} />
       <BreadCrumb title="Compare Products" />
       <div className="compare-product-wrapper home-wrapper-2 py-5">
@@ -97,7 +96,6 @@ const CompareProduct = () => {
         </div>
       </div>
     
-      
     </>
   )
 }

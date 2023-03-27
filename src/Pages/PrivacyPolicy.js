@@ -6,6 +6,7 @@ const PrivacyPolicy = () => {
   return (
     <>
 
+
       <Meta title={"PrivacyPolicy"} />
       <BreadCrumb title="PrivacyPolicy" />  
       <section className='policy-wrapper py-5 home-wrapper-2'>
@@ -16,8 +17,7 @@ const PrivacyPolicy = () => {
                 </div>
             </div>
         </div>
-      </section>
-         
+      </section>   
     </>
   )
 }

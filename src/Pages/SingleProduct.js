@@ -11,9 +11,9 @@ import { AiOutlineHeart } from "react-icons/ai";
 const SingleProduct = () => {
   const [orderedProduct, setOrderedProduct] = useState(true);
   const props = {
-    width: 400,
-    height: 500,
-    zoomWidth: 500,
+    width: 600,
+    height: 400,
+    zoomWidth: 400,
     img: "https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640",
   };
 useEffect(()=>{
@@ -23,7 +23,6 @@ useEffect(()=>{
 
   return (
     <>
-     
       <Meta title={"SingleProduct"} />
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
@@ -303,7 +302,6 @@ useEffect(()=>{
           </div>
         </div>
       </section>
-      
     </>
   );
 };

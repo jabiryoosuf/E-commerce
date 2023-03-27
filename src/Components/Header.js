@@ -25,9 +25,9 @@ const Header = () => {
 
       <header className="header-top-strip py-1">
         <div className="container-xxl">
-          <div className="row mt-3">
+          <div className="row mt-1">
             <div className="col-6">
-              <p className="text-white mb-0 ">
+              <p className="text-white mb-0" >
                 Free Shipping over $100 & Free Return
               </p>
             </div>

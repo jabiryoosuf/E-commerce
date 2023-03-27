@@ -16,7 +16,6 @@ const ShipingPolicy = () => {
             </div>
         </div>
       </section>
-    
       
     </>
   )
