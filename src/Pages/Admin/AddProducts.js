@@ -5,8 +5,8 @@ import { Button } from "react-bootstrap";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 // import Stack from "@mui/material/Stack";
-import { useDispatch } from "react-redux";
-import { addproductApi } from "../../Store/ProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addproductApi, productimageApi } from "../../Store/ProductSlice";
 import "./Addproduct.css";
 import { useNavigate } from "react-router-dom";
 
@@ -18,11 +18,14 @@ const AddProducts = () => {
   const dispatch = useDispatch();
   const navigate= useNavigate()
 
+  const {addproducts}=useSelector(((state)=>state.products))
 
+console.log(addproducts);
+const productId=addproducts._id
   const handleImage = (e) => {
-    const file = e.target.files[0];
-    setImage(URL.createObjectURL(file));
-    setData(image)
+    const images = e.target.files[0];
+    setImage(URL.createObjectURL(images));
+   
   };
 
   const handleChange = (e) => {
@@ -35,16 +38,27 @@ const AddProducts = () => {
 
   const handleDataSubmit = (e) => {
     e.preventDefault();
-    dispatch(addproductApi({data,navigate}));
+    dispatch(addproductApi({data,navigate})).then(()=>{
+
+      dispatch(productimageApi({image,productId}))
+    });
+    
   };
+//  const handleimagesubmit =(e)=>{
+//   e.preventDefault();
+//    dispatch(productimageApi({image,productId}))
+//  }
+   
   console.log(data);
 
   return (
     <div>
-      <div className="addproducts" style={{ margin: "20px" }}>
-        <h5>Add Products</h5>
-        <div className="form">
-          <form onSubmit={handleDataSubmit}>
+      
+      <div className="addproducts" style={{ margin: "20px",display:"flex" }}>
+       
+        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
+        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
+          <form   onSubmit={handleDataSubmit}>
             <TextField
               onChange={handleChange}
               id="standard-basic"
@@ -53,8 +67,9 @@ const AddProducts = () => {
               name="name"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                marginLeft:"10px",
+                marginRight:"10px"
+              
               }}
             />
             <br></br>
@@ -64,10 +79,11 @@ const AddProducts = () => {
                 width: "100%",
                 paddingLeft: "10px",
                 paddingRight: "10px",
+                
               }}
               id="standard-textarea"
               label="enter Description"
-              placeholder="description"
+              placeholder ="description"
               variant="standard"
               multiline
               name="description"
@@ -140,7 +156,26 @@ const AddProducts = () => {
               }}
             />
 
-            <label style={{ marginTop: "20px", fontFamily: "sans-serif" }}>
+          
+
+            <Button
+              type="submit"
+              style={{
+                border: "none",
+                marginTop: "15px",
+                borderRadius: "10px",
+                background: "#144272",
+              }}
+            >
+              Submit
+            </Button>
+          </form>
+        </div>
+        <div>
+          
+        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
+        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
+        <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
               Upload image
             </label>
 
@@ -153,7 +188,49 @@ const AddProducts = () => {
                 background: "white",
                 borderRadius: "20px",
               }}
-            >
+              >
+              <IconButton
+                style={{ position: "absolute" }}
+                color="dark"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  onChange={handleImage}
+                  hidden
+                  name="images"
+                  accept="image/*"
+                  type="file"
+                />
+                
+                <PhotoCamera />
+              </IconButton>
+              {image && (
+                <img
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  src={image}
+                  alt="images"
+                />
+              )}
+              </div>
+            {/* <button onClick={handleimagesubmit}>
+              upload
+            </button> */}
+              <div>
+                 {/* <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
+              Upload image
+            </label> */}
+{/* 
+<div
+              className="iconbtn"
+              style={{
+                marginTop: "15px",
+                width: "100px",
+                height: "100px",
+                background: "white",
+                borderRadius: "20px",
+              }}
+              >
               <IconButton
                 style={{ position: "absolute" }}
                 color="dark"
@@ -166,7 +243,7 @@ const AddProducts = () => {
                   accept="image/*"
                   type="file"
                 />
-
+                
                 <PhotoCamera />
               </IconButton>
               {image && (
@@ -175,20 +252,9 @@ const AddProducts = () => {
                   src={image}
                   alt="images"
                 />
-              )}
+              )} */}
+              </div>
             </div>
-            <Button
-              type="submit"
-              style={{
-                border: "none",
-                marginTop: "15px",
-                borderRadius: "10px",
-                background: " #3f3f8e",
-              }}
-            >
-              Submit
-            </Button>
-          </form>
         </div>
       </div>
     </div>
