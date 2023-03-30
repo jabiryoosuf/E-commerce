@@ -24,11 +24,11 @@ const SidebarNew = () => {
             
             <h2>Admin</h2>
           </MenuItem>
-           <Link  style={{color:'white'}} to='/admin'>
-          <MenuItem  className="sidebar" icon={<HomeOutlinedIcon />}>Home</MenuItem></Link>
-          
-          <MenuItem  className="sidebar" icon={<ShoppingCartIcon />}>Products</MenuItem>
-          <Link  style={{color:'white'}} to="/addproducts">
+
+          <MenuItem  className="sidebar" icon={<HomeOutlinedIcon />}>Home</MenuItem>
+          <Link to={'/allproducts'}>
+          <MenuItem  className="sidebar" icon={<ShoppingCartIcon />}>Products</MenuItem></Link>
+          <Link style={{textDecoration:"none"}} to="/addproducts">
           <MenuItem style={{textDecoration:"none"}}  className="sidebar" icon={<AddShoppingCartIcon />}>AddProducts</MenuItem>
           </Link>
           <MenuItem  className="sidebar" icon={<PersonIcon />}>Profile</MenuItem>

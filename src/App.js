@@ -7,7 +7,6 @@ import OurStore from "./Pages/OurStore";
 import Blogs from "./Pages/Blogs";
 import CompareProduct from "./Pages/CompareProduct";
 import Wishlist from "./Pages/Wishlist";
-import Login from "./Pages/Login";
 import Forgotpassword from "./Pages/Forgotpassword";
 import Register from "./Pages/SignUp";
 import ResetPassword from "./Pages/ResetPassword";
@@ -20,9 +19,11 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import Home from "./Pages/Home";
+import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import DashboardHome from "./Pages/Admin/Dashboard-home";
-import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
+import Allproduct from "./Pages/Admin/Allproduct";
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
 function App() {
   return (
@@ -30,6 +31,27 @@ function App() {
       <BrowserRouter> 
      <Routes>
       <Route element={<Layout/>}>
+      <Route path="/"element={<Home/>}/>
+      <Route path="/about"element={<About/>}></Route>
+      <Route path="/contact"element={<Contact/>} ></Route>
+      <Route path="/store"element={<OurStore/>} ></Route>
+      <Route path="/product/:id"element={<SingleProduct/>} ></Route>
+      <Route path="/blogs"element={<Blogs/>}></Route>
+      <Route path="/cart"element={<Cart/>} ></Route>
+      <Route path="/checkout"element={<Checkout/>} ></Route>
+      <Route path="/singleblogs/:id"element={<Singleblogs/>} ></Route>
+      <Route path="/contact"element={<Contact/>} ></Route>
+      <Route path="/compare-product"element={<CompareProduct/>} ></Route>
+      <Route path="/wishlist"element={<Wishlist/>} ></Route>
+      <Route path="/login"element={<Login/>} ></Route>
+      <Route path="/forgot-password"element={<Forgotpassword/>} ></Route>
+      <Route path="/sign-up"element={<SignUp/>} ></Route>
+      <Route path="/terms-condition"element={<TremsAndContion/>}></Route>
+      <Route path="/refund-policy"element={<RefundPolicy/>} ></Route>
+      <Route path="/shipping-policy"element={<ShipingPolicy/>} ></Route>
+      <Route path="/Privacy-policy"element={<PrivacyPolicy/>} ></Route>
+
+
       <Route path="/"element={<Home/>}/>
       <Route path="/about"element={<About/>} />
       <Route path="/contact"element={<Contact/>} />
@@ -39,6 +61,8 @@ function App() {
       <Route path="/cart"element={<Cart/>} />
       <Route path="/checkout"element={<Checkout/>} />
 
+
+     
       <Route path="/singleblogs/:id"element={<Singleblogs/>} ></Route>
 
       <Route path="/contact"element={<Contact/>} ></Route>
@@ -57,13 +81,14 @@ function App() {
 
 
       </Route>
-      <Route path="/resetpassword/:id"element={<ResetPassword/>} ></Route>
-      <Route element={<LayoutAdmin/>}>
+
+    
+     <Route path="/reset-password/:id"element={<ResetPassword/>} ></Route>
       <Route path="/admin" element={<DashboardHome/>}/>
-      
+      <Route path="/allproducts" element={<Allproduct/>}/>
       <Route path='/addproducts' element={<AddProducts/>}></Route>
-      </Route>
       
+        {/* <Route path="/addproduct" element={<CustomForm/>}/> */}
      </Routes>
      </BrowserRouter>
  

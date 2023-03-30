@@ -39,7 +39,7 @@ const Login = () => {
               <h3 className="text-center mb-3">Login</h3>
               <form onSubmit={handleLoginSubmit}   action="" className="d-flex flex-column gap-15">
                 <div>
-                  <input  onChange={handleChange}
+                  <input onChange={(e) => setLogin({...login,email:e.target.value })}
                     type="email"
                     name="email"
                     placeholder="Email"
@@ -47,7 +47,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="mt-1">
-                  <input  onChange={handleChange}
+                  <input onChange={(e) => setLogin({...login,password:e.target.value })}
                     type="password"
                     name="password"
                     placeholder="password"

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: "Rubik", sans-serif;
 }
+
 :root {
   --color-131921: #131921;
   --color-3b4149: #3b4149;
@@ -26,7 +27,7 @@
   box-shadow: 0 0 10px #0000;
   padding: 15px;
 }
-a {
+a{
   text-decoration: none;
   display: inline-block;
 }
@@ -86,6 +87,7 @@ a {
   font-weight: 400;
   letter-spacing: 0.3;
   text-transform: uppercase;
+  
 }
 .header-bottom .dropdown button:focus {
   box-shadow: none;

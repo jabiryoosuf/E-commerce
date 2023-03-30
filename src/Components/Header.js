@@ -7,8 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 const Header = () => {
  
   return (
-    <>  
-        <ToastContainer     
+    <>
+      <ToastContainer     
           position="top-right"
           autoClose={1000}
           hideProgressBar={false}
@@ -22,6 +22,8 @@ const Header = () => {
           
           transition={Zoom}
         />
+     
+      
 
       <header className="header-top-strip py-1">
         <div className="container-xxl">
@@ -161,4 +163,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header
