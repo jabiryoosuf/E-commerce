@@ -5,6 +5,7 @@ import { axiosApi } from "./axios-method";
     const response=await axiosApi.post('/product/admin/new',data)
     console.log(response);
     navigate('/allproducts')
+    return response.data
   }
 
   );
@@ -13,10 +14,14 @@ import { axiosApi } from "./axios-method";
     console.log(response);
     return response.data
   })
+  export const productimageApi =createAsyncThunk ("products/productimageApi",async({image,productId})=>{
+   const response=await axiosApi.post(`/productImage/admin/new/${productId}`,image)
+   console.log(response);
+   return response.data
+  })
   const initialState={
-    products:{},
-    allproduct:{}
-   
+   addproducts:{},
+    allproduct:{},
    }
 
   const ProductSlice=createSlice({
@@ -29,7 +34,7 @@ import { axiosApi } from "./axios-method";
                console.log("data submission pending");
             },
             [addproductApi.fulfilled]:(state,action)=>{
-               state.products=action.payload
+               state.addproducts=action.payload
                console.log("submission fulfilled");
             },
             [addproductApi.rejected]:()=>{
