@@ -16,6 +16,7 @@ export const loginApi = createAsyncThunk(
     }
     if (result.data.role==='admin') {
       navigate("/admin");
+    
     } else {
       navigate("/");
     }

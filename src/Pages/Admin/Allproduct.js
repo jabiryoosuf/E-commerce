@@ -4,8 +4,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import React, { useEffect } from "react";
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { allproductsApi } from '../../Store/ProductSlice';
 import {map} from "lodash"
+import { addproductApi } from '../../Store/ProductSlice';
 
 const Allproduct = () => {
   const dispatch = useDispatch();
@@ -15,10 +15,13 @@ const Allproduct = () => {
    })); 
 
   useEffect(()=>{
-    dispatch(allproductsApi())
+    dispatch(addproductApi())
   },[]);
   const res = allproduct?.Products;
   console.log(res);
+  
+console.log(window.location.pathname);
+
   return (
     <div style={{width:"100%",height:"100vh",display:'flex',alignItems:"center",justifyContent:"center"}}>
       <Table striped bordered hover style={{width:"80%"}}>

@@ -25,6 +25,7 @@ import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
+import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
 function App() {
   return (
     <div className="App">
