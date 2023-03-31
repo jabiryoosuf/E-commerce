@@ -33,3 +33,5 @@ import { axiosApi } from "./axios-method";
          }
 
   })
+
+  export default 
