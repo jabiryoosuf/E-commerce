@@ -99,7 +99,6 @@ function App() {
           ) : (
             <Route path="/" element={<Home />} />
           )}
-          {/* <Route path="/addproduct" element={<CustomForm/>}/> */}
         </Routes>
       </BrowserRouter>
     </div>

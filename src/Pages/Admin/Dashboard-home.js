@@ -9,9 +9,9 @@ const DashboardHome = () => {
   return (
     <div>
       <div style={{display:"flex",background: "#0A2647"}}>
-        <SidebarNew />
+      
         <div style={{width:"100%"}}>
-        <Header/>
+          
         <h1 style={{  marginLeft: "3rem",color:"white" }}>Dashboard</h1>
         <Box mt='20px'display='flex' flexWrap='wrap' gap={4}>
         <PieChart
