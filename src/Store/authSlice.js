@@ -14,8 +14,9 @@ export const loginApi = createAsyncThunk(
     if (result?.data?.role) {
       localStorage.setItem("role", result.data.role);
     }
-    if (result.data.role==='admin') {
+     if (result.data.role==='admin') {
       navigate("/admin");
+      window.location.reload(false);
     } else {
       navigate("/");
     }

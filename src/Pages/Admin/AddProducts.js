@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-// import Form from "react-bootstrap/Form";
 import TextField from "@mui/material/TextField";
 import { Button } from "react-bootstrap";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-// import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
 import { addproductApi, productimageApi } from "../../Store/ProductSlice";
 import "./Addproduct.css";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const [price, setPrice] = useState({})
   const [data, setData] = useState();
 
@@ -19,11 +17,11 @@ const AddProducts = () => {
   const navigate= useNavigate()
 
   const {addproducts}=useSelector(((state)=>state.products))
-
-console.log(addproducts);
 const productId=addproducts._id
+console.log(productId);
   const handleImage = (e) => {
     const images = e.target.files[0];
+    console.log(images);
     setImage(URL.createObjectURL(images));
    
   };
@@ -36,18 +34,18 @@ const productId=addproducts._id
     setData({...data,price:price})
   };
 
-  const handleDataSubmit = (e) => {
+  const handleDataSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addproductApi({data,navigate})).then(()=>{
-
-      dispatch(productimageApi({image,productId}))
-    });
-    
+    try {
+      await dispatch(addproductApi({data}));
+      const formData= new FormData(image)
+      formData.append("photo",)
+      await dispatch(productimageApi({formData,productId,navigate}));
+    } catch (error) {
+      console.log(error);
+    }
   };
-//  const handleimagesubmit =(e)=>{
-//   e.preventDefault();
-//    dispatch(productimageApi({image,productId}))
-//  }
+
    
   console.log(data);
 
