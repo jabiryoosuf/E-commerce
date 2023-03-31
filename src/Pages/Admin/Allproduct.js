@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {map} from "lodash"
-import { addproductApi } from '../../Store/ProductSlice';
+import { allproductsApi } from '../../Store/ProductSlice';
 
 const Allproduct = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Allproduct = () => {
    })); 
 
   useEffect(()=>{
-    dispatch(addproductApi())
+    dispatch(allproductsApi())
   },[]);
   const res = allproduct?.Products;
   console.log(res);
