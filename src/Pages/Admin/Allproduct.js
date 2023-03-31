@@ -19,6 +19,9 @@ const Allproduct = () => {
   },[]);
   const res = allproduct?.Products;
   console.log(res);
+  
+console.log(window.location.pathname);
+
   return (
     <div style={{width:"100%",height:"100vh",display:'flex',alignItems:"center",justifyContent:"center"}}>
       <Table striped bordered hover style={{width:"80%"}}>

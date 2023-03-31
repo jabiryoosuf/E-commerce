@@ -1,24 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
  
-  export const addproductApi= createAsyncThunk('products/addproductApi',async({data,navigate})=>{
+  export const addproductApi= createAsyncThunk('products/addproductApi',async({data})=>{
     const response=await axiosApi.post('/product/admin/new',data)
     console.log(response);
-    navigate('/allproducts')
+    
     return response.data
-  }
-
+  } 
+   
   );
-  export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
-    const response=await axiosApi.get('/product/admin/all',data)
-    console.log(response);
-    return response.data
-  })
-  export const productimageApi =createAsyncThunk ("products/productimageApi",async({image,productId})=>{
+ 
+  export const productimageApi =createAsyncThunk ("products/productimageApi",async({image,productId,navigate})=>{
    const response=await axiosApi.post(`/productImage/admin/new/${productId}`,image)
    console.log(response);
+   navigate('/allproducts')
    return response.data
+   
   })
+  export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
+   const response=await axiosApi.get('/product/admin/all',data)
+   console.log(response);
+   return response.data
+ })
   const initialState={
    addproducts:{},
     allproduct:{},

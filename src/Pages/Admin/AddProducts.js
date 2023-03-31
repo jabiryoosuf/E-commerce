@@ -14,7 +14,7 @@ const AddProducts = () => {
   const [image, setImage] = useState("");
   const [price, setPrice] = useState({})
   const [data, setData] = useState();
-
+  
   const dispatch = useDispatch();
   const navigate= useNavigate()
 
@@ -28,29 +28,32 @@ const productId=addproducts._id
    
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>  {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handlePrice = (e) => {
     setPrice({ ...price, [e.target.name]: e.target.value });
     setData({...data,price:price})
   };
+   
+  const handleDataSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    await dispatch(addproductApi(data));
+    await dispatch(productimageApi({ image, productId, navigate }));
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  const handleDataSubmit = (e) => {
-    e.preventDefault();
-    dispatch(addproductApi({data,navigate})).then(()=>{
-
-      dispatch(productimageApi({image,productId}))
-    });
-    
-  };
 //  const handleimagesubmit =(e)=>{
 //   e.preventDefault();
 //    dispatch(productimageApi({image,productId}))
 //  }
    
   console.log(data);
-
+ 
+console.log(window.location.pathname);
   return (
     <div>
       
