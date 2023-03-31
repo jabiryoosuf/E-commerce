@@ -26,10 +26,11 @@ import Allproduct from "./Pages/Admin/Allproduct";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
 import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
+import NotFound from "./Pages/NotFound";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter> 
+      {/* <BrowserRouter> 
      <Routes>
       <Route element={<Layout/>}>
       <Route path="/"element={<Home/>}/>
@@ -83,7 +84,7 @@ function App() {
 
       </Route>
 
-    
+       
      <Route path="/reset-password/:id"element={<ResetPassword/>} ></Route>
         <Route element={<LayoutAdmin/>}>
       <Route path="/admin" element={<DashboardHome/>}/>
@@ -91,10 +92,10 @@ function App() {
       <Route path='/addproducts' element={<AddProducts/>}></Route>
       </Route>
         {/* <Route path="/addproduct" element={<CustomForm/>}/> */}
-     </Routes>
-     </BrowserRouter>
- 
-     {/* <AddProducts/> */}
+     {/* </Routes> */}
+     {/* </BrowserRouter> */} 
+          <NotFound/>
+   
     </div>
   );
 }
