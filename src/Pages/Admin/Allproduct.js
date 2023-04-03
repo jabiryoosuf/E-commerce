@@ -52,7 +52,12 @@ console.log(window.location.pathname);
             <td>{item.quantity}</td>
             <td>
                 <div style={{width:"30px",height:"30px",background:"blue",borderRadius:"50%",overflow:"hidden" }}>
-                 <img style={{width:"100%",height:"100%", objectFit:"cover"}} src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHN8ZW58MHx8MHx8&w=1000&q=80" alt="product image"/>
+                {item.images.map((item)=>(
+                 <img style={{width:"100%",height:"100%", objectFit:"cover"}} src={item.url} alt="product"/>
+
+                )
+                  
+                )}
                 </div>
             </td>
             <td style={{textAlign:"center"}}>
