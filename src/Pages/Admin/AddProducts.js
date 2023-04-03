@@ -18,7 +18,6 @@ const AddProducts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { addproducts } = useSelector((state) => state.products);
 
   const handleImage = (e) => {
    setImage(e.target.files[0])
