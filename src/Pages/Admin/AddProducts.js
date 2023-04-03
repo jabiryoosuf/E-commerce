@@ -1,30 +1,32 @@
 import React, { useState } from "react";
-// import Form from "react-bootstrap/Form";
 import TextField from "@mui/material/TextField";
 import { Button } from "react-bootstrap";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-// import Stack from "@mui/material/Stack";
-import { useDispatch, useSelector } from "react-redux";
-import { addproductApi, productimageApi } from "../../Store/ProductSlice";
-import "./Addproduct.css";
+import { useDispatch } from "react-redux";
+import { addproductApi} from "../../Store/ProductSlice";
+import "./Addprodutcs.css";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
   const [image, setImage] = useState(null);
+  const [viewImage, setViewImage]=useState()
   const [price, setPrice] = useState({});
   const [data, setData] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { addproducts } = useSelector((state) => state.products);
-
   const handleImage = (e) => {
    setImage(e.target.files[0])
-   console.log(image);
+   ViewImage(e.target.files[0])
   };
-
+const ViewImage = (view)=>{
+  const reader = new FileReader()
+  reader.readAsDataURL(view)
+  reader.onloadend = ()=>{
+   setViewImage(reader.result)
+   console.log(viewImage);
+  }
+}
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -36,7 +38,7 @@ const AddProducts = () => {
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData()
+     const formData = new FormData()
     formData.append('photo',image,image.name)
     await dispatch(addproductApi({data,formData,navigate }));
     } catch (error) {
@@ -164,12 +166,12 @@ const AddProducts = () => {
             </Button>
           </form>
         </div>
-        <div>
+        <div >
           <div
-            className="form"
-            style={{ color: "white", border: "3px solid #144272" }}
+            className="form-image"
+            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center", border: "3px solid #144272" }}
           >
-            <h5 style={{ color: "#144272", margin: "15px" }}>Add Products</h5>
+            <h5 style={{ color: "#144272", margin: "15px"}}>Add Products Image</h5>
             <label
               style={{
                 marginTop: "20px",
@@ -190,29 +192,19 @@ const AddProducts = () => {
                 borderRadius: "20px",
               }}
             >
-              {/* <IconButton
-                style={{ position: "absolute" }}
-                color="dark"
-                aria-label="upload picture"
-                component="label"
-              > */}
               <input
                 onChange={handleImage}
                 name="images"
                 accept="image/*"
                 type="file"
               />
-
-              {/* <PhotoCamera />
-              </IconButton> */}
               {image && (
                 <img
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  src={image}
+                  style={{ width: "200%", height: "200%",margin:"20px", objectFit: "cover" }}
+                  src={viewImage}
                   alt="images"
                 />
               )}
-              {/* </div> */}
             </div>
           </div>
         </div>
