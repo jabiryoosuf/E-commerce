@@ -11,7 +11,7 @@ import "./Addproduct.css";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState();
   const [price, setPrice] = useState({})
   const [data, setData] = useState();
   
