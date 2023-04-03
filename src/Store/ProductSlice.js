@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
  
+// add product
+
   export const addproductApi= createAsyncThunk('products/addproductApi',async({data,formData,navigate})=>{
     const response=await axiosApi.post('/product/admin/new',data)
     console.log(response);
@@ -11,21 +13,19 @@ import { axiosApi } from "./axios-method";
   }  
   );
  
-//   export const productimageApi =createAsyncThunk ("products/productimageApi",async({formData,productId,navigate})=>{
-//    const response=await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
-//    console.log(response);
-//    navigate('/allproducts')
-//    return response.data
-   
-//   })
-  export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
-   const response=await axiosApi.get('/product/admin/all',data)
+// get all products
+
+  export const allproductsApi= createAsyncThunk ("products/allproductApi",async()=>{
+   const response=await axiosApi.get('/product/admin/all')
    console.log(response);
    return response.data
- })
+}
+)
+
   const initialState={
    addproducts:{},
     allproduct:{},
+    deleteproduct:{}
    }
 
   const ProductSlice=createSlice({
@@ -33,7 +33,7 @@ import { axiosApi } from "./axios-method";
      initialState,
      reducers:{},
      extraReducers:{
-           
+             
             [addproductApi.pending]:()=>{
                console.log("data submission pending");
             },
@@ -53,7 +53,18 @@ import { axiosApi } from "./axios-method";
              },
              [allproductsApi.rejected]:()=>{
                 console.log("submission rejected");
+             },
+             [DeleteProductApi.pending]:()=>{
+               console.log("task pending");
+             },
+             [DeleteProductApi.fulfilled]:(state,action)=>{
+               state.deleteproduct=action.payload
+               console.log("deletion succesfull");
+             },
+             [DeleteProductApi.rejected]:()=>{
+               console.log("task rejected");
              }
+
          }
 
   })

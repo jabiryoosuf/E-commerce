@@ -5,22 +5,35 @@ import React, { useEffect } from "react";
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {map} from "lodash"
-import { allproductsApi } from '../../Store/ProductSlice';
+import { DeleteProductApi, allproductsApi } from '../../Store/ProductSlice';
+import { useParams } from 'react-router-dom';
+
 
 const Allproduct = () => {
   const dispatch = useDispatch();
-
+  const params=useParams()
   const { allproduct } = useSelector((state) =>({
     allproduct:state.products.allproduct,
    })); 
 
+   const deletehandle=(productId)=>{
+    dispatch(DeleteProductApi(productId)).then(()=>{
+      dispatch(allproductsApi())
+    })
+    
+  }
+
   useEffect(()=>{
     dispatch(allproductsApi())
   },[]);
+
   const res = allproduct?.Products;
   console.log(res);
-  
-console.log(window.location.pathname);
+
+    const productId=params.id
+
+ 
+   
 
   return (
     <div style={{width:"100%",height:"100vh",display:'flex',alignItems:"center",justifyContent:"center"}}>
@@ -54,19 +67,17 @@ console.log(window.location.pathname);
                 <div style={{width:"30px",height:"30px",background:"blue",borderRadius:"50%",overflow:"hidden" }}>
                 {item.images.map((item)=>(
                  <img style={{width:"100%",height:"100%", objectFit:"cover"}} src={item.url} alt="product"/>
-
-                )
-                  
-                )}
+                 ))}
                 </div>
             </td>
             <td style={{textAlign:"center"}}>
                 <VisibilityIcon style={{color:"blue"}}/>
                 <EditIcon style={{color:"green",marginInline:"10px"}}/>
-                <DeleteIcon style={{color:"red"}}/>
+                <DeleteIcon onClick={()=>deletehandle(item._id)} style={{color:"red"}}/>
             </td>
           </tr>
-        ))}
+            ))}
+      
         </tbody>
       </Table>
     </div>

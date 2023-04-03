@@ -56,7 +56,7 @@ function App() {
 
             {/* Layout close */}
           </Route>
-          <Route path="*" element={ <NotFound/>}/>
+          {/* <Route path="*" element={ <NotFound/>}/> */}
      <Route path="/reset-password/:id"element={<ResetPassword/>} ></Route>
      {localStorage.role === "admin" ? (
             <>

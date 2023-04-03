@@ -200,7 +200,7 @@ const ViewImage = (view)=>{
               />
               {image && (
                 <img
-                  style={{ width: "200%", height: "200%",margin:"20px", objectFit: "cover" }}
+                  style={{ width: "200%", height: "200%",marginTop:"20px",marginRight:"20px", objectFit: "cover" }}
                   src={viewImage}
                   alt="images"
                 />
