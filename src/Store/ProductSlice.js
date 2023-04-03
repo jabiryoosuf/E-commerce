@@ -11,20 +11,18 @@ import { axiosApi } from "./axios-method";
   }  
   );
  
-//   export const productimageApi =createAsyncThunk ("products/productimageApi",async({formData,productId,navigate})=>{
-//    const response=await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
-//    console.log(response);
-//    navigate('/allproducts')
-//    return response.data
-   
-//   })
+
   export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
-   const response=await axiosApi.get('/product/admin/all',data)
+   const response=await axiosApi.get('/product/admin/all')
    console.log(response);
    return response.data
 }
 )
-
+    export const DeleteProductApi=createAsyncThunk('product/DeleteProductApi',async(productId)=>{
+      const response=await axiosApi.delete(`/product/delete/admin/${productId}`)
+      console.log(response);
+      return response.data
+    })
   const initialState={
    addproducts:{},
     allproduct:{},
