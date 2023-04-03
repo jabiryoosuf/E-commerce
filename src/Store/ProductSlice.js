@@ -21,7 +21,11 @@ import { axiosApi } from "./axios-method";
    return response.data
 }
 )
-
+    export const DeleteProductApi=createAsyncThunk('product/DeleteProductApi',async(productId)=>{
+      const response=await axiosApi.delete(`/product/delete/admin/${productId}`)
+      console.log(response);
+      return response.data
+    })
   const initialState={
    addproducts:{},
     allproduct:{},
