@@ -53,7 +53,7 @@ const productId=addproducts._id
    
   console.log(data);
  
-console.log(window.location.pathname);
+// console.log(window.location.pathname);
   return (
     <div>
       
