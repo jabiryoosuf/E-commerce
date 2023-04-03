@@ -11,57 +11,54 @@ import "./Addproduct.css";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState({})
+  const [image, setImage] = useState(null);
+  const [price, setPrice] = useState({});
   const [data, setData] = useState();
-  
+
   const dispatch = useDispatch();
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
-  const {addproducts}=useSelector(((state)=>state.products))
+ 
 
-console.log(addproducts);
-const productId=addproducts._id
   const handleImage = (e) => {
-    const images = e.target.files[0];
-    setImage(URL.createObjectURL(images));
-   
+    setImage(e.target.files[0]);
+    console.log(image);
   };
 
-  const handleChange = (e) =>  {
+  const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handlePrice = (e) => {
     setPrice({ ...price, [e.target.name]: e.target.value });
-    setData({...data,price:price})
+    setData({ ...data, price: price });
   };
-   
-  const handleDataSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    await dispatch(addproductApi(data));
-    await dispatch(productimageApi({ image, productId, navigate }));
-  } catch (error) {
-    console.error(error);
-  }
-};
 
-//  const handleimagesubmit =(e)=>{
-//   e.preventDefault();
-//    dispatch(productimageApi({image,productId}))
-//  }
-   
+  const handleDataSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("photo", image, image.name);
+      dispatch(addproductApi({data,formData,navigate}));
+     
+      // const productId = addproducts._id;
+      // await dispatch(productimageApi({ formData, productId, navigate }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(image);
   console.log(data);
- 
-// console.log(window.location.pathname);
+
   return (
     <div>
-      
-      <div className="addproducts" style={{ margin: "20px",display:"flex" }}>
-       
-        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
-        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
-          <form   onSubmit={handleDataSubmit}>
+      <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
+        <div
+          className="form"
+          style={{ color: "white", border: "3px solid #144272" }}
+        >
+          <h5 style={{ color: "#144272", margin: "15px" }}>Add Products</h5>
+          <form onSubmit={handleDataSubmit}>
             <TextField
               onChange={handleChange}
               id="standard-basic"
@@ -70,9 +67,8 @@ const productId=addproducts._id
               name="name"
               style={{
                 width: "100%",
-                marginLeft:"10px",
-                marginRight:"10px"
-              
+                marginLeft: "10px",
+                marginRight: "10px",
               }}
             />
             <br></br>
@@ -82,11 +78,10 @@ const productId=addproducts._id
                 width: "100%",
                 paddingLeft: "10px",
                 paddingRight: "10px",
-                
               }}
               id="standard-textarea"
               label="enter Description"
-              placeholder ="description"
+              placeholder="description"
               variant="standard"
               multiline
               name="description"
@@ -159,8 +154,6 @@ const productId=addproducts._id
               }}
             />
 
-          
-
             <Button
               type="submit"
               style={{
@@ -175,10 +168,18 @@ const productId=addproducts._id
           </form>
         </div>
         <div>
-          
-        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
-        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
-        <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
+          <div
+            className="form"
+            style={{ color: "white", border: "3px solid #144272" }}
+          >
+            <h5 style={{ color: "#144272", margin: "15px" }}>Add Products</h5>
+            <label
+              style={{
+                marginTop: "20px",
+                color: "red",
+                fontFamily: "sans-serif",
+              }}
+            >
               Upload image
             </label>
 
@@ -191,23 +192,22 @@ const productId=addproducts._id
                 background: "white",
                 borderRadius: "20px",
               }}
-              >
-              <IconButton
+            >
+              {/* <IconButton
                 style={{ position: "absolute" }}
                 color="dark"
                 aria-label="upload picture"
                 component="label"
-              >
-                <input
-                  onChange={handleImage}
-                  hidden
-                  name="images"
-                  accept="image/*"
-                  type="file"
-                />
-                
-                <PhotoCamera />
-              </IconButton>
+              > */}
+              <input
+                onChange={handleImage}
+                name="images"
+                accept="image/*"
+                type="file"
+              />
+
+              {/* <PhotoCamera />
+              </IconButton> */}
               {image && (
                 <img
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -215,49 +215,9 @@ const productId=addproducts._id
                   alt="images"
                 />
               )}
-              </div>
-            {/* <button onClick={handleimagesubmit}>
-              upload
-            </button> */}
-              <div>
-                 {/* <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
-              Upload image
-            </label> */}
-{/* 
-<div
-              className="iconbtn"
-              style={{
-                marginTop: "15px",
-                width: "100px",
-                height: "100px",
-                background: "white",
-                borderRadius: "20px",
-              }}
-              >
-              <IconButton
-                style={{ position: "absolute" }}
-                color="dark"
-                aria-label="upload picture"
-                component="label"
-              >
-                <input
-                  onChange={handleImage}
-                  hidden
-                  accept="image/*"
-                  type="file"
-                />
-                
-                <PhotoCamera />
-              </IconButton>
-              {image && (
-                <img
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  src={image}
-                  alt="images"
-                />
-              )} */}
-              </div>
+              {/* </div> */}
             </div>
+          </div>
         </div>
       </div>
     </div>
