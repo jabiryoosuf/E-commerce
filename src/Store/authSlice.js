@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import { axiosApi } from "./axios-method";
 import { toast } from "react-toastify";
 
@@ -9,16 +10,8 @@ export const loginApi = createAsyncThunk(
     console.log(result);
     if (result?.data?.token) {
       localStorage.setItem("token", result.data.token);
-    }
-    if (result?.data?.role) {
-      localStorage.setItem("role", result.data.role);
-    }
-    if (result.data.role==='admin') {
-      navigate("/admin");
-    } else {
       navigate("/");
     }
-
     return result.data;
   }
 );
