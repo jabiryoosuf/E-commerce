@@ -36,12 +36,9 @@ const AddProducts = () => {
   const handleDataSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("photo", image, image.name);
-      dispatch(addproductApi({data,formData,navigate}));
-     
-      // const productId = addproducts._id;
-      // await dispatch(productimageApi({ formData, productId, navigate }));
+      const formData = new FormData()
+    formData.append('photo',image,image.name)
+    await dispatch(addproductApi({data,formData,navigate }));
     } catch (error) {
       console.error(error);
     }

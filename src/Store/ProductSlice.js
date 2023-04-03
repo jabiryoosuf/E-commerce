@@ -4,15 +4,13 @@ import { axiosApi } from "./axios-method";
   export const addproductApi= createAsyncThunk('products/addproductApi',async({data,formData,navigate})=>{
     const response=await axiosApi.post('/product/admin/new',data)
     console.log(response);
-        const productId=response.data._id
-        await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
-        navigate('/allproducts')
-    
+    const productId=response.data._id
+    await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
+    navigate('/allproducts')
     return response.data
-  } 
-   
+  }  
   );
-
+ 
 //   export const productimageApi =createAsyncThunk ("products/productimageApi",async({formData,productId,navigate})=>{
 //    const response=await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
 //    console.log(response);
@@ -20,13 +18,8 @@ import { axiosApi } from "./axios-method";
 //    return response.data
    
 //   })
-  export const allproductsApi= createAsyncThunk ("products/allproductApi",async()=>{
-   const response=await axiosApi.get('/product/admin/all')
-   console.log(response);
-   return response.data
- })
- export const DeleteProductApi=createAsyncThunk('products/DeleteProductApi',async(productId)=>{
-   const response=await axiosApi.delete(`/product/delete/admin/${productId}`)
+  export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
+   const response=await axiosApi.get('/product/admin/all',data)
    console.log(response);
    return response.data
 }
