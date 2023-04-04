@@ -26,6 +26,9 @@ import Allproduct from "./Pages/Admin/Allproduct";
 import AddProducts from "./Pages/Admin/AddProducts";
 import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
 import NotFound from "./Pages/NotFound";
+import Adminprofile from "./Pages/Admin/Adminprofile";
+import Adminmassage from "./Pages/Admin/Adminmassage";
+import Admincalander from "./Pages/Admin/Admincalander";
 function App() {
   return (
     <div className="App">
@@ -64,6 +67,12 @@ function App() {
       <Route path="/admin" element={<DashboardHome/>}/>
       <Route path="/allproducts" element={<Allproduct/>}/>
       <Route path='/addproducts' element={<AddProducts/>}></Route>
+      
+      <Route path='/adminprofile' element={<Adminprofile/>}></Route>
+      <Route path='/adminmassage' element={<Adminmassage/>}></Route>
+      <Route path='/admincalander' element={<Admincalander/>}></Route>
+
+
       </Route>
       </>
           ) : (
