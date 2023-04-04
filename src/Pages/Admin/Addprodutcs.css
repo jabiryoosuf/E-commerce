@@ -1,12 +1,11 @@
-.form{
-     /* background-color: rgb(107 107 161); */
+.addProductform{
    min-width: 700px;
     min-height: 600px;
     padding-left: 10px;
     
 }
-.form-image{
+.addProductform-image{
   padding-left: 10px;
-  min-width: 500px;
-    min-height: 600px;
+  min-width: 550px;
+    min-height: 667px;
 }

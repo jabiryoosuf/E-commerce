@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { addproductApi} from "../../Store/ProductSlice";
 import "./Addprodutcs.css";
 import { useNavigate } from "react-router-dom";
+import { color } from "@mui/system";
 
 const AddProducts = () => {
   const [image, setImage] = useState(null);
@@ -49,14 +50,16 @@ const ViewImage = (view)=>{
   console.log(image);
   console.log(data);
 
+
+
   return (
     <div>
       <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
         <div
-          className="form"
-          style={{ color: "white", border: "3px solid #144272" }}
+          className="addProductform"
+          
         >
-          <h5 style={{ color: "#144272", margin: "15px" }}>Add Products</h5>
+          <h5 style={{ color: "#16213E", margin: "15px" }}>Add Products</h5>
           <form onSubmit={handleDataSubmit}>
             <TextField
               onChange={handleChange}
@@ -66,24 +69,44 @@ const ViewImage = (view)=>{
               name="name"
               style={{
                 width: "100%",
-                marginLeft: "10px",
-                marginRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
             <TextField
+             id="standard-textarea"
+             label="enter Description"
+             variant="standard"
+             name="description"
               onChange={handleChange}
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
               }}
-              id="standard-textarea"
-              label="enter Description"
-              placeholder="description"
-              variant="standard"
-              multiline
-              name="description"
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
             />
             <br></br>
 
@@ -94,8 +117,19 @@ const ViewImage = (view)=>{
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="actualPrice"
             />
@@ -107,8 +141,19 @@ const ViewImage = (view)=>{
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="previousPrice"
             />
@@ -120,8 +165,19 @@ const ViewImage = (view)=>{
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="offerPrice"
             />
@@ -134,8 +190,19 @@ const ViewImage = (view)=>{
               name="quantity"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
@@ -148,8 +215,19 @@ const ViewImage = (view)=>{
               name="brand"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
 
@@ -159,7 +237,7 @@ const ViewImage = (view)=>{
                 border: "none",
                 marginTop: "15px",
                 borderRadius: "10px",
-                background: "#144272",
+                background: "#0A2647",
               }}
             >
               Submit
@@ -168,14 +246,15 @@ const ViewImage = (view)=>{
         </div>
         <div >
           <div
-            className="form-image"
-            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center", border: "3px solid #144272" }}
+            className="addProductform-image"
+            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center" }}
           >
-            <h5 style={{ color: "#144272", margin: "15px"}}>Add Products Image</h5>
+            <h5 style={{ color: "#16213E", margin: "15px"}}>Add Products Image</h5>
             <label
               style={{
                 marginTop: "20px",
-                color: "red",
+                color: "#475BE8",
+                fontWeight:"bold",
                 fontFamily: "sans-serif",
               }}
             >
@@ -187,8 +266,6 @@ const ViewImage = (view)=>{
               style={{
                 marginTop: "15px",
                 width: "100px",
-                height: "100px",
-                background: "white",
                 borderRadius: "20px",
               }}
             >
@@ -197,6 +274,7 @@ const ViewImage = (view)=>{
                 name="images"
                 accept="image/*"
                 type="file"
+                style={{width:"250px"}}
               />
               {image && (
                 <img
