@@ -12,7 +12,7 @@ const SidebarNew = () => {
   const { collapseSidebar } = useProSidebar();
 
   return (
-    <div id="app">
+    <div id="app" style={({ height: "100vh" }, { display: "flex" })}>
       <Sidebar
         backgroundColor="#16213E"
         style={{ height: "100vh", border: "none", color: "white" }}
@@ -63,16 +63,14 @@ const SidebarNew = () => {
         </Menu>
       </Sidebar>
     </div>
-  );
-};
+  )}
 
-export default SidebarNew;
 
 const CustomLink = ({ to, children, ...props }) => {
   const resolvedpath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedpath.pathname, end: true });
   const linkStyle = {
-    color: isActive ? "#475BE8" : "white",
+    color: isActive ? "red" : "white",
     width: "100%",
   };
   return (
@@ -83,3 +81,4 @@ const CustomLink = ({ to, children, ...props }) => {
     </li>
   );
 };
+export default SidebarNew;

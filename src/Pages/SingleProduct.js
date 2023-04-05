@@ -9,7 +9,7 @@ import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { singleproductsApi } from "../Store/ProductSlice";
+import { SingleProductApi } from "../Store/ProductSlice";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
@@ -20,7 +20,7 @@ const SingleProduct = () => {
   console.log(productId);
   const {} =useSelector((state)=>state.products)
   useEffect(()=>{
-    dispatch(singleproductsApi(productId))
+    dispatch(SingleProductApi(productId))
   },[])
   const [orderedProduct, setOrderedProduct] = useState(true);
   const props = {

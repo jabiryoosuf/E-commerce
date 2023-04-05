@@ -24,7 +24,7 @@ import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
-import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
+import LayoutAdmin from "./Pages/Admin/layoutAdmin";
 import NotFound from "./Pages/NotFound";
 import Upateproduct from "./Pages/Admin/Upateproduct";
 function App() {
@@ -36,7 +36,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
-            <Route path="/store" element={<OurStore />}></Route>
+            <Route path="/store" eleme
+            nt={<OurStore />}></Route>
             <Route path="/product/:id" element={<SingleProduct />}></Route>
             <Route path="/blogs" element={<Blogs />}></Route>
             <Route path="/cart" element={<Cart />}></Route>

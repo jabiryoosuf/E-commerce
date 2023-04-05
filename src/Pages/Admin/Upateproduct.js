@@ -11,7 +11,7 @@ import {
   UpdateProductApi,
   
 } from "../../Store/ProductSlice";
-import "./Addproduct.css";
+// import "./Addproduct.css";
 import { useNavigate, useParams } from "react-router-dom";
 
 const Upateproduct = () => {
