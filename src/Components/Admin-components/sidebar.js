@@ -12,7 +12,7 @@ const SidebarNew = () => {
   const { collapseSidebar } = useProSidebar();
 
   return (
-    <div id="app">
+    <div id="app" style={({ height: "100vh" }, { display: "flex" })}>
       <Sidebar
         backgroundColor="#16213E"
         style={{ height: "100vh", border: "none", color: "white" }}
@@ -29,13 +29,9 @@ const SidebarNew = () => {
             <h2>Admin</h2>
           </MenuItem>
           <CustomLink to="/admin">
-     
-      
-  
             <MenuItem className="sidebar" icon={<HomeOutlinedIcon />}>
               Home
             </MenuItem>
-          
           </CustomLink>
           <CustomLink to="/allproducts">
             <MenuItem className="sidebar" icon={<ShoppingCartIcon />}>
@@ -51,29 +47,35 @@ const SidebarNew = () => {
               AddProducts
             </MenuItem>
           </CustomLink>
-          <MenuItem className="sidebar" icon={<PersonIcon />}>
-            Profile
-          </MenuItem>
+          <CustomLink to="/adminprofile">
+            <MenuItem className="sidebar" icon={<PersonIcon />}>
+              Profile
+            </MenuItem>
+          </CustomLink>
+          <CustomLink to='/adminmassage'>
           <MenuItem className="sidebar" icon={<MessageIcon />}>
             Message
           </MenuItem>
+          </CustomLink>
+          <CustomLink to='/admincalander'>
           <MenuItem className="sidebar" icon={<CalendarTodayOutlinedIcon />}>
             Calendar
           </MenuItem>
+          </CustomLink>
         </Menu>
       </Sidebar>
     </div>
-  );
-};
+  )}
 
-export default SidebarNew;
 
 const CustomLink = ({ to, children, ...props }) => {
   const resolvedpath = useResolvedPath(to);
   const isActive = useMatch({ path: resolvedpath.pathname, end: true });
   const linkStyle = {
-    color: isActive ? "#475BE8" : "white",
+    color: isActive ? "#275be8" : "white",
     width: "100%",
+    
+    
   };
   return (
     <li className={isActive ? "active" : ""}>
@@ -83,3 +85,4 @@ const CustomLink = ({ to, children, ...props }) => {
     </li>
   );
 };
+export default SidebarNew;

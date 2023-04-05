@@ -8,14 +8,33 @@ import ReactStars from "react-rating-stars-component";
 import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleProductApi } from "../Store/ProductSlice";
+import { useParams } from "react-router-dom";
+
 const SingleProduct = () => {
+
+  const params = useParams()
+  const dispatch = useDispatch()
+  const productId = params.id
+
+  console.log(productId);
+  const {singleproduct} =useSelector((state)=>state.products)
+  console.log(singleproduct);
+  const productImage=singleproduct.images?.[0].url
+  console.log(productImage);
+
+  useEffect(()=>{
+    dispatch(SingleProductApi(productId))
+  },[])
+
   const [orderedProduct, setOrderedProduct] = useState(true);
-  const props = {
-    width: 600,
-    height: 400,
-    zoomWidth: 400,
-    img: "https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640",
-  };
+  // const props = {
+  //   width: 500,
+  //   height: 500,
+  //   zoomWidth: 400,
+  //   img: productImage
+  // };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -30,7 +49,7 @@ const SingleProduct = () => {
             <div className="col-6">
               <div className="main-product-image">
                 <div>
-                  <ReactImageZoom {...props} />
+                
                 </div>
               </div>
               <div className="other-product-image d-flex">
@@ -48,7 +67,7 @@ const SingleProduct = () => {
                     className="img-fluid"
                   />
                 </div>
-
+                  
                 <div>
                   <img
                     src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
@@ -70,12 +89,11 @@ const SingleProduct = () => {
               <div className="main-product-details">
                 <div className="border-bottom">
                   <h3 className="title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-                    ex vero voluptatem est ab. Animi!
+                     {singleproduct.name}
                   </h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$100</p>
+                  <p className="price">{singleproduct?.price?.actualprice}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -96,8 +114,8 @@ const SingleProduct = () => {
                     <p className="product-data">Watch</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Brand:</h3>{" "}
-                    <p className="product-data">havels</p>
+                    <h3 className="product-heading">Brand</h3>{" "}
+                    <p className="product-data">{singleproduct.brand}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>{" "}

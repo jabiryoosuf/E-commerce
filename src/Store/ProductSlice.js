@@ -104,9 +104,15 @@ const ProductSlice = createSlice({
     [UpdateProductApi.rejected]: () => {
       console.log("updation rejected");
     },
+    [SingleProductApi.pending]:(state,action)=>{
+      console.log("data pending");
+    },
     [SingleProductApi.fulfilled]:(state,action)=>{
       state.singleproduct=action.payload
       console.log("data fulfilled");
+    },
+    [SingleProductApi.rejected]:(state,action)=>{
+      console.log("data rejected");
     }
     
   },
