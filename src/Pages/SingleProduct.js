@@ -8,7 +8,20 @@ import ReactStars from "react-rating-stars-component";
 import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { singleproductsApi } from "../Store/ProductSlice";
+import { useParams } from "react-router-dom";
+
 const SingleProduct = () => {
+
+  const params = useParams()
+  const dispatch = useDispatch()
+  const productId = params.id
+  console.log(productId);
+  const {} =useSelector((state)=>state.products)
+  useEffect(()=>{
+    dispatch(singleproductsApi(productId))
+  },[])
   const [orderedProduct, setOrderedProduct] = useState(true);
   const props = {
     width: 600,

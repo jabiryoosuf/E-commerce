@@ -24,7 +24,7 @@ import { axiosApi } from "./axios-method";
 // single product
 
 export const singleproductsApi= createAsyncThunk ("products/allproductApi",async(productid)=>{
-  const response=await axiosApi.get(`/product/admin/${productid}`)
+  const response = await axiosApi.get(`/product/admin/${productid}`)
   console.log(response);
   return response.data
 }
@@ -41,6 +41,7 @@ export const singleproductsApi= createAsyncThunk ("products/allproductApi",async
   const initialState={
    addproducts:{},
     allproduct:{},
+    singleProduct:{},
     deleteproduct:{}
    }
 
@@ -60,6 +61,7 @@ export const singleproductsApi= createAsyncThunk ("products/allproductApi",async
             [addproductApi.rejected]:()=>{
                console.log("submission rejected");
             },
+
             [allproductsApi.pending]:()=>{
                 console.log("data submission pending");
              },
@@ -70,6 +72,7 @@ export const singleproductsApi= createAsyncThunk ("products/allproductApi",async
              [allproductsApi.rejected]:()=>{
                 console.log("submission rejected");
              },
+
              [DeleteProductApi.pending]:()=>{
                console.log("task pending");
              },
@@ -80,6 +83,8 @@ export const singleproductsApi= createAsyncThunk ("products/allproductApi",async
              [DeleteProductApi.rejected]:()=>{
                console.log("task rejected");
              }
+
+
 
          }
 
