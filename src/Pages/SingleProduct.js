@@ -8,13 +8,32 @@ import ReactStars from "react-rating-stars-component";
 import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { SingleProductApi } from "../Store/ProductSlice";
+import { useParams } from "react-router-dom";
+
 const SingleProduct = () => {
+
+  const params = useParams()
+  const dispatch = useDispatch()
+  const productId = params.id
+
+  console.log(productId);
+  const {singleproduct} =useSelector((state)=>state.products)
+  console.log(singleproduct);
+  const productImage=singleproduct.images[0].url
+  console.log(productImage);
+
+  useEffect(()=>{
+    dispatch(SingleProductApi(productId))
+  },[])
+
   const [orderedProduct, setOrderedProduct] = useState(true);
   const props = {
-    width: 600,
-    height: 400,
+    width: 500,
+    height: 500,
     zoomWidth: 400,
-    img: "https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640",
+    img: productImage
   };
   useEffect(() => {
     window.scrollTo(0, 0);

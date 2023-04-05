@@ -6,7 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 // import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
-import { SingleProductApi, UpdateProductApi } from "../../Store/ProductSlice";
+import {
+  SingleProductApi,
+  UpdateProductApi,
+  
+} from "../../Store/ProductSlice";
 import "./Addprodutcs.css";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -69,8 +73,7 @@ const Upateproduct = () => {
     <div>
       <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
         <div
-          className="form"
-          style={{ color: "white", border: "3px solid #144272" }}
+          className="addProductform"
         >
           <h5 style={{ color: "#144272", margin: "15px" }}>Update Products</h5>
           <form>
@@ -83,8 +86,18 @@ const Upateproduct = () => {
               value={data?.name}
               style={{
                 width: "100%",
-                marginLeft: "10px",
-                marginRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
@@ -92,14 +105,22 @@ const Upateproduct = () => {
               onChange={handleChange}
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               id="standard-textarea"
               label="enter Description"
-              placeholder="description"
               variant="standard"
-              multiline
               name="description"
               value={data?.description}
             />
@@ -112,8 +133,18 @@ const Upateproduct = () => {
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="actualPrice"
               value={data?.price?.actualPrice}
@@ -126,8 +157,18 @@ const Upateproduct = () => {
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="previousPrice"
               value={data?.price?.previousPrice}
@@ -140,8 +181,18 @@ const Upateproduct = () => {
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="offerPrice"
               value={data?.price?.offerPrice}
@@ -156,8 +207,18 @@ const Upateproduct = () => {
               value={data?.quantity}
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
@@ -171,8 +232,18 @@ const Upateproduct = () => {
               value={data?.brand}
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
 
@@ -192,14 +263,15 @@ const Upateproduct = () => {
         </div>
         <div>
           <div
-            className="form"
-            style={{ color: "white", border: "3px solid #144272" }}
+            className="addProductform-image"
+            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center" }}
           >
             <h5 style={{ color: "#144272", margin: "15px" }}>Add image</h5>
             <label
               style={{
                 marginTop: "20px",
                 color: "red",
+                fontWeight:"bold",
                 fontFamily: "sans-serif",
               }}
             >
@@ -211,29 +283,23 @@ const Upateproduct = () => {
               style={{
                 marginTop: "15px",
                 width: "100px",
-                height: "100px",
-                background: "white",
                 borderRadius: "20px",
               }}
             >
-              {/* <IconButton
-                style={{ position: "absolute" }}
-                color="dark"
-                aria-label="upload picture"
-                component="label"
-              > */}
+
               <input
                 onChange={handleImage}
                 name="images"
                 accept="image/*"
                 type="file"
+                style={{width:"250px"}}
               />
 
               {/* <PhotoCamera />
               </IconButton> */}
               {image && (
                 <img
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  style={{ width: "100%", height: "100%",marginTop:"20px",marginRight:"20px", objectFit: "cover" }}
                   src={image}
                   alt="images"
                 />
