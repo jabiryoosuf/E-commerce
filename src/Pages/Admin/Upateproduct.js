@@ -11,8 +11,8 @@ import {
   UpdateProductApi,
   
 } from "../../Store/ProductSlice";
-import "./Addproduct.css";
 import { useNavigate, useParams } from "react-router-dom";
+import './Addprodutcs.css'
 
 const Upateproduct = () => {
   const params = useParams();
@@ -75,7 +75,7 @@ const Upateproduct = () => {
     <div>
       <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
         <div
-          className="form"
+          className="addProductform"
           style={{ color: "white", border: "3px solid #144272" }}
         >
           <h5 style={{ color: "#144272", margin: "15px" }}>Update Products</h5>
@@ -197,7 +197,7 @@ const Upateproduct = () => {
         </div>
         <div>
           <div
-            className="form"
+            className="addProductform"
             style={{ color: "white", border: "3px solid #144272" }}
           >
             <h5 style={{ color: "#144272", margin: "15px" }}>Add image</h5>
