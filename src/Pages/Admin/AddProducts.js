@@ -73,7 +73,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -97,7 +96,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -121,7 +119,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -145,7 +142,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -169,7 +165,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -194,7 +189,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -219,7 +213,6 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
                   borderBottom:"1px solid #16213E"
                 }
               }}
