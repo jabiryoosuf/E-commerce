@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import './Addprodutcs.css'
 
 const AddProducts = () => {
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
   const [viewImage, setViewImage]=useState()
   const [price, setPrice] = useState({});
   const [data, setData] = useState();
@@ -74,7 +74,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -98,7 +98,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -122,7 +122,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -146,7 +146,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -170,7 +170,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -195,7 +195,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}
@@ -220,7 +220,7 @@ const ViewImage = (view)=>{
               }}
               sx={{
                 input: {
-                  color: "white",
+                  color: "black",
                   borderBottom:"1px solid #16213E"
                 }
               }}

@@ -32,7 +32,7 @@ const Upateproduct = () => {
 
   useEffect(() => {
     setData(singleproduct);
-  },[]);
+  },[singleproduct]);
 
   useEffect(() => {
     dispatch(SingleProductApi(productId));
@@ -210,7 +210,7 @@ const Upateproduct = () => {
             >
               Upload image
             </label>
-
+           
             <div
               className="iconbtn"
               style={{

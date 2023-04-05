@@ -234,10 +234,7 @@ dispatch(allproductsApi())
             
               <ProductCard product={product} />
             ))}
-{/*             
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
+
           </div>
         </div>
       </section>
