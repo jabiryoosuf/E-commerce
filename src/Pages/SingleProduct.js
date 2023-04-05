@@ -18,7 +18,6 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const productId = params.id
 
-  console.log(productId);
   const {singleproduct} =useSelector((state)=>state.products)
   console.log(singleproduct);
   const productImage=singleproduct.images?.[0].url
@@ -48,21 +47,27 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
-                <div>
-                
+                <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+                 <img style={{width:'400px',height:'500px'}}
+                 src={productImage}
+                     alt=''
+                    //  className="img-fluid"
+                 ></img>
+                 
+
                 </div>
               </div>
               <div className="other-product-image d-flex">
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
                 </div>
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
@@ -70,7 +75,7 @@ const SingleProduct = () => {
                   
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
@@ -78,7 +83,7 @@ const SingleProduct = () => {
 
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
@@ -111,7 +116,7 @@ const SingleProduct = () => {
                 <div className="border-bottom py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Type:</h3>{" "}
-                    <p className="product-data">Watch</p>
+                    <p className="product-data"></p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Brand</h3>{" "}
@@ -119,15 +124,15 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>{" "}
-                    <p className="product-data">Watch</p>
+                    <p className="product-data"></p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Tags:</h3>{" "}
-                    <p className="product-data">watch</p>
+                    <p className="product-data"></p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
-                    <p className="product-data">In stock</p>
+                    <p className="product-data">{singleproduct?.quantity >0 ? singleproduct?.quantity : "out of stock" }</p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
@@ -222,13 +227,7 @@ const SingleProduct = () => {
               <div className="bg-white p-3">
                 <h4>Description</h4>
                 <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestias aspernatur atque deserunt incidunt? Harum, iste
-                  suscipit nihil aliquid corrupti cum ut obcaecati reiciendis
-                  sit unde earum laboriosam, accusamus corporis sapiente omnis
-                  consequuntur? Accusantium quia, ad quasi libero error repellat
-                  sunt earum, eveniet reiciendis aliquid tempore distinctio
-                  labore quidem corrupti recusandae.
+               {singleproduct?.description}
                 </p>
               </div>
             </div>

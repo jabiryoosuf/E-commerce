@@ -51,25 +51,25 @@ const Upateproduct = () => {
     console.log(image);
   };
 
-  // const handleDataupdate = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  
-  //     const formData = new FormData();
-  //     formData.append("photo", image, image.name);
-  //     await dispatch(UpdateProductApi({ data, formData, navigate }));
-  //     }
-    
-  //   catch (error) {
-  //     console.error(error);
-  //   }
-  // };
   const handleDataupdate = async (e) => {
     e.preventDefault();
+    try {
   
-     dispatch(UpdateProductApi({ data, navigate,productId}));
+      const formData = new FormData();
+      formData.append("photo", image, image.name);
+      await dispatch(UpdateProductApi({ data, formData, navigate}));
+      }
     
-  }
+    catch (error) {
+      console.error(error);
+    }
+  };
+  // const handleDataupdate = async (e) => {
+  //   e.preventDefault();
+  
+  //    dispatch(UpdateProductApi({ data, navigate,productId}));
+    
+  // }
 
   return (
     <div>

@@ -41,11 +41,11 @@ export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async
 
 export const UpdateProductApi = createAsyncThunk(
   "products/UpdateProductApi",
-  async ({ data,navigate ,productId}) => {
+  async ({ data,navigate,formData }) => {
     const response = await axiosApi.put(`/product/update/admin/${productId}`, data);
     console.log(response);
-   //  const productId = response.data._id;
-   //  await axiosApi.post(`/productImage/admin/new/${productId}`, formData);
+     const productId = response.data._id;
+    await axiosApi.post(`/product/admin/update/${productId}`, formData);
     navigate("/allproducts");
     return response.data;
   }
