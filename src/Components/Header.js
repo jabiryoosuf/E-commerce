@@ -95,10 +95,10 @@ const Header = () => {
                 </div>
                 <div>
                   <Link to="/cart" className="d-flex align-items-center gap-10 text-white">
-                    <img src="../images/cart.svg" alt="" />
+                    <img src="images/cart.svg" alt="" />
                     <div className="d-flex flex-column gap-10">
                       <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$500</p>
+                      <p className="mb-0">$ 0</p>
                     </div>
                   </Link>
                 </div>
