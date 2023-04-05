@@ -57,7 +57,7 @@ const Upateproduct = () => {
   
       const formData = new FormData();
       formData.append("photo", image, image.name);
-      await dispatch(UpdateProductApi({ data, formData, navigate}));
+      await dispatch(UpdateProductApi({ data, formData, navigate,productId}));
       }
     
     catch (error) {

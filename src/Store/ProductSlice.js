@@ -41,7 +41,7 @@ export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async
 
 export const UpdateProductApi = createAsyncThunk(
   "products/UpdateProductApi",
-  async ({ data,navigate,formData }) => {
+  async ({ data,formData,navigate }) => {
     const response = await axiosApi.put(`/product/update/admin/${productId}`, data);
     console.log(response);
      const productId = response.data._id;
