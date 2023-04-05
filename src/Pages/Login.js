@@ -4,7 +4,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginApi } from "../Store/authSlice";
+import { loginApi } from "../Store/AuthSlice";
   
 const Login = () => {
   const [login,setLogin]=useState({})

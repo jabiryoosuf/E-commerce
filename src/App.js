@@ -65,7 +65,7 @@ function App() {
           <Route path="/reset-password/:id" element={<ResetPassword />}></Route>
           {localStorage.role === "admin" ? (
             <>
-              <Route element={<LayoutAdmin />}>
+              <Route element={<LayoutAdmin/>}>
                 <Route path="/admin" element={<DashboardHome />} />
                 <Route path="/allproducts" element={<Allproduct />} />
                 <Route path="/addproducts" element={<AddProducts />}></Route>
