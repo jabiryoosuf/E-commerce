@@ -16,4 +16,4 @@ const LayoutAdmin = () => {
     </div>
   )
 }
-export default LayoutAdmin;
+export default LayoutAdmin

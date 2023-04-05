@@ -16,7 +16,6 @@ export const loginApi = createAsyncThunk(
     }
     if (result.data.role==='admin') {
       navigate("/admin");
-    window.location.reload(false)
     } else {
       navigate("/");
     }
@@ -94,6 +93,8 @@ const authSlice = createSlice({
     [forgotpassowrdApi.pending]: (state) => {
       console.log("pending");
 
+      //  toast.loading(("Sending email..."), { autoClose: true });
+      //  toast.update(0, { render: "Email sent successfully!", type: "success", autoClose: 1000 });
     },
     [forgotpassowrdApi.fulfilled]: (state, action) => {
       console.log("task successfull");
