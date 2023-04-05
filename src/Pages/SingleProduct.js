@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import Header from "../Components/Header";
@@ -16,10 +16,9 @@ const SingleProduct = () => {
     zoomWidth: 400,
     img: "https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640",
   };
-useEffect(()=>{
-  window.scrollTo(0,0)
-},[])
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>
@@ -158,14 +157,12 @@ useEffect(()=>{
                   <div className="d-flex align-items-center gap-15">
                     <div>
                       <a href="">
-                        {" "}
                         <TbGitCompare className="fs-5 me-2" />
                         Add to Compare
                       </a>
                     </div>
                     <div>
                       <a href="">
-                        {" "}
                         <AiOutlineHeart className="fs-5 me-2" />
                         Add to Wishlist
                       </a>
@@ -190,7 +187,8 @@ useEffect(()=>{
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Care Instructions</h3>
                     <p className="product-data">
-                    Use a soft damp cloth and a drop of mild soap to remove any haze. Air dry.
+                      Use a soft damp cloth and a drop of mild soap to remove
+                      any haze. Air dry.
                     </p>
                   </div>
                 </div>

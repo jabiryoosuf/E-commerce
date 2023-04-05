@@ -1,64 +1,66 @@
 import React, { useState } from "react";
-// import Form from "react-bootstrap/Form";
 import TextField from "@mui/material/TextField";
 import { Button } from "react-bootstrap";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-// import Stack from "@mui/material/Stack";
-import { useDispatch, useSelector } from "react-redux";
-import { addproductApi, productimageApi } from "../../Store/ProductSlice";
-import "./Addproduct.css";
+import { useDispatch } from "react-redux";
+import { addproductApi} from "../../Store/ProductSlice";
+import "./Addprodutcs.css";
 import { useNavigate } from "react-router-dom";
+import { color } from "@mui/system";
 
 const AddProducts = () => {
-  const [image, setImage] = useState("");
-  const [price, setPrice] = useState({})
+  const [image, setImage] = useState(null);
+  const [viewImage, setViewImage]=useState()
+  const [price, setPrice] = useState({});
   const [data, setData] = useState();
 
   const dispatch = useDispatch();
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
-  const {addproducts}=useSelector(((state)=>state.products))
-
-console.log(addproducts);
-const productId=addproducts._id
   const handleImage = (e) => {
-    const images = e.target.files[0];
-    setImage(URL.createObjectURL(images));
-   
+   setImage(e.target.files[0])
+   ViewImage(e.target.files[0])
   };
-
+const ViewImage = (view)=>{
+  const reader = new FileReader()
+  reader.readAsDataURL(view)
+  reader.onloadend = ()=>{
+   setViewImage(reader.result)
+   console.log(viewImage);
+  }
+}
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
   const handlePrice = (e) => {
     setPrice({ ...price, [e.target.name]: e.target.value });
-    setData({...data,price:price})
+    setData({ ...data, price: price });
   };
 
-  const handleDataSubmit = (e) => {
+  const handleDataSubmit = async (e) => {
     e.preventDefault();
-    dispatch(addproductApi({data,navigate})).then(()=>{
-
-      dispatch(productimageApi({image,productId}))
-    });
-    
+    try {
+     const formData = new FormData()
+    formData.append('photo',image,image.name)
+    await dispatch(addproductApi({data,formData,navigate }));
+    } catch (error) {
+      console.error(error);
+    }
   };
-//  const handleimagesubmit =(e)=>{
-//   e.preventDefault();
-//    dispatch(productimageApi({image,productId}))
-//  }
-   
+
+  console.log(image);
   console.log(data);
+
+
 
   return (
     <div>
-      
-      <div className="addproducts" style={{ margin: "20px",display:"flex" }}>
-       
-        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
-        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
-          <form   onSubmit={handleDataSubmit}>
+      <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
+        <div
+          className="addProductform"
+          
+        >
+          <h5 style={{ color: "#16213E", margin: "15px" }}>Add Products</h5>
+          <form onSubmit={handleDataSubmit}>
             <TextField
               onChange={handleChange}
               id="standard-basic"
@@ -67,26 +69,44 @@ const productId=addproducts._id
               name="name"
               style={{
                 width: "100%",
-                marginLeft:"10px",
-                marginRight:"10px"
-              
+              margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
             <TextField
+             id="standard-textarea"
+             label="enter Description"
+             variant="standard"
+             name="description"
               onChange={handleChange}
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                
+                margin:"5px"
               }}
-              id="standard-textarea"
-              label="enter Description"
-              placeholder ="description"
-              variant="standard"
-              multiline
-              name="description"
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
             />
             <br></br>
 
@@ -97,8 +117,19 @@ const productId=addproducts._id
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="actualPrice"
             />
@@ -110,8 +141,19 @@ const productId=addproducts._id
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="previousPrice"
             />
@@ -123,8 +165,19 @@ const productId=addproducts._id
               variant="standard"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
               name="offerPrice"
             />
@@ -137,8 +190,19 @@ const productId=addproducts._id
               name="quantity"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
             <br></br>
@@ -151,12 +215,21 @@ const productId=addproducts._id
               name="brand"
               style={{
                 width: "100%",
-                paddingLeft: "10px",
-                paddingRight: "10px",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  color: "white",
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
               }}
             />
-
-          
 
             <Button
               type="submit"
@@ -164,18 +237,27 @@ const productId=addproducts._id
                 border: "none",
                 marginTop: "15px",
                 borderRadius: "10px",
-                background: "#144272",
+                background: "#0A2647",
               }}
             >
               Submit
             </Button>
           </form>
         </div>
-        <div>
-          
-        <div className="form" style={{color:"white",border:"3px solid #144272"}}>
-        <h5 style={{ color:"#144272", margin:"15px"}}>Add Products</h5>
-        <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
+        <div >
+          <div
+            className="addProductform-image"
+            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center" }}
+          >
+            <h5 style={{ color: "#16213E", margin: "15px"}}>Add Products Image</h5>
+            <label
+              style={{
+                marginTop: "20px",
+                color: "#475BE8",
+                fontWeight:"bold",
+                fontFamily: "sans-serif",
+              }}
+            >
               Upload image
             </label>
 
@@ -184,77 +266,25 @@ const productId=addproducts._id
               style={{
                 marginTop: "15px",
                 width: "100px",
-                height: "100px",
-                background: "white",
                 borderRadius: "20px",
               }}
-              >
-              <IconButton
-                style={{ position: "absolute" }}
-                color="dark"
-                aria-label="upload picture"
-                component="label"
-              >
-                <input
-                  onChange={handleImage}
-                  hidden
-                  name="images"
-                  accept="image/*"
-                  type="file"
-                />
-                
-                <PhotoCamera />
-              </IconButton>
+            >
+              <input
+                onChange={handleImage}
+                name="images"
+                accept="image/*"
+                type="file"
+                style={{width:"250px"}}
+              />
               {image && (
                 <img
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  src={image}
+                  style={{ width: "200%", height: "200%",marginTop:"20px",marginRight:"20px", objectFit: "cover" }}
+                  src={viewImage}
                   alt="images"
                 />
               )}
-              </div>
-            {/* <button onClick={handleimagesubmit}>
-              upload
-            </button> */}
-              <div>
-                 {/* <label style={{ marginTop: "20px",color:"red", fontFamily: "sans-serif" }}>
-              Upload image
-            </label> */}
-{/* 
-<div
-              className="iconbtn"
-              style={{
-                marginTop: "15px",
-                width: "100px",
-                height: "100px",
-                background: "white",
-                borderRadius: "20px",
-              }}
-              >
-              <IconButton
-                style={{ position: "absolute" }}
-                color="dark"
-                aria-label="upload picture"
-                component="label"
-              >
-                <input
-                  onChange={handleImage}
-                  hidden
-                  accept="image/*"
-                  type="file"
-                />
-                
-                <PhotoCamera />
-              </IconButton>
-              {image && (
-                <img
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  src={image}
-                  alt="images"
-                />
-              )} */}
-              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>

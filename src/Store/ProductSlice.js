@@ -1,27 +1,47 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
  
-  export const addproductApi= createAsyncThunk('products/addproductApi',async({data,navigate})=>{
+// add product
+
+  export const addproductApi= createAsyncThunk('products/addproductApi',async({data,formData,navigate})=>{
     const response=await axiosApi.post('/product/admin/new',data)
     console.log(response);
+    const productId=response.data._id
+    await axiosApi.post(`/productImage/admin/new/${productId}`,formData)
     navigate('/allproducts')
     return response.data
-  }
-
+  }  
   );
-  export const allproductsApi= createAsyncThunk ("products/allproductApi",async(data)=>{
-    const response=await axiosApi.get('/product/admin/all',data)
-    console.log(response);
-    return response.data
-  })
-  export const productimageApi =createAsyncThunk ("products/productimageApi",async({image,productId})=>{
-   const response=await axiosApi.post(`/productImage/admin/new/${productId}`,image)
+ 
+// get all products
+
+  export const allproductsApi= createAsyncThunk ("products/allproductApi",async()=>{
+   const response=await axiosApi.get('/product/admin/all')
    console.log(response);
    return response.data
-  })
+}
+)
+// single product
+
+export const singleproductsApi= createAsyncThunk ("products/allproductApi",async(productid)=>{
+  const response=await axiosApi.get(`/product/admin/${productid}`)
+  console.log(response);
+  return response.data
+}
+)
+
+// delete Product
+
+    export const DeleteProductApi=createAsyncThunk('product/DeleteProductApi',async(productId)=>{
+      const response=await axiosApi.delete(`/product/delete/admin/${productId}`)
+      console.log(response);
+      return response.data
+    })
+
   const initialState={
    addproducts:{},
     allproduct:{},
+    deleteproduct:{}
    }
 
   const ProductSlice=createSlice({
@@ -29,7 +49,7 @@ import { axiosApi } from "./axios-method";
      initialState,
      reducers:{},
      extraReducers:{
-           
+             
             [addproductApi.pending]:()=>{
                console.log("data submission pending");
             },
@@ -49,7 +69,18 @@ import { axiosApi } from "./axios-method";
              },
              [allproductsApi.rejected]:()=>{
                 console.log("submission rejected");
+             },
+             [DeleteProductApi.pending]:()=>{
+               console.log("task pending");
+             },
+             [DeleteProductApi.fulfilled]:(state,action)=>{
+               state.deleteproduct=action.payload
+               console.log("deletion succesfull");
+             },
+             [DeleteProductApi.rejected]:()=>{
+               console.log("task rejected");
              }
+
          }
 
   })
