@@ -6,7 +6,7 @@ import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {map} from "lodash"
 import { DeleteProductApi, allproductsApi } from '../../Store/ProductSlice';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
 const Allproduct = () => {
@@ -72,7 +72,8 @@ const Allproduct = () => {
             </td>
             <td style={{textAlign:"center"}}>
                 <VisibilityIcon style={{color:"blue"}}/>
-                <EditIcon style={{color:"green",marginInline:"10px"}}/>
+                <Link to={`/updateproduct/${item._id}`}>
+                <EditIcon style={{color:"green",marginInline:"10px"}}></EditIcon></Link>
                 <DeleteIcon onClick={()=>deletehandle(item._id)} style={{color:"red"}}/>
             </td>
           </tr>
