@@ -18,10 +18,10 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const productId = params.id
 
-  console.log(productId);
   const {singleproduct} =useSelector((state)=>state.products)
   console.log(singleproduct);
-  const productImage=singleproduct.images[0].url
+
+  const productImage=singleproduct?.images?.[0]?.url
   console.log(productImage);
 
   useEffect(()=>{
@@ -29,12 +29,7 @@ const SingleProduct = () => {
   },[])
 
   const [orderedProduct, setOrderedProduct] = useState(true);
-  const props = {
-    width: 500,
-    height: 500,
-    zoomWidth: 400,
-    img: productImage
-  };
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -48,29 +43,22 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
-                <div>
-                  <ReactImageZoom {...props} />
+                <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  {/* <ReactImageZoom {...props} /> */}
+                  <img src={productImage} alt='product picture' style={{width:"400px",height:"400px"}}/>
                 </div>
               </div>
               <div className="other-product-image d-flex">
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
                 </div>
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
-                    alt=""
-                    className="img-fluid"
-                  />
-                </div>
-
-                <div>
-                  <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
@@ -78,7 +66,15 @@ const SingleProduct = () => {
 
                 <div>
                   <img
-                    src="https://staticimg.titan.co.in/Titan/Catalog/1810NP01_1.jpg?impolicy=pqmed&imwidth=640"
+                    src={productImage}
+                    alt=""
+                    className="img-fluid"
+                  />
+                </div>
+
+                <div>
+                  <img
+                    src={productImage}
                     alt=""
                     className="img-fluid"
                   />
@@ -89,12 +85,11 @@ const SingleProduct = () => {
               <div className="main-product-details">
                 <div className="border-bottom">
                   <h3 className="title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
-                    ex vero voluptatem est ab. Animi!
+                    {singleproduct?.name}
                   </h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$100</p>
+                  <p className="price">$ {singleproduct?.price?.actualPrice}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -116,7 +111,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Brand:</h3>{" "}
-                    <p className="product-data">havels</p>
+                    <p className="product-data">{singleproduct?.brand}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>{" "}
@@ -128,7 +123,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
-                    <p className="product-data">In stock</p>
+                    <p className="product-data">{singleproduct?.quantity >0 ? singleproduct?.quantity : "out of stock" }</p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
@@ -223,13 +218,7 @@ const SingleProduct = () => {
               <div className="bg-white p-3">
                 <h4>Description</h4>
                 <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestias aspernatur atque deserunt incidunt? Harum, iste
-                  suscipit nihil aliquid corrupti cum ut obcaecati reiciendis
-                  sit unde earum laboriosam, accusamus corporis sapiente omnis
-                  consequuntur? Accusantium quia, ad quasi libero error repellat
-                  sunt earum, eveniet reiciendis aliquid tempore distinctio
-                  labore quidem corrupti recusandae.
+               {singleproduct?.description}
                 </p>
               </div>
             </div>
