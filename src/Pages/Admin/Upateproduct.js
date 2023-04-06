@@ -6,13 +6,9 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 // import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  SingleProductApi,
-  UpdateProductApi,
-  
-} from "../../Store/ProductSlice";
+import { SingleProductApi, UpdateProductApi } from "../../Store/ProductSlice";
 import { useNavigate, useParams } from "react-router-dom";
-import './Addprodutcs.css'
+import "./Addprodutcs.css";
 
 const Upateproduct = () => {
   const params = useParams();
@@ -23,8 +19,7 @@ const Upateproduct = () => {
   const [image, setImage] = useState();
 
   const { singleproduct } = useSelector((state) => ({
-    singleproduct: state.products.singleproduct
-     
+    singleproduct: state.products.singleproduct,
   }));
 
   console.log(singleproduct);
@@ -32,7 +27,7 @@ const Upateproduct = () => {
 
   useEffect(() => {
     setData(singleproduct);
-  },[singleproduct]);
+  }, [singleproduct]);
 
   useEffect(() => {
     dispatch(SingleProductApi(productId));
@@ -42,7 +37,7 @@ const Upateproduct = () => {
     setPrice({ ...price, [e.target.name]: e.target.value });
     setData({ ...data, price: price });
   };
- 
+
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -54,21 +49,18 @@ const Upateproduct = () => {
   const handleDataupdate = async (e) => {
     e.preventDefault();
     try {
-  
       const formData = new FormData();
       formData.append("photo", image, image.name);
-      await dispatch(UpdateProductApi({ data, formData, navigate,productId}));
-      }
-    
-    catch (error) {
+      await dispatch(UpdateProductApi({ data, formData, navigate,productId }));
+    } catch (error) {
       console.error(error);
     }
   };
   // const handleDataupdate = async (e) => {
   //   e.preventDefault();
-  
+
   //    dispatch(UpdateProductApi({ data, navigate,productId}));
-    
+
   // }
 
   return (
@@ -89,15 +81,15 @@ const Upateproduct = () => {
               value={data?.name}
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -105,18 +97,18 @@ const Upateproduct = () => {
             />
             <br></br>
             <TextField
-              onChange={ handleChange}
+              onChange={handleChange}
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -130,21 +122,21 @@ const Upateproduct = () => {
             <br></br>
 
             <TextField
-              onChange={ handlePrice}
+              onChange={handlePrice}
               id="standard-basic"
               label="Price"
               variant="standard"
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -154,21 +146,21 @@ const Upateproduct = () => {
             />
             <br></br>
             <TextField
-              onChange={ handlePrice}
+              onChange={handlePrice}
               id="standard-basic"
               label="previousPrice"
               variant="standard"
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -184,15 +176,15 @@ const Upateproduct = () => {
               variant="standard"
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -202,7 +194,7 @@ const Upateproduct = () => {
             />
             <br></br>
             <TextField
-              onChange={ handleChange}
+              onChange={handleChange}
               id="standard-basic"
               label="Quantity"
               variant="standard"
@@ -210,15 +202,15 @@ const Upateproduct = () => {
               value={data?.quantity}
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -227,7 +219,7 @@ const Upateproduct = () => {
             <br></br>
 
             <TextField
-              onChange={ handleChange}
+              onChange={handleChange}
               id="standard-basic"
               label="Brand"
               variant="standard"
@@ -235,22 +227,23 @@ const Upateproduct = () => {
               value={data?.brand}
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
               }}
             />
 
-            <Button onClick={handleDataupdate}
+            <Button
+              onClick={handleDataupdate}
               // type="submit"
               style={{
                 border: "none",
@@ -273,13 +266,13 @@ const Upateproduct = () => {
               style={{
                 marginTop: "20px",
                 color: "red",
-                fontWeight:"bold",
+                fontWeight: "bold",
                 fontFamily: "sans-serif",
               }}
             >
               Upload image
             </label>
-           
+
             <div
               className="iconbtn"
               style={{
@@ -288,20 +281,25 @@ const Upateproduct = () => {
                 borderRadius: "20px",
               }}
             >
-
               <input
                 onChange={handleImage}
                 name="images"
                 accept="image/*"
                 type="file"
-                style={{width:"250px"}}
+                style={{ width: "250px" }}
               />
 
               {/* <PhotoCamera />
               </IconButton> */}
               {image && (
                 <img
-                  style={{ width: "100%", height: "100%",marginTop:"20px",marginRight:"20px", objectFit: "cover" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    marginTop: "20px",
+                    marginRight: "20px",
+                    objectFit: "cover",
+                  }}
                   src={image}
                   alt="images"
                 />
