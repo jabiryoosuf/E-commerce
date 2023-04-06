@@ -9,7 +9,7 @@ const initialState = {
 
 
 export const cartApi = createAsyncThunk( "cart/cartApi", async (pages)=>{
-    const res= await axios.get('')
+    const res= await axios.get('cart/admin/new')
     return res.data
   }  
 )
