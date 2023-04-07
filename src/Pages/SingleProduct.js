@@ -10,22 +10,37 @@ import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
+  
+  const [qty, setQty] = useState(1);
+  const [cart, setCart] = useState("");
 
-  const params = useParams()
-  const dispatch = useDispatch()
-  const productId = params.id
+  const params = useParams();
+  const dispatch = useDispatch();
+  const productId = params.id;
 
-  const {singleproduct} =useSelector((state)=>state.products)
+  const { singleproduct } = useSelector((state) => state.products);
   console.log(singleproduct);
-  const productImage=singleproduct.images?.[0].url
+
+  const productImage = singleproduct.images?.[0].url;
   console.log(productImage);
 
-  useEffect(()=>{
-    dispatch(SingleProductApi(productId))
-  },[])
+  const handleQty = (e) => {
+    setQty({ ...qty, [e.target.name]: e.target.value });
+    
+  };
+  useEffect(() => {
+    dispatch(SingleProductApi(productId));
+    setCart({ ...cart,singleproduct:singleproduct, qty: qty });
+  },[]);
+  console.log("cart", cart);
+
+  const addToCart = () => {
+    dispatch(cartApi(cart));
+  };
 
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const props = {
@@ -47,55 +62,42 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
-                <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-                 <img style={{width:'400px',height:'500px'}}
-                 src={productImage}
-                     alt=''
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <img
+                    style={{ width: "400px", height: "500px" }}
+                    src={productImage}
+                    alt=""
                     //  className="img-fluid"
-                 ></img>
-                 
-
+                  ></img>
                 </div>
               </div>
               <div className="other-product-image d-flex">
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
-                </div>
-                  
-                <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
 
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
+                </div>
+
+                <div>
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
               </div>
             </div>
             <div className="col-6">
               <div className="main-product-details">
                 <div className="border-bottom">
-                  <h3 className="title">
-                     {singleproduct.name}
-                  </h3>
+                  <h3 className="title">{singleproduct.name}</h3>
                 </div>
                 <div className="border-bottom py-3">
                   <p className="price">{singleproduct?.price?.actualprice}</p>
@@ -132,7 +134,11 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
-                    <p className="product-data">{singleproduct?.quantity >0 ? singleproduct?.quantity : "out of stock" }</p>
+                    <p className="product-data">
+                      {singleproduct?.quantity > 0
+                        ? singleproduct?.quantity
+                        : "out of stock"}
+                    </p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
@@ -152,26 +158,34 @@ const SingleProduct = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-2">
+                  {/* <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Color:</h3>{" "}
-                  </div>
+                  </div> */}
                   <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-2">
-                    <h3 className="product-heading">Quantity:</h3>{" "}
+                    <h3 onChange={(e) => handleQty} className="product-heading">
+                      Quantity:
+                    </h3>{" "}
                     <div className="">
                       <input
                         type="number"
-                        name=""
+                        name="quantity"
                         min={1}
                         max={10}
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
+                        defaultValue={1}
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button className="button border-0 " type="submit">
+                      <button
+                        onClick={addToCart}
+                        className="button border-0 "
+                        type="submit"
+                      >
                         Add to Cart
                       </button>
+
                       <button className="button signup border-0">
                         Buy It Now
                       </button>
@@ -226,9 +240,7 @@ const SingleProduct = () => {
             <div className="col-12">
               <div className="bg-white p-3">
                 <h4>Description</h4>
-                <p>
-               {singleproduct?.description}
-                </p>
+                <p>{singleproduct?.description}</p>
               </div>
             </div>
           </div>

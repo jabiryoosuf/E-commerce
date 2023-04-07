@@ -4,12 +4,14 @@ import axios from "axios"
 const initialState = {
     loading:false,
     error:null,
-    cartItems : []
+    cartItems :[]
 }
 
 
-export const cartApi = createAsyncThunk( "cart/cartApi", async (pages)=>{
-    const res= await axios.get('')
+export const cartApi = createAsyncThunk( "cart/cartApi", async (cart)=>{
+    const res= await axios.post('/cart/admin/new',cart)
+    console.log(res);
+      
     return res.data
   }  
 )
@@ -33,7 +35,7 @@ state.error=false
     state.loading=false
     state.error=action.error
     console.log('cartItems rejected');
-}
+}  
     }
 })
 

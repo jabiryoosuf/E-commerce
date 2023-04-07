@@ -142,7 +142,7 @@ const Upateproduct = () => {
                 disableUnderline: true,
               }}
               name="actualPrice"
-              value={data?.price?.actualPrice}
+              
             />
             <br></br>
             <TextField
@@ -166,7 +166,7 @@ const Upateproduct = () => {
                 disableUnderline: true,
               }}
               name="previousPrice"
-              value={data?.price?.previousPrice}
+              // value={data?.price?.previousPrice}
             />
             <br></br>
             <TextField
@@ -190,7 +190,7 @@ const Upateproduct = () => {
                 disableUnderline: true,
               }}
               name="offerPrice"
-              value={data?.price?.offerPrice}
+              // value={data?.price?.offerPrice}
             />
             <br></br>
             <TextField
