@@ -13,6 +13,7 @@ import { SingleProductApi } from "../Store/ProductSlice";
 import { useParams } from "react-router-dom";
 
 const SingleProduct = () => {
+  const [qty, setQty] = useState(0);
 
   const params = useParams()
   const dispatch = useDispatch()
@@ -33,6 +34,10 @@ const SingleProduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const uploadcart=()=>{
+    
+
+  }
 
   return (
     <>
@@ -160,7 +165,9 @@ const SingleProduct = () => {
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button className="button border-0 " type="submit">
+                      <button className="button border-0 " type="submit"
+                      onClick={()=>{uploadcart()}}
+                      >
                         Add to Cart
                       </button>
                       <button className="button signup border-0">
