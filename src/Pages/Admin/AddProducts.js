@@ -174,7 +174,9 @@ const ViewImage = (view)=>{
               InputProps={{
                 disableUnderline: true,
               }}
-              name="offerPrice"
+              name="
+              
+              "
             />
             <br></br>
             <TextField

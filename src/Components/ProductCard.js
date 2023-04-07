@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
@@ -10,8 +10,11 @@ import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { map } from "lodash";
 
+
+
 const ProductCard = (props) => {
   console.log("singleProduct", props.product);
+
   const { grid } = props;
   let location = useLocation();
   console.log(props.product);
@@ -26,7 +29,7 @@ const ProductCard = (props) => {
           <Link to={`/product/${product._id}`} className="product-card position-relative">
             <div className="wishlist-icon position-absolute">
               <Link>
-                <img src={wish} alt="wishlist" />
+              <img src={wish}/>
               </Link>
             </div>
 

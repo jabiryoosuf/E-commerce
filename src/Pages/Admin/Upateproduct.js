@@ -18,34 +18,34 @@ const Upateproduct = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [data, setData] = useState();
-  const [price, setPrice] = useState({});
+  const [datas, setDatas] = useState();
+  const [prices, setPrices] = useState({});
   const [image, setImage] = useState();
 
   const { singleproduct } = useSelector((state) => ({
-    singleproduct: state.products.singleproduct
-     
+    singleproduct: state.products.singleproduct  
   }));
 
   console.log(singleproduct);
   const productId = params.id;
 
   useEffect(() => {
-    setData(singleproduct);
-  },[]);
+    setDatas(singleproduct);
+  },[singleproduct]);
 
   useEffect(() => {
     dispatch(SingleProductApi(productId));
-  }, []);
+  },[]);
 
   const handlePrice = (e) => {
-    setPrice({ ...price, [e.target.name]: e.target.value });
-    setData({ ...data, price: price });
+    // setPrices({ ...prices, [e.target.name]: e.target.value });
+    setDatas({ ...datas, price: prices });
   };
  
   const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    // setDatas({ ...datas, [e.target.name]: e.target.value });
   };
+
   const handleImage = (e) => {
     setImage(e.target.files[0]);
     console.log(image);
@@ -66,9 +66,7 @@ const Upateproduct = () => {
   // };
   const handleDataupdate = async (e) => {
     e.preventDefault();
-  
-     dispatch(UpdateProductApi({ data, navigate,productId}));
-    
+     dispatch(UpdateProductApi({ datas, navigate,productId}));
   }
 
   return (
@@ -85,7 +83,7 @@ const Upateproduct = () => {
               label="Product Name"
               variant="standard"
               name="name"
-              value={data?.name}
+              // value={datas?.name}
               style={{
                 width: "100%",
               margin:"5px"
@@ -105,6 +103,11 @@ const Upateproduct = () => {
             <br></br>
             <TextField
               onChange={ handleChange}
+              id="standard-textarea"
+              label="enter Description"
+              variant="standard"
+              name="description"
+              // value={datas?.description}
               style={{
                 width: "100%",
               margin:"5px"
@@ -120,11 +123,6 @@ const Upateproduct = () => {
               InputProps={{
                 disableUnderline: true,
               }}
-              id="standard-textarea"
-              label="enter Description"
-              variant="standard"
-              name="description"
-              value={data?.description}
             />
             <br></br>
 
@@ -133,6 +131,8 @@ const Upateproduct = () => {
               id="standard-basic"
               label="Price"
               variant="standard"
+              name="actualPrice"
+              // value={datas?.price?.actualPrice}
               style={{
                 width: "100%",
               margin:"5px"
@@ -148,12 +148,12 @@ const Upateproduct = () => {
               InputProps={{
                 disableUnderline: true,
               }}
-              name="actualPrice"
-              value={data?.price?.actualPrice}
             />
             <br></br>
             <TextField
-              onChange={ handlePrice}
+              onChange={handlePrice}
+              name="previousPrice"
+              // value={datas?.price?.previousPrice}
               id="standard-basic"
               label="previousPrice"
               variant="standard"
@@ -172,8 +172,7 @@ const Upateproduct = () => {
               InputProps={{
                 disableUnderline: true,
               }}
-              name="previousPrice"
-              value={data?.price?.previousPrice}
+             
             />
             <br></br>
             <TextField
@@ -181,6 +180,8 @@ const Upateproduct = () => {
               id="standard-basic"
               label="offerPrice"
               variant="standard"
+              name="offerPrice"
+              // value={datas?.price?.offerPrice}
               style={{
                 width: "100%",
               margin:"5px"
@@ -196,8 +197,7 @@ const Upateproduct = () => {
               InputProps={{
                 disableUnderline: true,
               }}
-              name="offerPrice"
-              value={data?.price?.offerPrice}
+             
             />
             <br></br>
             <TextField
@@ -206,7 +206,7 @@ const Upateproduct = () => {
               label="Quantity"
               variant="standard"
               name="quantity"
-              value={data?.quantity}
+              // value={datas?.quantity}
               style={{
                 width: "100%",
               margin:"5px"
@@ -231,7 +231,7 @@ const Upateproduct = () => {
               label="Brand"
               variant="standard"
               name="brand"
-              value={data?.brand}
+              // value={datas?.brand}
               style={{
                 width: "100%",
               margin:"5px"
@@ -250,7 +250,7 @@ const Upateproduct = () => {
             />
 
             <Button onClick={handleDataupdate}
-              // type="submit"
+              type="submit"
               style={{
                 border: "none",
                 marginTop: "15px",

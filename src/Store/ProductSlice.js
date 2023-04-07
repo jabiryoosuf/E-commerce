@@ -4,6 +4,7 @@ import { axiosApi } from "./axios-method";
 export const addproductApi = createAsyncThunk(
   "products/addproductApi",
   async ({ data, formData, navigate }) => {
+    console.log(formData);
     const response = await axiosApi.post("/product/admin/new", data);
     console.log(response);
     const productId = response.data._id;
@@ -31,13 +32,12 @@ export const DeleteProductApi = createAsyncThunk(
     return response.data;
   }
 );
+
 export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(productId)=>{
-   const response=await axiosApi.get(`/product/admin/${productId}`)
+   const response = await axiosApi.get(`/product/admin/${productId}`)
    console.log(response);
    return response.data
 })
-
-
 
 export const UpdateProductApi = createAsyncThunk(
   "products/UpdateProductApi",
