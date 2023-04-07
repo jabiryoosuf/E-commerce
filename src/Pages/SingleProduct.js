@@ -10,15 +10,16 @@ import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
   
   const [qty, setQty] = useState(1);
-  const [cart, setCart] = useState("");
+
 
   const params = useParams();
+  const navigate=useNavigate()
   const dispatch = useDispatch();
   const productId = params.id;
 
@@ -29,18 +30,22 @@ const SingleProduct = () => {
   console.log(productImage);
 
   const handleQty = (e) => {
-    setQty({ ...qty, [e.target.name]: e.target.value });
+   
+    setQty({ ...qty,quantity : e.target.value });
+ 
+  };
+  useEffect(() =>  {
     
-  };
-  useEffect(() => {
-    dispatch(SingleProductApi(productId));
-    setCart({ ...cart,singleproduct:singleproduct, qty: qty });
+     dispatch(SingleProductApi(productId));
+     ;
   },[]);
-  console.log("cart", cart);
 
-  const addToCart = () => {
-    dispatch(cartApi(cart));
+
+  const addToCart =()=> {
+    
+  dispatch(cartApi({qty,navigate}));
   };
+  console.log("QTY",qty);
 
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const props = {
@@ -126,7 +131,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>{" "}
-                    <p className="product-data"></p>
+                    <p className="product-data">{singleproduct.category}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Tags:</h3>{" "}
@@ -162,7 +167,7 @@ const SingleProduct = () => {
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div> */}
                   <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-2">
-                    <h3 onChange={(e) => handleQty} className="product-heading">
+                    <h3 onChange={ handleQty} className="product-heading">
                       Quantity:
                     </h3>{" "}
                     <div className="">
@@ -171,6 +176,7 @@ const SingleProduct = () => {
                         name="quantity"
                         min={1}
                         max={10}
+                      
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
@@ -179,7 +185,7 @@ const SingleProduct = () => {
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
                       <button
-                        onClick={addToCart}
+                        onClick={addToCart(productId)}
                         className="button border-0 "
                         type="submit"
                       >
