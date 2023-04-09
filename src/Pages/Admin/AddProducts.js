@@ -225,6 +225,28 @@ const ViewImage = (view)=>{
                 disableUnderline: true,
               }}
             />
+            <TextField
+              onChange={handleChange}
+              id="standard-basic"
+              label="Category"
+              variant="standard"
+              name="category"
+              style={{
+                width: "100%",
+                margin:"5px"
+              }}
+              sx={{
+                input: {
+                  borderBottom:"1px solid #16213E"
+                }
+              }}
+              InputLabelProps={{
+                style: { color: '#16213E' },
+              }}
+              InputProps={{
+                disableUnderline: true,
+              }}
+            />
 
             <Button
               type="submit"
