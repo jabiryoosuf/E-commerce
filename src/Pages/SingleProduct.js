@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
-import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,11 +28,14 @@ const SingleProduct = () => {
     dispatch(SingleProductApi(productId));
   }, []);
 
-  const AddtoCart =async () => {
-    const product = { product: productId, quantity };
-    setProducts({ products: product });
-     console.log(products);
-     await dispatch(cartApi( {products, navigate }));
+  const AddtoCart =async(e) => {
+    e.preventDefault();
+    const product = {product: productId,quantity};
+    setProducts({ products: product })
+       console.log(products);
+    await dispatch(cartApi({products,navigate}))
+  
+ 
   };
 
   console.log(products);
@@ -62,7 +62,7 @@ const SingleProduct = () => {
                   {/* <ReactImageZoom {...props} /> */}
                   <img
                     src={productImage}
-                    alt="product picture"
+                    alt="product pictur"
                     style={{ width: "400px", height: "400px" }}
                   />
                 </div>
@@ -159,6 +159,7 @@ const SingleProduct = () => {
                         name="quantity"
                         min={1}
                         max={10}
+                        value={quantity}
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
