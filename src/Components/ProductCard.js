@@ -14,40 +14,40 @@ import { useDispatch } from "react-redux";
 import { addwishListApi } from "../Store/wishSlice";
 
 const ProductCard = (props) => {
-  const [wish, setWish] = useState(Heart);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   console.log("singleProduct", props.product);
 
   const { grid } = props;
   let location = useLocation();
   console.log(props.product);
 
-  const handleWish=() =>{
-    if (wish === Heart) {
-      setWish(RedHeart);
-      dispatch(addwishListApi())
-    } else {
-      setWish(Heart);
-    }
+  const handleWishClick = (productId) => {
+    console.log(productId);
+    setSelectedProductId(selectedProductId === productId ? null : productId)
+    // dispatch(addwishListApi({productId}))
   };
 
   return (
     <>
       {map(props.product, (product,_id) => (
-        <div key={_id}
+        <div
+          key={_id}
           className={`product-card position-relative ${
             location.pathname == "/store" ? `gr-${grid}` : "col-3"
           }`}
         >
-        
-            <div className="wishlist-icon position-absolute">
-              <img style={{ width: "20px" }} onClick={handleWish} src={wish} />
-            </div>
-            <Link
-            to={`/product/${product._id}`}
-          >
-            <div className="product-image">
+          <div className="wishlist-icon position-absolute">
+            <img
+              style={{ width: "20px" }}
+              onClick={() => handleWishClick(_id)}
+              src={selectedProductId === _id ? RedHeart : Heart}
+              alt="wishlist"
+            />
+          </div>
+          <Link to={`/product/${product._id}`}>
+            <div className="product-image ">
               <img
                 src={product?.images?.[0]?.url}
                 className="img-fluid"

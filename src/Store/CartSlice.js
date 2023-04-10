@@ -7,12 +7,13 @@ const initialState = {
   cartItems: [],
 };
 let userId
-export const cartApi = createAsyncThunk("cart/cartApi", async ({quantity,navigate,productId}) => {
-  const res = await axiosApi.post("/cart/admin/new?",quantity,productId);
+export const cartApi = createAsyncThunk("cart/cartApi", async ({products,navigate}) => {
+  console.log(products);
+  const res = await axiosApi.post("/cart/admin/new",products);
   console.log(res);
   userId=res.data.userId
   console.log(userId);
-  await navigate("/cart");
+  // await navigate("/cart");
   return res.data;
 });
 
@@ -31,18 +32,17 @@ const cartSlice = createSlice({
   extraReducers: {
     [cartApi.pending]: (state) => {
       state.loading = true;
-      console.log("cartItems pending");
+      console.log("add cartItems pending");
     },
     [cartApi.fulfilled]: (state, action) => {
       state.loading = false;
-
-      console.log("cartItems success");
+      console.log("add cartItems success");
       state.error = false;
     },
     [cartApi.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error;
-      console.log("cartItems rejected");
+      console.log("add cartItems rejected");
     },
     [getcartApi.pending]: (state) => {
       state.loading = true;

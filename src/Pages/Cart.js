@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getcartApi } from "../Store/CartSlice";
+import {map} from "lodash"
 
 const Cart = () => {
   const dispatch = useDispatch()
 
   const {cartItems}=useSelector((state)=>state.cart)
+  console.log(cartItems.products);
 useEffect(()=>{
   dispatch(getcartApi())
 },[])
@@ -30,7 +32,7 @@ useEffect(()=>{
                 <h4 className="cart-colo-3">Quantity</h4>
                 <h4 className="cart-colo-4">Total</h4>
               </div>
-              {cartItems.map((cartItem)=>(
+              {map(cartItems.products,(cartItem)=>(
                 <div className="cart-data py-3 d-flex justify-content-between align-items-center">
                 <div className="cart-col-1 d-flex gap-15 align-items-center">
                   <div className="w-25">

@@ -15,12 +15,13 @@ import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [products, setProducts] = useState();
   const [orderedProduct, setOrderedProduct] = useState(true);
 
   const { singleproduct } = useSelector((state) => state.products);
 
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productId = params.id;
 
@@ -29,12 +30,15 @@ const SingleProduct = () => {
   useEffect(() => {
     dispatch(SingleProductApi(productId));
   }, []);
-  
 
-  const AddtoCart = () => {
-   dispatch(cartApi({quantity,productId,navigate}));
+  const AddtoCart =async () => {
+    const product = { product: productId, quantity };
+    setProducts({ products: product });
+     console.log(products);
+     await dispatch(cartApi( {products, navigate }));
   };
-console.log(quantity);
+
+  console.log(products);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -155,11 +159,12 @@ console.log(quantity);
                         name="quantity"
                         min={1}
                         max={10}
-                        value={quantity}
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
-                        onChange={(e)=>setQuantity({ ...quantity,quantity: e.target.value })}
+                        onChange={(e) =>
+                          setQuantity(e.target.value)
+                        }
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
