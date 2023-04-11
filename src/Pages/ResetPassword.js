@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Meta from "../Components/Meta";
 import Header from "../Components/Header";
 import { useParams } from 'react-router-dom';
-import { resetpasswordApi } from '../Store/AuthSlice';
+import { resetpasswordApi } from '../Store/authSlice';
 import { useDispatch } from 'react-redux';
 import { ToastContainer, Zoom } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";

@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
-import Header from "../Components/Header";
-import Footer from "../Components/Footer";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
-import ReactImageZoom from "react-image-zoom";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
-  const [qty, setQty] = useState(0);
-
-  const params = useParams()
-  const dispatch = useDispatch()
-  const productId = params.id
-
-  const {singleproduct} =useSelector((state)=>state.products)
-  console.log(singleproduct);
-
-  const productImage=singleproduct?.images?.[0]?.url
-  console.log(productImage);
-
-  useEffect(()=>{
-    dispatch(SingleProductApi(productId))
-  },[])
-
+  const [quantity, setQuantity] = useState(1);
+  // const [products, setProducts] = useState();
   const [orderedProduct, setOrderedProduct] = useState(true);
+
+  const { singleproduct } = useSelector((state) => state.products);
+
+  const params = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const product = params.id;
+
+  const productImage = singleproduct?.images?.[0]?.url;
+
+  useEffect(() => {
+    dispatch(SingleProductApi(product));
+  }, []);
+
+  const AddtoCart =async(e) => {
+    e.preventDefault();
+    // const product = {product: productId,quantity};
+    // setProducts({ products: product })
+      //  console.log(products);
+    await dispatch(cartApi({product,quantity,navigate}))
   
+ 
+  };
+
+  // console.log(products);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -48,50 +56,42 @@ const SingleProduct = () => {
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
-                <div style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   {/* <ReactImageZoom {...props} /> */}
-                  <img src={productImage} alt='product picture' style={{width:"400px",height:"400px"}}/>
+                  <img
+                    src={productImage}
+                    alt="product pictur"
+                    style={{ width: "400px", height: "400px" }}
+                  />
                 </div>
               </div>
               <div className="other-product-image d-flex">
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
 
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
 
                 <div>
-                  <img
-                    src={productImage}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={productImage} alt="" className="img-fluid" />
                 </div>
               </div>
             </div>
             <div className="col-6">
               <div className="main-product-details">
                 <div className="border-bottom">
-                  <h3 className="title">
-                    {singleproduct?.name}
-                  </h3>
+                  <h3 className="title">{singleproduct?.name}</h3>
                 </div>
                 <div className="border-bottom py-3">
                   <p className="price">$ {singleproduct?.price?.actualPrice}</p>
@@ -120,7 +120,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>{" "}
-                    <p className="product-data">Watch</p>
+                    <p className="product-data">{singleproduct?.category}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Tags:</h3>{" "}
@@ -128,7 +128,11 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
-                    <p className="product-data">{singleproduct?.quantity >0 ? singleproduct?.quantity : "out of stock" }</p>
+                    <p className="product-data">
+                      {singleproduct?.quantity > 0
+                        ? singleproduct?.quantity
+                        : "out of stock"}
+                    </p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
@@ -156,18 +160,20 @@ const SingleProduct = () => {
                     <div className="">
                       <input
                         type="number"
-                        name=""
+                        name="quantity"
                         min={1}
                         max={10}
+                        value={quantity}
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
+                        onChange={(e) =>
+                          setQuantity(e.target.value)
+                        }
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button className="button border-0 " type="submit"
-                      onClick={()=>{uploadcart()}}
-                      >
+                      <button onClick={AddtoCart} className="button border-0 ">
                         Add to Cart
                       </button>
                       <button className="button signup border-0">
@@ -224,9 +230,7 @@ const SingleProduct = () => {
             <div className="col-12">
               <div className="bg-white p-3">
                 <h4>Description</h4>
-                <p>
-               {singleproduct?.description}
-                </p>
+                <p>{singleproduct?.description}</p>
               </div>
             </div>
           </div>
@@ -259,7 +263,6 @@ const SingleProduct = () => {
                         className="text-dark text-decoration-underline"
                         href=""
                       >
-                        {" "}
                         write a review
                       </a>
                     </div>

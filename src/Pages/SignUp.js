@@ -5,7 +5,7 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerApi } from "../Store/AuthSlice";
+import { registerApi } from "../Store/authSlice";
 
 const SignUp = () => {
 

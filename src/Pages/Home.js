@@ -23,7 +23,7 @@ const Home = () => {
 
 useEffect(()=>{
 dispatch(allproductsApi())
-},[])
+},[dispatch])
 
   return (
     <>
@@ -233,11 +233,8 @@ dispatch(allproductsApi())
             {map(allproduct,(product)=>(
             
               <ProductCard product={product} />
-            ))}
-{/*             
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
+            ))} 
+
           </div>
         </div>
       </section>
@@ -329,10 +326,14 @@ dispatch(allproductsApi())
             <div className="col-12">
               <h3 className="section-heading">Our Popular Products</h3>
             </div>
+            {/* <ProductCard />
             <ProductCard />
             <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <ProductCard /> */}
+               {map(allproduct,(product)=>(
+            
+            <ProductCard product={product} />
+          ))}
           </div>
         </div>
       </section>
