@@ -24,7 +24,7 @@ import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
-import LayoutAdmin from "./Pages/Admin/layoutAdmin";
+import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
 import NotFound from "./Pages/NotFound";
 import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
@@ -65,7 +65,7 @@ function App() {
           <Route path="/reset-password/:id" element={<ResetPassword />}></Route>
           {localStorage.role === "admin" ? (
             <>
-              <Route element={<LayoutAdmin />}>
+              <Route element={<LayoutAdmin/>}>
                 <Route path="/admin" element={<DashboardHome />} />
                 <Route path="/allproducts" element={<Allproduct />} />
                 <Route path="/addproducts" element={<AddProducts />}></Route>

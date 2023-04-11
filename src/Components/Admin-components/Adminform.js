@@ -1,42 +1,43 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addproductApi } from "../../Store/ProductSlice";
-import { useNavigate } from "react-router-dom";
-import Adminform from "../../Components/Admin-components/Adminform";
-import { TextField } from "@mui/material";
+import React, { useState } from 'react'
+import TextField from "@mui/material/TextField";
 import { Button } from "react-bootstrap";
-// import Adminform from "../../Components/Admin-components/AddProdutcs";
 
-const AddProducts = () => {
- 
-  const [data, setData] = useState();
-  const [image, setImage] = useState(null);
+import "../../Pages/Admin/Addprodutcs.css";
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const Adminform = ({handleDataSubmit,handleDataupdate,heading,submitbutton,image,data,setData,setImage}) => {
 
-  const handleDataSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = new FormData();
-      formData.append("photo", image,image.name);
-       console.log(formData);
-      await dispatch(addproductApi({ data, formData, navigate }));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-console.log(data);
-console.log(image);
+    const [viewImage, setViewImage] = useState();
+    const [price, setPrice] = useState({});
+
+  console.log(data);
+  console.log(image);
+    const handleImage = (e) => {
+      setImage(e.target.files[0]);
+      ViewImage(e.target.files[0]);
+    };
+    const ViewImage = (view) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(view);
+      reader.onloadend = () => {
+        setViewImage(reader.result);
+        console.log(viewImage);
+      };
+    };
+    const handleChange = (e) => {
+      setData({ ...data, [e.target.name]: e.target.value });
+    };
+    const handlePrice = (e) => {
+      setPrice({ ...price, [e.target.name]: e.target.value });
+      setData({ ...data, price: price });
+    };
+
   return (
     <div>
-      <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
-        <div
-          className="addProductform"
-          
-        >
-          <h5 style={{ color: "#16213E", margin: "15px" }}>Add Products</h5>
-          <form onSubmit={handleDataSubmit}>
+       <div className="addproducts" style={{ margin: "20px", display: "flex" }}>
+        <div className="addProductform">
+          <h5 style={{ color: "#16213E", margin: "15px" }}>{heading} Products</h5>
+          {/* <form onSubmit = "return !!(handleDataSubmit() & handleDataupdate())"> */}
+          <form onSubmit={handleDataSubmit || handleDataupdate}>
             <TextField
               onChange={handleChange}
               id="standard-basic"
@@ -45,15 +46,15 @@ console.log(image);
               name="name"
               style={{
                 width: "100%",
-              margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -61,22 +62,22 @@ console.log(image);
             />
             <br></br>
             <TextField
-             id="standard-textarea"
-             label="enter Description"
-             variant="standard"
-             name="description"
+              id="standard-textarea"
+              label="enter Description"
+              variant="standard"
+              name="description"
               onChange={handleChange}
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -91,15 +92,15 @@ console.log(image);
               variant="standard"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -114,15 +115,15 @@ console.log(image);
               variant="standard"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -137,41 +138,39 @@ console.log(image);
               variant="standard"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
               }}
-              name="
-              
-              "
+              name="offerPrice"
             />
             <br></br>
             <TextField
               onChange={handleChange}
               id="standard-basic"
-              label="Quantity"
+              label="stock"
               variant="standard"
-              name="quantity"
+              name="stock"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -187,37 +186,39 @@ console.log(image);
               name="brand"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
               }}
             />
+            <br></br>
+
             <TextField
               onChange={handleChange}
               id="standard-basic"
-              label="Category"
+              label="category"
               variant="standard"
               name="category"
               style={{
                 width: "100%",
-                margin:"5px"
+                margin: "5px",
               }}
               sx={{
                 input: {
-                  borderBottom:"1px solid #16213E"
-                }
+                  borderBottom: "1px solid #16213E",
+                },
               }}
               InputLabelProps={{
-                style: { color: '#16213E' },
+                style: { color: "#16213E" },
               }}
               InputProps={{
                 disableUnderline: true,
@@ -233,21 +234,28 @@ console.log(image);
                 background: "#0A2647",
               }}
             >
-              Submit
+              {submitbutton}
             </Button>
           </form>
         </div>
-        <div >
+        <div>
           <div
             className="addProductform-image"
-            style={{ color: "white",display:"flex", flexDirection:"column",alignItems:"center" }}
+            style={{
+              color: "white",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <h5 style={{ color: "#16213E", margin: "15px"}}>Add Products Image</h5>
+            <h5 style={{ color: "#16213E", margin: "15px" }}>
+              {heading} Products Image
+            </h5>
             <label
               style={{
                 marginTop: "20px",
                 color: "#475BE8",
-                fontWeight:"bold",
+                fontWeight: "bold",
                 fontFamily: "sans-serif",
               }}
             >
@@ -267,11 +275,17 @@ console.log(image);
                 name="images"
                 accept="image/*"
                 type="file"
-                style={{width:"250px"}}
+                style={{ width: "250px" }}
               />
               {image && (
                 <img
-                  style={{ width: "200%", height: "200%",marginTop:"20px",marginRight:"20px", objectFit: "cover" }}
+                  style={{
+                    width: "200%",
+                    height: "200%",
+                    marginTop: "20px",
+                    marginRight: "20px",
+                    objectFit: "cover",
+                  }}
                   src={viewImage}
                   alt="images"
                 />
@@ -281,7 +295,7 @@ console.log(image);
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddProducts;
+export default Adminform

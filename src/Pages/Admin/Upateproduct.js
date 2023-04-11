@@ -1,10 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import Form from "react-bootstrap/Form";
-import TextField from "@mui/material/TextField";
-import { Button } from "react-bootstrap";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
-// import Stack from "@mui/material/Stack";
 import { useDispatch, useSelector } from "react-redux";
 import {
   SingleProductApi,
@@ -13,14 +7,19 @@ import {
 } from "../../Store/ProductSlice";
 import "./Addprodutcs.css";
 import { useNavigate, useParams } from "react-router-dom";
+import Adminform from "../../Components/Admin-components/Adminform";
+import { TextField } from "@mui/material";
+import { Button } from "react-bootstrap";
 
 const Upateproduct = () => {
+  const [data, setData] = useState();
+  const [image, setImage] = useState(null);
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [datas, setDatas] = useState();
   const [prices, setPrices] = useState({});
-  const [image, setImage] = useState();
+
 
   const { singleproduct } = useSelector((state) => ({
     singleproduct: state.products.singleproduct  
@@ -54,12 +53,12 @@ const Upateproduct = () => {
   // const handleDataupdate = async (e) => {
   //   e.preventDefault();
   //   try {
-  
+
   //     const formData = new FormData();
   //     formData.append("photo", image, image.name);
   //     await dispatch(UpdateProductApi({ data, formData, navigate }));
   //     }
-    
+
   //   catch (error) {
   //     console.error(error);
   //   }
@@ -102,7 +101,7 @@ const Upateproduct = () => {
             />
             <br></br>
             <TextField
-              onChange={ handleChange}
+              onChange={handleChange}
               id="standard-textarea"
               label="enter Description"
               variant="standard"
@@ -127,7 +126,7 @@ const Upateproduct = () => {
             <br></br>
 
             <TextField
-              onChange={ handlePrice}
+              onChange={handlePrice}
               id="standard-basic"
               label="Price"
               variant="standard"

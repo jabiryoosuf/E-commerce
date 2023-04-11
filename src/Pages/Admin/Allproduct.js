@@ -48,6 +48,7 @@ const Allproduct = () => {
             <th>offerPrice</th>
             <th>Stock</th>
             <th>Photos</th>
+            <th>Category</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -63,6 +64,7 @@ const Allproduct = () => {
             <td>{item.price?.offerPrice}</td>
            
             <td>{item.quantity}</td>
+            
             <td>
                 <div style={{width:"30px",height:"30px",background:"blue",borderRadius:"50%",overflow:"hidden" }}>
                 {item.images.map((item)=>(
@@ -70,6 +72,7 @@ const Allproduct = () => {
                  ))}
                 </div>
             </td>
+            <td>{item.category}</td>
             <td style={{textAlign:"center"}}>
                 <VisibilityIcon style={{color:"blue"}}/>
                 <Link to={`/updateproduct/${item._id}`}>
