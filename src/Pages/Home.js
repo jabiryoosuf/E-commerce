@@ -24,6 +24,9 @@ const Home = () => {
 useEffect(()=>{
 dispatch(allproductsApi())
 },[])
+useEffect(() => {
+  window.scrollTo(0, 0);
+}, []);
 
   return (
     <>

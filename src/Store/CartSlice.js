@@ -24,8 +24,10 @@ export const getCartItemsAPi = createAsyncThunk(
   }
 );
 
-export const deleteCartApi=createAsyncThunk('cart/deleteCartApi',async(productId)=>{
-  const response=await axiosApi.delete(`/cart/admin/${productId}`)
+export const deleteCartApi=createAsyncThunk('cart/deleteCartApi',async(cartproductId)=>{
+  const response=await axiosApi.delete(`/cart/admin/${cartproductId}`)
+  console.log(response.data);
+  return response.data
 }
 )
 
@@ -34,7 +36,7 @@ const initialState = {
   error: null,
   cartItems: [],
   getcartitems: [],
-
+  
 };
 
 const cartSlice = createSlice({
