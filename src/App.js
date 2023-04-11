@@ -24,7 +24,7 @@ import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
-import LayoutAdmin from "./Pages/Admin/LayoutAdmin";
+import LayoutAdmin from "./Pages/Admin/layoutAdmin";
 import NotFound from "./Pages/NotFound";
 import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
