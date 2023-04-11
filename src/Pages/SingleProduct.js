@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi } from "../Store/CartSlice";
+import { addwishlistApi } from "../Store/WishlistSlice";
 
 const SingleProduct = () => {
   
@@ -29,23 +30,31 @@ const SingleProduct = () => {
   const productImage = singleproduct.images?.[0].url;
   console.log(productImage);
 
-  const handleQty = (e) => {
+  // const handleQty = (e) => {
    
-    setQty({ ...qty,quantity : e.target.value });
+  //   setQty({...qty,quantity:e.target.value });
  
-  };
+  // };
   useEffect(() =>  {
     
      dispatch(SingleProductApi(productId));
      ;
   },[]);
 
+  console.log("QTY", qty);
+  console.log(productId);
 
-  const addToCart =()=> {
-    
-  dispatch(cartApi({qty,navigate}));
+  const addToCart = ()=> {
+       
+      
+ dispatch(cartApi({ qty,productId,navigate}));
+ 
   };
-  console.log("QTY",qty);
+ 
+   
+  const addToWishlist=(productId)=>{
+    dispatch(addwishlistApi({productId,navigate}))
+  }
 
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const props = {
@@ -167,25 +176,27 @@ const SingleProduct = () => {
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div> */}
                   <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-2">
-                    <h3 onChange={ handleQty} className="product-heading">
+                    <h3 className="product-heading">
                       Quantity:
                     </h3>{" "}
                     <div className="">
-                      <input
+                      <input 
+                       onChange={(e)=>setQty(e.target.value)}
                         type="number"
                         name="quantity"
                         min={1}
                         max={10}
+                        value={qty}
                       
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
-                        defaultValue={1}
+                    
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
                       <button
-                        onClick={addToCart(productId)}
+                        onClick={()=>addToCart(singleproduct._id)}
                         className="button border-0 "
                         type="submit"
                       >
@@ -206,7 +217,7 @@ const SingleProduct = () => {
                     </div>
                     <div>
                       <a href="">
-                        <AiOutlineHeart className="fs-5 me-2" />
+                        <AiOutlineHeart onClick={()=>addToWishlist(productId)}  className="fs-5 me-2" />
                         Add to Wishlist
                       </a>
                     </div>

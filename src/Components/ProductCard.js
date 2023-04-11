@@ -25,13 +25,13 @@ const ProductCard = (props) => {
         >
           <Link to={`/product/${product._id}`} className="product-card position-relative">
             <div className="wishlist-icon position-absolute">
-              <Link>
+              {/* <Link> */}
                 <img src={wish} alt="wishlist" />
-              </Link>
+              {/* </Link> */}
             </div>
 
             <div className="product-image">
-              <img
+              <img 
                 src={product?.images?.[0]?.url}
                 className="img-fluid"
                 alt="product-img"

@@ -8,6 +8,7 @@ export const addproductApi = createAsyncThunk(
     console.log(response);
     const productId = response.data._id;
     await axiosApi.post(`/productImage/admin/new/${productId}`, formData);
+  
     navigate("/allproducts");
     return response.data;
   }

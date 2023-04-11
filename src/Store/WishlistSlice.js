@@ -4,9 +4,10 @@ import { axiosApi } from "./axios-method";
   
 
 
-  export const  addwishlistApi=createAsyncThunk('wishlist/addwishlistApi',async()=>{
+  export const  addwishlistApi=createAsyncThunk('wishlist/addwishlistApi',async({productId,navigate})=>{
     const response=await axiosApi.post('/wishlist/admin/new')
     console.log(response);
+    navigate('/wishlist')
     return response.data
   })
   
@@ -21,13 +22,14 @@ const wishListSlice=createSlice({
     reducers:{},
     extraReducers:{
         [addwishlistApi.pending]:()=>{
-         console.log("data pending");
+         console.log("task pending");
         },
         [addwishlistApi.fulfilled]:(state,action)=>{
             state.wishlist=action.payload
+            console.log("item addedd to wishlist");
         },
         [addwishlistApi.rejected]:()=>{
-            console.log("data rejected");
+            console.log("task rejected");
         }
     }
 })
