@@ -1,0 +1,11 @@
+.addProductform{
+   min-width: 700px;
+    min-height: 600px;
+    padding-left: 10px;
+    
+}
+.addProductform-image{
+  padding-left: 10px;
+  min-width: 550px;
+    min-height: 667px;
+}

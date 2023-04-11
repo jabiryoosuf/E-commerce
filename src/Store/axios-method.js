@@ -1,6 +1,7 @@
 import axios  from 'axios'
 
  const BASICURL ="http://192.168.29.231:5000"
+//  const BASICURL ="http://192.168.29.217:5000"
  
  export const axiosApi = axios.create({
     baseURL:BASICURL,
