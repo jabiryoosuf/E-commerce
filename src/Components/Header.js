@@ -3,9 +3,31 @@ import { NavLink, Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 const Header = () => {
- 
+
+  const[total,setTotal]=useState()
+  const { getcartitems } = useSelector((state) => state.cart);
+  console.log('item',getcartitems);
+
+    let itemCount=getcartitems.length
+    console.log(itemCount);
+
+    useEffect(() => {
+      let subtotal = 0;
+      for (let i = 0; i < getcartitems.length; i++) {
+        const item = getcartitems[i];
+        if (item?.product && item.product.price && item.quantity) { 
+          subtotal += item.product.price.actualPrice * item.quantity;
+        }
+       
+      }
+      setTotal(subtotal);
+      
+    }, [getcartitems]);
+      
   return (
     <>
       <ToastContainer     
@@ -94,13 +116,17 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
+                  
                   <Link to="/cart" className="d-flex align-items-center gap-10 text-white">
+                   
                     <img src="images/cart.svg" alt="" />
                     <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">0</span>
-                      <p className="mb-0">$ 0</p>
+                      <span className="badge bg-white text-dark">{itemCount}</span>
+                      <p className="mb-0">$ {total}</p>
                     </div>
+                    
                   </Link>
+                  
                 </div>
               </div>
             </div>

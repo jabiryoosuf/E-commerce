@@ -15,10 +15,10 @@ const Cart = () => {
    const[total,setTotal]=useState()
   const { getcartitems } = useSelector((state) => state.cart);
 
-  console.log("dd", getcartitems);
-  console.log("leng", getcartitems.length);
-  //  const isCartEmpty= getcartitems.length
-  //  console.log('leng',isCartEmpty);
+  console.log("items", getcartitems);
+  let itemCount= getcartitems.length
+  console.log("leng", itemCount);
+  
   useEffect(() => {
     dispatch(getCartItemsAPi());
   }, []);
@@ -33,10 +33,15 @@ const Cart = () => {
   }
   useEffect(() => {
     let subtotal = 0;
-    getcartitems.forEach((item) => {
-      subtotal += item.product.price.actualPrice * item.quantity;
-    });
+    for (let i = 0; i < getcartitems.length; i++) {
+      const item = getcartitems[i];
+      if (item?.product && item.product.price && item.quantity) { 
+        subtotal += item.product.price.actualPrice * item.quantity;
+      }
+     
+    }
     setTotal(subtotal);
+    
   }, [getcartitems]);
     
   
@@ -46,7 +51,7 @@ const Cart = () => {
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
         <>
-        {getcartitems.length === 0?(
+        { itemCount === 0?(
         <> 
         <h2 style={{textAlign:'center'}}>Your Cart is Empty</h2>
           <div className="empty" style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
