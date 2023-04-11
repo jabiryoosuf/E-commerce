@@ -26,6 +26,16 @@ export const getcartApi = createAsyncThunk("cart/cartApi", async () => {
   return res.data;
 });
 
+// Remove form cart
+
+export const RemoveCartApi = createAsyncThunk(
+  "wish/addwishListApi",
+  async (cartItemId) => {
+    const responds = await axiosApi.delete(`/cart/admin/${cartItemId}`);
+    return responds.data;
+  }
+);
+
 const cartSlice = createSlice({
     
   name: "cart",

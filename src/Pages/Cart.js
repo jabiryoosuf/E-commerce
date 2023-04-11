@@ -6,37 +6,53 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getcartApi } from "../Store/CartSlice";
+import { RemoveCartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import { useState } from "react";
+import emptycart from "../images/emptycart.gif"
 
 const Cart = () => {
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
-  // const [quantity,setQuantity]=useState()
   const { cartItems } = useSelector((state) => state.cart);
   console.log(cartItems);
 
   useEffect(() => {
     dispatch(getcartApi());
   }, []);
+
   useEffect(() => {
     let totalPrice = 0;
-for (let i = 0; i < cartItems.length; i++) {
-  const item = cartItems[i];
-  totalPrice += item?.quantity * item?.product?.price?.actualPrice;
-}
-setTotalCartPrice(totalPrice);
+    for (let i = 0; i < cartItems.length; i++) {
+      const item = cartItems[i];
+      totalPrice += item?.quantity * item?.product?.price?.actualPrice;
+    }
+    setTotalCartPrice(totalPrice);
   }, [cartItems]);
 
+  const deleteCartItem = (cartItemId)=>{
+dispatch(RemoveCartApi(cartItemId)).then(()=>{
+  dispatch(getcartApi())
+})
+  }
   return (
     <>
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
+      {cartItems.length === 0?(
+        <> 
+        <h2 style={{textAlign:'center'}}>Your Cart is Empty</h2>
+          <div className="empty" style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+          
+          <img src={emptycart} alt="empty cart"></img>
+          </div>
+        </>
+        ) : (
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
+              
               <div className="cart-header py-3 mb-3 d-flex justify-content-between align-contet-center">
                 <h4 className="cart-colo-1">Product</h4>
                 <h4 className="cart-colo-2">Price</h4>
@@ -54,8 +70,8 @@ setTotalCartPrice(totalPrice);
                       />
                     </div>
                     <div className="w-75">
-                      <p>{cartItem?.name}</p>
-                      <p> {cartItem?.brand}:</p>
+                      <p>{cartItem?.product?.name}</p>
+                      <p>{cartItem?.product?.brand}:</p>
                     </div>
                   </div>
                   <div className="cart-col-2">
@@ -77,7 +93,7 @@ setTotalCartPrice(totalPrice);
                       />
                     </div>
                     <div>
-                      <MdDelete className="text-danger" />
+                      <MdDelete style={{cursor:"pointer",fontSize:"30px"}} className="text-danger" onClick={()=>deleteCartItem(cartItem._id)} />
                     </div>
                   </div>
                   <div className="cart-col-4">
@@ -107,6 +123,7 @@ setTotalCartPrice(totalPrice);
             </div>
           </div>
         </div>
+        )}
       </section>
     </>
   );
