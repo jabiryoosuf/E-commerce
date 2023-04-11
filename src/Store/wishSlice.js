@@ -13,7 +13,7 @@ export const addwishListApi = createAsyncThunk(
   "wish/addwishListApi",
   async (productId) => {
     console.log(productId);
-    const responds = await axiosApi.post(`/wishlist/admin/new`,{products:productId});
+    const responds = await axiosApi.post(`/wishlist/admin/new`,{product:productId});
     return responds.data;
   }
 );

@@ -10,20 +10,17 @@ import service3 from "../images/service-04.png";
 import service4 from "../images/service-05.png";
 import service from "../images/service.png";
 import { useDispatch, useSelector } from "react-redux";
-import {map} from "lodash"
+import { map } from "lodash";
 import { allproductsApi } from "../Store/ProductSlice";
 
-
-
 const Home = () => {
-
-  const dispatch = useDispatch()
-  const {allproduct}=useSelector((state)=>state.products)
+  const dispatch = useDispatch();
+  const { allproduct } = useSelector((state) => state.products);
   console.log(allproduct);
 
-useEffect(()=>{
-dispatch(allproductsApi())
-},[dispatch])
+  useEffect(() => {
+    dispatch(allproductsApi());
+  }, []);
 
   return (
     <>
@@ -229,12 +226,10 @@ dispatch(allproductsApi())
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
             </div>
-           
-            {map(allproduct,(product)=>(
-            
-              <ProductCard product={product} />
-            ))} 
 
+            {map(allproduct, (product) => (
+              <ProductCard product={product} />
+            ))}
           </div>
         </div>
       </section>
@@ -330,10 +325,9 @@ dispatch(allproductsApi())
             <ProductCard />
             <ProductCard />
             <ProductCard /> */}
-               {map(allproduct,(product)=>(
-            
-            <ProductCard product={product} />
-          ))}
+            {map(allproduct, (product) => (
+              <ProductCard product={product} />
+            ))}
           </div>
         </div>
       </section>
@@ -396,9 +390,7 @@ dispatch(allproductsApi())
           </div>
         </div>
       </section>
-  
     </>
-    
   );
 };
 

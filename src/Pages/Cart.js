@@ -8,16 +8,26 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
+import { useState } from "react";
 
 const Cart = () => {
   const dispatch = useDispatch();
-
+  const [totalCartPrice, setTotalCartPrice] = useState(0);
+  // const [quantity,setQuantity]=useState()
   const { cartItems } = useSelector((state) => state.cart);
   console.log(cartItems);
 
   useEffect(() => {
     dispatch(getcartApi());
   }, []);
+  useEffect(() => {
+    let totalPrice = 0;
+for (let i = 0; i < cartItems.length; i++) {
+  const item = cartItems[i];
+  totalPrice += item?.quantity * item?.product?.price?.actualPrice;
+}
+setTotalCartPrice(totalPrice);
+  }, [cartItems]);
 
   return (
     <>
@@ -33,12 +43,12 @@ const Cart = () => {
                 <h4 className="cart-colo-3">Quantity</h4>
                 <h4 className="cart-colo-4">Total</h4>
               </div>
-              {map(cartItems, (cartItem) => (
+              {map(cartItems, (cartItem = cartItem) => (
                 <div className="cart-data py-3 d-flex justify-content-between align-items-center">
                   <div className="cart-col-1 d-flex gap-15 align-items-center">
                     <div className="w-25">
                       <img
-                        src={cartItem?.images?.[0]?.url}
+                        src={cartItem?.product?.images?.[0]?.url}
                         className="img-fluid"
                         alt="product name"
                       />
@@ -49,7 +59,9 @@ const Cart = () => {
                     </div>
                   </div>
                   <div className="cart-col-2">
-                    <h5 className="price">$ {cartItem?.price?.actualPrice}</h5>
+                    <h5 className="price">
+                      $ {cartItem?.product?.price?.actualPrice}
+                    </h5>
                   </div>
 
                   <div className="cart-col-3 d-flex align-items-center gap-15">
@@ -58,7 +70,7 @@ const Cart = () => {
                         className="form-control"
                         type="number"
                         name=""
-                        value={cartItem?.products[0]?.quantity}
+                        value={cartItem?.quantity}
                         min={1}
                         max={10}
                         id=""
@@ -70,7 +82,9 @@ const Cart = () => {
                   </div>
                   <div className="cart-col-4">
                     <h5 className="price">
-                      $ {cartItem?.quantity * cartItem?.price?.actualPrice}
+                      ${" "}
+                      {cartItem?.quantity *
+                        cartItem?.product?.price?.actualPrice}
                     </h5>
                   </div>
                 </div>
@@ -82,7 +96,7 @@ const Cart = () => {
                     Continue To Shopping
                   </Link>
                   <div className="d-flex flex-column align-items-end">
-                    <h4>Sub Total: $100</h4>
+                    <h4>Sub Total : {totalCartPrice}</h4>
                     <p>Taxes and shipping calculated at checkout</p>
                     <Link to="/checkout" className="button">
                       Check Out

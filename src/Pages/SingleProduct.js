@@ -34,6 +34,7 @@ const SingleProduct = () => {
     // setProducts({ products: product })
       //  console.log(products);
     await dispatch(cartApi({product,quantity,navigate}))
+    
   
  
   };

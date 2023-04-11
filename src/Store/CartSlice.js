@@ -8,20 +8,20 @@ const initialState = {
 };
 
 export const cartApi = createAsyncThunk("cart/cartApi", async({product,quantity,navigate}) => {
-  const res = await axiosApi.post("/cart/admin/new",product,quantity);
+  const res = await axiosApi.post("/cart/admin/new",{product,quantity});
   console.log(res);
   const userId=res.data.userId
   localStorage.setItem("userId",userId)
   console.log(userId);
-  //  navigate("/cart");
+   navigate("/cart");
   return res.data;
 });
 
 
 export const getcartApi = createAsyncThunk("cart/cartApi", async () => {
-  const userId=localStorage.getItem("userId")
-  console.log(userId);
-  const res = await axiosApi.get(`/cart/user/all` );
+  // const userId=localStorage.getItem("userId")
+  // console.log(userId);
+  const res = await axiosApi.get(`/cart/user/all`);
   console.log(res);
   return res.data;
 });
