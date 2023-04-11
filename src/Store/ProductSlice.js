@@ -33,8 +33,8 @@ export const DeleteProductApi = createAsyncThunk(
   }
 );
 
-export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(productId)=>{
-   const response = await axiosApi.get(`/product/admin/${productId}`)
+export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(product)=>{
+   const response = await axiosApi.get(`/product/admin/${product}`)
    console.log(response);
    return response.data
 })

@@ -13,7 +13,8 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems.products);
+  console.log(cartItems);
+
   useEffect(() => {
     dispatch(getcartApi());
   }, []);
@@ -32,7 +33,7 @@ const Cart = () => {
                 <h4 className="cart-colo-3">Quantity</h4>
                 <h4 className="cart-colo-4">Total</h4>
               </div>
-              {map(cartItems.products, (cartItem) => (
+              {map(cartItems, (cartItem) => (
                 <div className="cart-data py-3 d-flex justify-content-between align-items-center">
                   <div className="cart-col-1 d-flex gap-15 align-items-center">
                     <div className="w-25">
@@ -57,6 +58,7 @@ const Cart = () => {
                         className="form-control"
                         type="number"
                         name=""
+                        value={cartItem?.products[0]?.quantity}
                         min={1}
                         max={10}
                         id=""

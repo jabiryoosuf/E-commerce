@@ -7,8 +7,8 @@ const initialState = {
   cartItems: [],
 };
 
-export const cartApi = createAsyncThunk("cart/cartApi", async({products,navigate}) => {
-  const res = await axiosApi.post("/cart/admin/new",products);
+export const cartApi = createAsyncThunk("cart/cartApi", async({product,quantity,navigate}) => {
+  const res = await axiosApi.post("/cart/admin/new",product,quantity);
   console.log(res);
   const userId=res.data.userId
   localStorage.setItem("userId",userId)
@@ -21,7 +21,7 @@ export const cartApi = createAsyncThunk("cart/cartApi", async({products,navigate
 export const getcartApi = createAsyncThunk("cart/cartApi", async () => {
   const userId=localStorage.getItem("userId")
   console.log(userId);
-  const res = await axiosApi.get(`/cart/admin/${userId}` );
+  const res = await axiosApi.get(`/cart/user/all` );
   console.log(res);
   return res.data;
 });

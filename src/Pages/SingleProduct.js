@@ -12,7 +12,7 @@ import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
-  const [products, setProducts] = useState();
+  // const [products, setProducts] = useState();
   const [orderedProduct, setOrderedProduct] = useState(true);
 
   const { singleproduct } = useSelector((state) => state.products);
@@ -20,25 +20,25 @@ const SingleProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const productId = params.id;
+  const product = params.id;
 
   const productImage = singleproduct?.images?.[0]?.url;
 
   useEffect(() => {
-    dispatch(SingleProductApi(productId));
+    dispatch(SingleProductApi(product));
   }, []);
 
   const AddtoCart =async(e) => {
     e.preventDefault();
-    const product = {product: productId,quantity};
-    setProducts({ products: product })
-       console.log(products);
-    await dispatch(cartApi({products,navigate}))
+    // const product = {product: productId,quantity};
+    // setProducts({ products: product })
+      //  console.log(products);
+    await dispatch(cartApi({product,quantity,navigate}))
   
  
   };
 
-  console.log(products);
+  // console.log(products);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

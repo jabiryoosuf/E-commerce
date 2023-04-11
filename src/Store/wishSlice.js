@@ -7,17 +7,33 @@ const initialState = {
   wishList: [],
 };
 
+// add to wishList
+
 export const addwishListApi = createAsyncThunk(
   "wish/addwishListApi",
-  async ({productId}) => {
-    const responds = await axiosApi.post(`/wishlist/admin/new`, productId);
+  async (productId) => {
+    console.log(productId);
+    const responds = await axiosApi.post(`/wishlist/admin/new`,{products:productId});
     return responds.data;
   }
 );
+
+// get all wishList
+
 export const getwishListApi = createAsyncThunk(
   "wish/addwishListApi",
   async () => {
     const responds = await axiosApi.get(`/wishlist/admin/all`);
+    return responds.data;
+  }
+);
+
+// Remove form wishList
+
+export const RemovewishListApi = createAsyncThunk(
+  "wish/addwishListApi",
+  async (productId) => {
+    const responds = await axiosApi.delete(`/wishlist/admin/${productId}`);
     return responds.data;
   }
 );

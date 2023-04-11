@@ -11,7 +11,7 @@ import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addwishListApi } from "../Store/wishSlice";
+import { RemovewishListApi, addwishListApi } from "../Store/wishSlice";
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -25,7 +25,13 @@ const ProductCard = (props) => {
 
   const handleWishClick = (productId) => {
     console.log(productId);
-    setSelectedProductId(selectedProductId === productId ? null : productId)
+    if(selectedProductId === productId){
+      setSelectedProductId(null)
+      dispatch(RemovewishListApi(productId))
+    } else{
+      setSelectedProductId(productId)
+      dispatch(addwishListApi(productId))
+    }
     // dispatch(addwishListApi({productId}))
   };
 
@@ -41,8 +47,8 @@ const ProductCard = (props) => {
           <div className="wishlist-icon position-absolute">
             <img
               style={{ width: "20px" }}
-              onClick={() => handleWishClick(_id)}
-              src={selectedProductId === _id ? RedHeart : Heart}
+              onClick={() => handleWishClick(product._id)}
+              src={selectedProductId === product._id ? RedHeart : Heart}
               alt="wishlist"
             />
           </div>
