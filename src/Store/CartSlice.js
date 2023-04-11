@@ -5,22 +5,24 @@ const initialState = {
   loading: false,
   error: null,
   cartItems: [],
+  totalPrice: "",
 };
 
-export const cartApi = createAsyncThunk("cart/cartApi", async({product,quantity,navigate}) => {
-  const res = await axiosApi.post("/cart/admin/new",{product,quantity});
-  console.log(res);
-  const userId=res.data.userId
-  localStorage.setItem("userId",userId)
-  console.log(userId);
-   navigate("/cart");
-  return res.data;
-});
+// add to cart
 
+export const cartApi = createAsyncThunk(
+  "cart/cartApi",
+  async ({ product, quantity, navigate }) => {
+    const res = await axiosApi.post("/cart/admin/new", { product, quantity });
+    console.log(res);
+    navigate("/cart");
+    return res.data;
+  }
+);
+
+// get all  cart Items
 
 export const getcartApi = createAsyncThunk("cart/cartApi", async () => {
-  // const userId=localStorage.getItem("userId")
-  // console.log(userId);
   const res = await axiosApi.get(`/cart/user/all`);
   console.log(res);
   return res.data;
@@ -37,11 +39,16 @@ export const RemoveCartApi = createAsyncThunk(
 );
 
 const cartSlice = createSlice({
-    
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    totalCartAmount: (state, action) => {
+      state.totalPrice = action.payload;
+    },
+  },
   extraReducers: {
+    // add to cart
+
     [cartApi.pending]: (state) => {
       state.loading = true;
       console.log("add cartItems pending");
@@ -56,6 +63,9 @@ const cartSlice = createSlice({
       state.error = action.error;
       console.log("add cartItems rejected");
     },
+
+    // get all  cart Items
+
     [getcartApi.pending]: (state) => {
       state.loading = true;
       console.log("cartItems pending");
@@ -71,7 +81,24 @@ const cartSlice = createSlice({
       state.error = action.error;
       console.log("cartItems rejected");
     },
+
+    // Remove form cart
+
+    [RemoveCartApi.pending]: (state) => {
+      state.loading = true;
+      console.log("Remove cartItems pending");
+    },
+    [RemoveCartApi.fulfilled]: (state, action) => {
+      state.loading = false;
+      console.log("Remove cartItems success");
+      state.error = false;
+    },
+    [RemoveCartApi.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+      console.log("Remove cartItems rejected");
+    },
   },
 });
-
+export const { totalCartAmount } = cartSlice.actions;
 export default cartSlice.reducer;
