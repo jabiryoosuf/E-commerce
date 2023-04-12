@@ -12,6 +12,7 @@ import RedHeart from "../images/heart (1).png";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RemovewishListApi, addwishListApi } from "../Store/wishSlice";
+import { style } from "@mui/system";
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -41,7 +42,7 @@ const ProductCard = (props) => {
         <div
           key={_id}
           className={`product-card position-relative ${
-            location.pathname == "/store" ? `gr-${grid}` : "col-3"
+            location.pathname == "/ourstore" ? `gr-${grid}`  : "col-3" 
           }`}
         >
           <div className="wishlist-icon position-absolute">
