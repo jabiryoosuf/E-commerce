@@ -42,7 +42,11 @@ const initialState = {
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+      
+    
+
+  },
   extraReducers: {
     [cartApi.pending]: (state) => {
       state.loading = true;

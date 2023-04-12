@@ -54,6 +54,16 @@ export const resetpasswordApi = createAsyncThunk(
   }
 );
 
+export const logOutApi=createAsyncThunk('auth/logOutApi',async(navigate)=>{
+  const token=localStorage.getItem('token')
+  const role=localStorage.getItem('role')
+  const res=await axiosApi.get('/logout',token,role)
+  localStorage.removeItem('token')
+  localStorage.removeItem('role')
+  console.log(res);
+  navigate('/')
+})
+
 const initialState = {
   token: "",
   user: {},
@@ -115,6 +125,15 @@ const authSlice = createSlice({
     [resetpasswordApi.rejected]: () => {
       console.log("task rejected");
     },
+    [logOutApi.fulfilled]:()=>{
+      console.log("logout success");
+      toast.success("Successfully logedOut", { autoClose: 1000 });
+    },
+    [logOutApi.rejected]:()=>{
+      console.log("rejected");
+      toast.error("Logout rejected", { autoClose: 1000 });
+    }
+
   },
 });
 

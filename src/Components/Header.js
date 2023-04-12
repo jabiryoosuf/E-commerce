@@ -1,17 +1,25 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, Navigate, useNavigate } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import {AiOutlineLogout} from 'react-icons/ai'
+import Color from "./Color";
+import { logOutApi } from "../Store/authSlice";
 const Header = () => {
+   
+  const[total,setTotal]=useState(0)
 
-  const[total,setTotal]=useState()
+
+    const dispatch=useDispatch()
+  const navigate=useNavigate()
+
   const { getcartitems } = useSelector((state) => state.cart);
   console.log('item',getcartitems);
-
+      
     let itemCount=getcartitems.length
     console.log(itemCount);
 
@@ -27,6 +35,12 @@ const Header = () => {
       setTotal(subtotal);
       
     }, [getcartitems]);
+
+
+
+     const handleLogOut=()=>{
+        dispatch( logOutApi(navigate))
+     }
       
   return (
     <>
@@ -128,10 +142,24 @@ const Header = () => {
                   </Link>
                   
                 </div>
+                
+                  
+                 
+                    <div style={{fontSize:'30px',color:'white',marginRight:'-55px'}}>
+                      
+                <AiOutlineLogout onClick={handleLogOut} />
+               
+                </div>
+                
+                    
+                    
+                 
+                  
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        
       </header>
       <header className="header-bottom py-2">
         <div className="container-xxl">

@@ -13,12 +13,13 @@ import { useState } from "react";
 const Cart = () => {
   const dispatch = useDispatch();
    const[total,setTotal]=useState()
-  const { getcartitems } = useSelector((state) => state.cart);
-
+  const {getcartitems } = useSelector((state) => state.cart);
+   
   console.log("items", getcartitems);
   let itemCount= getcartitems.length
   console.log("leng", itemCount);
-  
+    
+
   useEffect(() => {
     dispatch(getCartItemsAPi());
   }, []);

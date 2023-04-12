@@ -30,9 +30,22 @@ import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
 import Adminmassage from "./Pages/Admin/Adminmassage";
 import Admincalander from "./Pages/Admin/Admincalander";
+import { useEffect } from "react";
+import { getCartItemsAPi } from "./Store/CartSlice";
+import { useDispatch } from "react-redux";
+
 function App() {
+  const dispatch=useDispatch()
+
+  useEffect(() => {
+    dispatch(getCartItemsAPi());
+  }, []);
   return (
+
+   
+  
     <div className="App">
+    
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
