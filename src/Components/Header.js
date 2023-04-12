@@ -9,20 +9,21 @@ import { useState } from "react";
 import { totalCartAmount } from "../Store/CartSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
   const { cartItems } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
-  const itemCount = cartItems.length;
+  const totalCartItems= cartItems.length
 
+  let totalPrice = 0;
   useEffect(() => {
-    let totalPrice = 0;
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
       totalPrice += item?.quantity * item?.product?.price?.actualPrice;
     }
     setTotalCartPrice(totalPrice);
-    dispatch(totalCartAmount(totalCartPrice));
-  }, []);
+    dispatch(totalCartAmount(totalPrice))
+  },);
+
 
   return (
     <>
@@ -125,7 +126,7 @@ const Header = () => {
                     <img src="images/cart.svg" alt="" />
                     <div className="d-flex flex-column gap-10">
                       <span className="badge bg-white text-dark">
-                        {itemCount}
+                        {totalCartItems}
                       </span>
                       <p className="mb-0">$ {totalCartPrice}</p>
                     </div>

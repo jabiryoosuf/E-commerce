@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RemoveCartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  
+  const { totalPrice,cartItems } = useSelector((state) => state.cart);
 
   const deleteCartItem = (cartItemId) => {
     dispatch(RemoveCartApi(cartItemId)).then(() => {
@@ -73,7 +76,7 @@ const Cart = () => {
                           className="form-control"
                           type="number"
                           name=""
-                          value={cartItem?.quantity}
+                          defaultValue={cartItem?.quantity}
                           min={1}
                           max={10}
                           id=""
@@ -89,7 +92,6 @@ const Cart = () => {
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
-                        ${" "}
                         {cartItem?.quantity *
                           cartItem?.product?.price?.actualPrice}
                       </h5>

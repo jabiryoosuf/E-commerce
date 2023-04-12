@@ -31,15 +31,14 @@ import Adminprofile from "./Pages/Admin/Adminprofile";
 import Adminmassage from "./Pages/Admin/Adminmassage";
 import Admincalander from "./Pages/Admin/Admincalander";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { getcartApi } from "./Store/CartSlice";
-function App() {
-  const dispatch = useDispatch();
+import { useDispatch } from "react-redux";
 
+function App() {
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getcartApi());
-  }, [dispatch]);
-  
+},[]);
   return (
     <div className="App">
       <BrowserRouter>

@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   cartItems: [],
   totalPrice: "",
+  totalCartItems:""
 };
 
 // add to cart
@@ -100,5 +101,5 @@ const cartSlice = createSlice({
     },
   },
 });
-export const { totalCartAmount } = cartSlice.actions;
+export const { totalCart,totalCartAmount } = cartSlice.actions;
 export default cartSlice.reducer;
