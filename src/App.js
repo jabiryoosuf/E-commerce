@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -30,7 +30,15 @@ import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
 import Adminmassage from "./Pages/Admin/Adminmassage";
 import Admincalander from "./Pages/Admin/Admincalander";
+import { useEffect } from "react";
+import { getcartApi } from "./Store/CartSlice";
+import { useDispatch } from "react-redux";
+
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getcartApi());
+},[]);
   return (
     <div className="App">
       <BrowserRouter>
@@ -59,13 +67,12 @@ function App() {
             <Route path="/shipping-policy" element={<ShipingPolicy />}></Route>
             <Route path="/Privacy-policy" element={<PrivacyPolicy />}></Route>
             <Route path="/shipping-policy" element={<ShipingPolicy />}></Route>
-            
           </Route>
 
           <Route path="/reset-password/:id" element={<ResetPassword />}></Route>
           {localStorage.role === "admin" ? (
             <>
-              <Route element={<LayoutAdmin/>}>
+              <Route element={<LayoutAdmin />}>
                 <Route path="/admin" element={<DashboardHome />} />
                 <Route path="/allproducts" element={<Allproduct />} />
                 <Route path="/addproducts" element={<AddProducts />}></Route>
