@@ -33,19 +33,25 @@ export const DeleteProductApi = createAsyncThunk(
   }
 );
 
-export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(product)=>{
-   const response = await axiosApi.get(`/product/admin/${product}`)
-   console.log(response);
-   return response.data
-})
+export const SingleProductApi = createAsyncThunk(
+  "products/SingleProductApi",
+  async (product) => {
+    const response = await axiosApi.get(`/product/admin/${product}`);
+    console.log(response);
+    return response.data;
+  }
+);
 
 export const UpdateProductApi = createAsyncThunk(
   "products/UpdateProductApi",
-  async ({ data,navigate ,productId}) => {
-    const response = await axiosApi.put(`/product/update/admin/${productId}`, data);
+  async ({ data, navigate, productId }) => {
+    const response = await axiosApi.put(
+      `/product/update/admin/${productId}`,
+      data
+    );
     console.log(response);
-   //  const productId = response.data._id;
-   //  await axiosApi.post(`/productImage/admin/new/${productId}`, formData);
+    //  const productId = response.data._id;
+    //  await axiosApi.post(`/productImage/admin/new/${productId}`, formData);
     navigate("/allproducts");
     return response.data;
   }
@@ -55,8 +61,8 @@ const initialState = {
   addproducts: {},
   allproduct: {},
   deleteproduct: {},
-  updateproduct:{},
-  singleproduct:{}
+  updateproduct: {},
+  singleproduct: {},
 };
 
 const ProductSlice = createSlice({
@@ -97,24 +103,23 @@ const ProductSlice = createSlice({
     [UpdateProductApi.pending]: () => {
       console.log("update penidng");
     },
-    [UpdateProductApi.fulfilled]: (state,action) => {
+    [UpdateProductApi.fulfilled]: (state, action) => {
       console.log("updation fulfilled");
-      state.updateproduct=action.payload
+      state.updateproduct = action.payload;
     },
     [UpdateProductApi.rejected]: () => {
       console.log("updation rejected");
     },
-    [SingleProductApi.pending]:(state,action)=>{
+    [SingleProductApi.pending]: (state, action) => {
       console.log("data pending");
     },
-    [SingleProductApi.fulfilled]:(state,action)=>{
-      state.singleproduct=action.payload
+    [SingleProductApi.fulfilled]: (state, action) => {
+      state.singleproduct = action.payload;
       console.log("data fulfilled");
     },
-    [SingleProductApi.rejected]:(state,action)=>{
+    [SingleProductApi.rejected]: (state, action) => {
       console.log("data rejected");
-    }
-    
+    },
   },
 });
 export default ProductSlice.reducer;
