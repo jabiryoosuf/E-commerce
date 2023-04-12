@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosApi } from "./axios-method";
+   
 
+  //add to cart item
 export const cartApi = createAsyncThunk(
   "cart/cartApi",
   async ({ qty, productId, navigate }) => {
@@ -14,7 +16,7 @@ export const cartApi = createAsyncThunk(
     return res.data;
   }
 );
-
+  //get all cart items
 export const getCartItemsAPi = createAsyncThunk(
   "cart/getCartItems",
   async () => {
@@ -23,7 +25,7 @@ export const getCartItemsAPi = createAsyncThunk(
     return response.data
   }
 );
-
+     //remove cartitem
 export const deleteCartApi=createAsyncThunk('cart/deleteCartApi',async(cartproductId)=>{
   const response=await axiosApi.delete(`/cart/admin/${cartproductId}`)
   console.log(response.data);
@@ -36,7 +38,7 @@ const initialState = {
   error: null,
   cartItems: [],
   getcartitems: [],
-  
+  subtotal:''  
 };
 
 const cartSlice = createSlice({
@@ -44,7 +46,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
       
-    
+      totalCartAmt:(state,action)=>{
+        state.subtotal=action .payload
+      }
 
   },
   extraReducers: {
@@ -75,5 +79,5 @@ const cartSlice = createSlice({
     },
   },
 });
-
+export const { totalCartAmt } = cartSlice.actions;
 export default cartSlice.reducer;

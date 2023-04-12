@@ -9,10 +9,11 @@ import { useState } from "react";
 import {AiOutlineLogout} from 'react-icons/ai'
 import Color from "./Color";
 import { logOutApi } from "../Store/authSlice";
+import {totalCartAmt}from '../Store/CartSlice'
 const Header = () => {
    
   const[total,setTotal]=useState(0)
-
+   
 
     const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -33,6 +34,7 @@ const Header = () => {
        
       }
       setTotal(subtotal);
+      dispatch(totalCartAmt(subtotal))
       
     }, [getcartitems]);
 

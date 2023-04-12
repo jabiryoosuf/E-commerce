@@ -10,14 +10,17 @@ import { deleteCartApi, getCartItemsAPi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
+
 const Cart = () => {
+
   const dispatch = useDispatch();
-   const[total,setTotal]=useState()
-  const {getcartitems } = useSelector((state) => state.cart);
+  
+  const {getcartitems,subtotal } = useSelector((state) => state.cart);
    
   console.log("items", getcartitems);
-  let itemCount= getcartitems.length
-  console.log("leng", itemCount);
+
+  // let itemCount= getcartitems.length
+  // console.log("leng", itemCount);
     
 
   useEffect(() => {
@@ -32,18 +35,18 @@ const Cart = () => {
     })
      
   }
-  useEffect(() => {
-    let subtotal = 0;
-    for (let i = 0; i < getcartitems.length; i++) {
-      const item = getcartitems[i];
-      if (item?.product && item.product.price && item.quantity) { 
-        subtotal += item.product.price.actualPrice * item.quantity;
-      }
+  // useEffect(() => {
+  //   let subtotal = 0;
+  //   for (let i = 0; i < getcartitems.length; i++) {
+  //     const item = getcartitems[i];
+  //     if (item?.product && item.product.price && item.quantity) { 
+  //       subtotal += item.product.price.actualPrice * item.quantity;
+  //     }
      
-    }
-    setTotal(subtotal);
+  //   }
+  //   setTotal(subtotal);
     
-  }, [getcartitems]);
+  // }, [getcartitems]);
     
   
   return (
@@ -52,7 +55,7 @@ const Cart = () => {
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
         <>
-        { itemCount === 0?(
+        { getcartitems.length === 0?(
         <> 
         <h2 style={{textAlign:'center'}}>Your Cart is Empty</h2>
           <div className="empty" style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -97,7 +100,8 @@ const Cart = () => {
                                />
                              </div>
                              <div>
-                               <MdDelete onClick={()=>deletItem(item._id)}  className="text-danger" />
+                               <MdDelete style={{cursor:'pointer',fontSize:'30px'}} 
+                               onClick={()=>deletItem(item._id)}  className="text-danger" />
                              </div>
                            </div>
                            <div className="cart-col-4">
@@ -113,7 +117,7 @@ const Cart = () => {
                   Continue To Shopping
                 </Link>
                 <div className="d-flex flex-column align-items-end">
-                  <h4>Sub Total:{total}</h4>
+                  <h4>Sub Total:{subtotal}</h4>
                   <p>Taxes and shipping calculated at checkout</p>
                   <Link to="/checkout" className="button">
                     Check Out
