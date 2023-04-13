@@ -21,9 +21,7 @@ const Home = () => {
   const {allproduct}=useSelector((state)=>state.products)
   console.log(allproduct);
 
-useEffect(()=>{
-dispatch(allproductsApi())
-},[])
+
 useEffect(() => {
   window.scrollTo(0, 0);
 }, []);

@@ -4,14 +4,19 @@ import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
 import Color from "../Components/Color";
+import {map} from "lodash"
+import { useSelector } from "react-redux";
 
 const OurStore = () => {
   const [grid,setGrid]=useState(4);
-  // const gridSetter=(i)
-  // alert (grid)
+  const { allproduct } = useSelector((state) => state.products)
+  
+  console.log( "allproducts",allproduct);
+ 
+  
   return (
     <div>
-
+         
       <Meta title={"Our Store"} />
       <BreadCrumb title="Our Store " />
       <div className="store-wrapper home-wrapper-2 py-5">
@@ -177,7 +182,7 @@ const OurStore = () => {
                     </div>
                     <div className="w-50">
                       <h5>
-                        Kids Headphones Bulk 10 Pack Multi Colored For Student
+                   ggggdget
                       </h5>
                       <ReactStars
                         count={5}
@@ -278,11 +283,14 @@ const OurStore = () => {
               </div>
               <div className="product-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
+       
+         {map(allproduct,(product)=>(
+          < ProductCard product={product} grid={grid}/>
+               
+         ))}
 
+               
+               
                 </div>
               </div>
             </div>

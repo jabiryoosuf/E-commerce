@@ -11,7 +11,7 @@ import view from "../images/view.svg";
 import { map } from "lodash";
 
 const ProductCard = (props) => {
-  console.log("singleProduct", props.product);
+  // console.log("singleProduct", props.product);
   const { grid } = props;
   let location = useLocation();
   console.log(props.product);

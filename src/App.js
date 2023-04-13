@@ -33,12 +33,14 @@ import Admincalander from "./Pages/Admin/Admincalander";
 import { useEffect } from "react";
 import { getCartItemsAPi } from "./Store/CartSlice";
 import { useDispatch } from "react-redux";
+import { allproductsApi } from "./Store/ProductSlice";
 
 function App() {
   const dispatch=useDispatch()
 
   useEffect(() => {
     dispatch(getCartItemsAPi());
+    dispatch(allproductsApi())
   }, []);
   return (
 
@@ -52,7 +54,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />}></Route>
             <Route path="/contact" element={<Contact />}></Route>
-            <Route path="/store" eleme nt={<OurStore />}></Route>
+            <Route path="/store" element={<OurStore />}></Route>
             <Route path="/product/:id" element={<SingleProduct />}></Route>
             <Route path="/blogs" element={<Blogs />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
@@ -76,7 +78,7 @@ function App() {
           </Route>
 
           <Route path="/reset-password/:id" element={<ResetPassword />}></Route>
-          {localStorage.role === "admin" ? (
+          {sessionStorage.role === "admin" ? (
             <>
               <Route element={<LayoutAdmin />}>
                 <Route path="/admin" element={<DashboardHome />} />

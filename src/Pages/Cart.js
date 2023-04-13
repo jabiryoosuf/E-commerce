@@ -10,14 +10,22 @@ import { deleteCartApi, getCartItemsAPi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle'
+import Button from '@mui/material/Button';
 
 const Cart = () => {
 
   const dispatch = useDispatch();
-  
+   
+  const [open, setOpen] = useState(false);
+  const [cartId,setCartId]=useState(null)
   const {getcartitems,subtotal } = useSelector((state) => state.cart);
    
-  console.log("items", getcartitems);
+  console.log( getcartitems);
 
   // let itemCount= getcartitems.length
   // console.log("leng", itemCount);
@@ -26,8 +34,18 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getCartItemsAPi());
   }, []);
+  
+  
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  //   setCartId(item._id)
+    
+  // };
 
-        
+  const handleClose = () => {
+    setOpen(false);
+  };
+         
 
   const deletItem=(cartproductId)=>{
     dispatch(deleteCartApi(cartproductId)).then(()=>{
@@ -51,6 +69,27 @@ const Cart = () => {
   
   return (
     <>
+     <Dialog
+        open={open}
+        onClose={()=>handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Delete CartItem!!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Are you Sure ? Do you want to delete?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={()=>{deletItem(cartId); setOpen(false)}} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
       <section className="cart-wrapper home-wrapper-2 py-5">
@@ -77,14 +116,15 @@ const Cart = () => {
                            <div className="cart-data py-3 d-flex justify-content-between align-items-center">
                            <div className="cart-col-1 d-flex gap-15 align-items-center">
                              <div className="w-25">
-                               <img src={item.product?.images[0]?.url} className="img-fluid" alt="product name" />
+                               <img src={item?.items?.[0]?.product?.images?.[0]?.url} className="img-fluid" alt="product name" />
                              </div>
                              <div className="w-75">
-                               <p>{item?.product?.name}</p>
+                               <p>{item?.items?.[0]?.product?.name}</p>
+                               <p>{item?.items?.[0]?.product?.brand}</p>
                              </div>
                            </div>
                            <div className="cart-col-2">
-                             <h5 className="price"> ${item?.product?.price?.actualPrice}</h5>
+                             <h5 className="price"> ${item?.items?.[0]?.product?.price?.actualPrice}</h5>
                            </div>
            
                            <div className="cart-col-3 d-flex align-items-center gap-15">
@@ -96,16 +136,17 @@ const Cart = () => {
                                  min={1}
                                  max={10}
                                  id=""
-                                 value={item?.quantity}
+                                 value={item?.items?.[0]?.quantity}
                                />
                              </div>
                              <div>
                                <MdDelete style={{cursor:'pointer',fontSize:'30px'}} 
-                               onClick={()=>deletItem(item._id)}  className="text-danger" />
+                               onClick={()=>{ setOpen(true);
+                               setCartId(item._id)}}className="text-danger" />
                              </div>
                            </div>
                            <div className="cart-col-4">
-                             <h5 className="price"> {item?.product?.price?.actualPrice*item?.quantity}</h5>
+                             <h5 className="price"> {item?.items?.[0]?.product?.price?.actualPrice*item?.items?.[0]?.quantity}</h5>
                            </div>
                          </div>
                    ))}

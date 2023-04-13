@@ -11,7 +11,7 @@ import { Link, useParams } from "react-router-dom";
 const Allproduct = () => {
   const dispatch = useDispatch();
 
-  const { allproduct } = useSelector((state) => ({
+  const { allproduct } = useSelector((state) =>( {
     allproduct: state.products.allproduct,
   }));
   console.log(allproduct);

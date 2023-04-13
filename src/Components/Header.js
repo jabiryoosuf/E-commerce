@@ -19,7 +19,7 @@ const Header = () => {
   const navigate=useNavigate()
 
   const { getcartitems } = useSelector((state) => state.cart);
-  console.log('item',getcartitems);
+  console.log(getcartitems);
       
     let itemCount=getcartitems.length
     console.log(itemCount);
@@ -28,9 +28,9 @@ const Header = () => {
       let subtotal = 0;
       for (let i = 0; i < getcartitems.length; i++) {
         const item = getcartitems[i];
-        if (item?.product && item.product.price && item.quantity) { 
-          subtotal += item.product.price.actualPrice * item.quantity;
-        }
+        // if (item?.product && item.product.price && item.quantity) { 
+          subtotal += item?.items?.[0]?.product?.price?.actualPrice * item?.items?.[0]?.quantity;
+        // }
        
       }
       setTotal(subtotal);
@@ -40,9 +40,9 @@ const Header = () => {
 
 
 
-     const handleLogOut=()=>{
-        dispatch( logOutApi(navigate))
-     }
+    //  const handleLogOut=()=>{
+    //     dispatch( logOutApi(navigate))
+    //  }
       
   return (
     <>
@@ -149,7 +149,7 @@ const Header = () => {
                  
                     <div style={{fontSize:'30px',color:'white',marginRight:'-55px'}}>
                       
-                <AiOutlineLogout onClick={handleLogOut} />
+                {/* <AiOutlineLogout onClick={handleLogOut} /> */}
                
                 </div>
                 

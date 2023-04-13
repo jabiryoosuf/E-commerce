@@ -9,19 +9,19 @@ export const loginApi = createAsyncThunk(
     const result = await axiosApi.post("/login/mail", login);
     console.log(result);
     if (result?.data?.token) {
-      localStorage.setItem("token", result.data.token);
+      sessionStorage.setItem("token", result.data.token);
     }
     if (result?.data?.role) {
-      localStorage.setItem("role", result.data.role);
+      sessionStorage.setItem("role", result.data.role);
     }
     if (result.data.role==='admin') {
       navigate("/admin");
     } else {
       navigate("/");
     }
-
+     
     console.log(result);
-
+ 
     return result.data;
   }
 );
@@ -54,15 +54,15 @@ export const resetpasswordApi = createAsyncThunk(
   }
 );
 
-export const logOutApi=createAsyncThunk('auth/logOutApi',async(navigate)=>{
-  const token=localStorage.getItem('token')
-  const role=localStorage.getItem('role')
-  const res=await axiosApi.get('/logout',token,role)
-  localStorage.removeItem('token')
-  localStorage.removeItem('role')
-  console.log(res);
-  navigate('/')
-})
+// export const logOutApi=createAsyncThunk('auth/logOutApi',async(navigate)=>{
+//   const token=sessionStorage.getItem('token')
+//   const role=sessionStorage.getItem('role')
+//   const res=await axiosApi.get('/logout',token,role)
+//   sessionStorage.removeItem('token')
+//   sessionStorage.removeItem('role')
+//   console.log(res);
+//   navigate('/')
+// })
 
 const initialState = {
   token: "",
@@ -124,14 +124,14 @@ const authSlice = createSlice({
     [resetpasswordApi.rejected]: () => {
       console.log("task rejected");
     },
-    [logOutApi.fulfilled]:()=>{
-      console.log("logout success");
-      toast.success("Successfully logedOut", { autoClose: 1000 });
-    },
-    [logOutApi.rejected]:()=>{
-      console.log("rejected");
-      toast.error("Logout rejected", { autoClose: 1000 });
-    }
+    // [logOutApi.fulfilled]:()=>{
+    //   console.log("logout success");
+    //   toast.success("Successfully logedOut", { autoClose: 1000 });
+    // },
+    // [logOutApi.rejected]:()=>{
+    //   console.log("rejected");
+    //   toast.error("Logout rejected", { autoClose: 1000 });
+    // }
 
   },
 });

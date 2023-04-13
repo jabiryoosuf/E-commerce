@@ -6,8 +6,9 @@ import { axiosApi } from "./axios-method";
   //add to cart item
 export const cartApi = createAsyncThunk(
   "cart/cartApi",
-  async ({ qty, productId, navigate }) => {
-    const res = await axiosApi.post("/cart/admin/new", qty, productId);
+  async ({ quantity, product, navigate }) => {
+    console.log("gfhfhfg",quantity, product);
+    const res = await axiosApi.post("/cart/admin/new",{items:{ quantity, product}});
 
     console.log(res);
 

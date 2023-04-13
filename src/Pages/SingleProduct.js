@@ -16,18 +16,22 @@ import { addwishlistApi } from "../Store/WishlistSlice";
 
 const SingleProduct = () => {
   
-  const [qty, setQty] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
 
   const params = useParams();
   const navigate=useNavigate()
   const dispatch = useDispatch();
-  const productId = params.id;
+  const product = params.id;
 
-  const { singleproduct } = useSelector((state) => state.products);
-  console.log(singleproduct);
+  const { singleproduct,getcartitems } = useSelector((state) =>({
+    singleproduct:state.products.singleproduct,
+    getcartitems:state.cart.getcartitems
+  }))
+  console.log(singleproduct); 
+console.log(getcartitems);
 
-  const productImage = singleproduct.images?.[0].url;
+  const productImage = singleproduct?.images?.[0]?.url;
   console.log(productImage);
 
   // const handleQty = (e) => {
@@ -37,23 +41,37 @@ const SingleProduct = () => {
   // };
   useEffect(() =>  {
     
-     dispatch(SingleProductApi(productId));
+     dispatch(SingleProductApi(product));
      ;
   },[]);
 
-  console.log("QTY", qty);
-  console.log(productId);
+  console.log("QTY", quantity);
+  console.log(product);
 
-  const addToCart = ()=> {
-       
+  const AddtoCart = async (e) => {
+    console.log(getcartitems?.[0]?.product?._id);
+    if (sessionStorage.role === "user") {
+      const existingCartItem = getcartitems.find(
+        (item) => item?.items?.[0]?.product?._id === product
+      );
+      if (existingCartItem) {
+        // If the product already exists in the cart, update the quantity
+       alert("product already in cart")
+        
+      } else {
+        // If the product does not exist in the cart, add a new item
+        dispatch(cartApi({  quantity, product ,navigate }))
+       console.log(product);
+        
+      }
       
- dispatch(cartApi({ qty,productId,navigate}));
- 
+    } else {
+      navigate("/login");
+    }
   };
- 
    
-  const addToWishlist=(productId)=>{
-    dispatch(addwishlistApi({productId,navigate}))
+  const addToWishlist=(product)=>{
+    dispatch(addwishlistApi({product,navigate}))
   }
 
   const [orderedProduct, setOrderedProduct] = useState(true);
@@ -149,8 +167,8 @@ const SingleProduct = () => {
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
                     <p className="product-data">
-                      {singleproduct?.quantity > 0
-                        ? singleproduct?.quantity
+                      {singleproduct?.stock > 0
+                        ? singleproduct?.stock
                         : "out of stock"}
                     </p>
                   </div>
@@ -181,12 +199,12 @@ const SingleProduct = () => {
                     </h3>{" "}
                     <div className="">
                       <input 
-                       onChange={(e)=>setQty(e.target.value)}
+                       onChange={(e)=>setQuantity(e.target.value)}
                         type="number"
                         name="quantity"
                         min={1}
                         max={10}
-                        value={qty}
+                        value={quantity}
                       
                         className="form-control"
                         style={{ width: "70px" }}
@@ -196,7 +214,7 @@ const SingleProduct = () => {
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
                       <button
-                        onClick={()=>addToCart(singleproduct._id)}
+                        onClick={()=>AddtoCart(singleproduct._id)}
                         className="button border-0 "
                         type="submit"
                       >
@@ -217,7 +235,7 @@ const SingleProduct = () => {
                     </div>
                     <div>
                       <a href="">
-                        <AiOutlineHeart onClick={()=>addToWishlist(productId)}  className="fs-5 me-2" />
+                        <AiOutlineHeart onClick={()=>addToWishlist(product)}  className="fs-5 me-2" />
                         Add to Wishlist
                       </a>
                     </div>
