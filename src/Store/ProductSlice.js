@@ -19,7 +19,7 @@ export const allproductsApi = createAsyncThunk(
   "products/allproductApi",
   async () => {
     // const response = await axiosApi.get("/product/admin/all");
-    const response = await axios.get("http://192.168.29.217:5000/product/admin/all");
+    const response = await axios.get("http://192.168.56.1:5000/product/admin/all");
     console.log(response);
     return response.data;
   }
@@ -37,7 +37,7 @@ export const DeleteProductApi = createAsyncThunk(
 
 export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(product)=>{
   //  const response = await axiosApi.get(`/product/admin/${product}`)
-   const response = await axios.get(`http://192.168.29.217:5000/product/admin/${product}`)
+   const response = await axios.get(`http://192.168.56.1:5000/product/admin/${product}`)
    console.log(response);
    return response.data
 })

@@ -7,8 +7,9 @@ import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { cartApi } from "../Store/CartSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { cartApi, getcartApi } from "../Store/CartSlice";
+import { addwishListApi } from "../Store/wishSlice";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -36,7 +37,7 @@ const SingleProduct = () => {
       if (existingCartItem) {
         alert("Product already exist");
       } else {
-        dispatch(cartApi({ product, quantity, navigate }));
+        dispatch(cartApi({ product, quantity, navigate }))
       }
     } else {
       navigate("/login");
@@ -46,8 +47,10 @@ const SingleProduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const uploadcart = () => {};
 
+const AddtoWishList =()=>{
+  dispatch(addwishListApi(product))
+}
   return (
     <>
       <Meta title={"SingleProduct"} />
@@ -130,8 +133,8 @@ const SingleProduct = () => {
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
                     <p className="product-data">
-                      {singleproduct?.quantity > 0
-                        ? singleproduct?.quantity
+                      {singleproduct?.stock > 0
+                        ? singleproduct?.stock
                         : "out of stock"}
                     </p>
                   </div>
@@ -182,16 +185,16 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex align-items-center gap-15">
                     <div>
-                      <a href="">
+                      <Link to="">
                         <TbGitCompare className="fs-5 me-2" />
                         Add to Compare
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a href="">
-                        <AiOutlineHeart className="fs-5 me-2" />
+                      <Link to="">
+                        <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" />
                         Add to Wishlist
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">

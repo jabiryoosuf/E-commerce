@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RemoveCartApi, getcartApi } from "../Store/CartSlice";
+import { RemoveCartApi, cartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
-import { useEffect } from "react";
 import { useState } from "react";
 import { Box, Modal, Typography } from "@mui/material";
 import { Button } from "react-bootstrap";
@@ -18,7 +17,12 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const { totalPrice, cartItems } = useSelector((state) => state.cart);
-console.log(cartItems);
+  
+  useEffect(() => {
+    dispatch(cartApi())
+    window.scrollTo(0,0);
+  },[]);
+
   const deleteCartItem = (cartItemId) => {
     dispatch(RemoveCartApi(cartItemId)).then(() => {
       dispatch(getcartApi());
@@ -164,7 +168,7 @@ console.log(cartItems);
               </div>
             </div>
           </div>
-        )}
+         )}
       </section>
     </>
   );

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
+import { toast } from "react-toastify";
 
 const initialState = {
   loading: false,
@@ -13,7 +14,7 @@ export const addwishListApi = createAsyncThunk(
   "wish/addwishListApi",
   async (productId) => {
     console.log(productId);
-    const responds = await axiosApi.post(`/wishlist/admin/new`,{product:productId});
+    const responds = await axiosApi.post(`/wishlist/admin/new`,{products:productId});
     return responds.data;
   }
 );
@@ -54,6 +55,7 @@ const wishSlice = createSlice({
       state.loading = false;
       state.error = false;
       console.log("wishList success");
+      toast.success("successfully add to wishList", { autoClose: 1000 });
     },
     [addwishListApi.rejected]: (state) => {
       state.loading = false;

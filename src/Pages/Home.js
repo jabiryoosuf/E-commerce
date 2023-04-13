@@ -1,26 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../Components/BlogCard";
 import ProductCard from "../Components/ProductCard";
 import SpecialProduct from "../Components/SpecialProduct";
-import service1 from "../images/service-02.png";
-import service2 from "../images/service-03.png";
-import service3 from "../images/service-04.png";
-import service4 from "../images/service-05.png";
-import service from "../images/service.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { map } from "lodash";
-import { allproductsApi } from "../Store/ProductSlice";
+
 
 const Home = () => {
-  const dispatch = useDispatch();
   const { allproduct } = useSelector((state) => state.products);
   console.log(allproduct);
 
 
   return (
     <>
+ 
       <section className="home-wrapper-1 py-5">
         <div className="container-xxl">
           <div className="row">
@@ -223,6 +218,7 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
             </div>
+            
             <div className="d-flex gap-10 flex-wrap">
             {map(allproduct, (product) => (
               <ProductCard product={product} />

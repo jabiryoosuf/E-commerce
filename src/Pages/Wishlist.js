@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import { useDispatch, useSelector } from "react-redux";
-import { getwishListApi } from "../Store/wishSlice";
-
+import { RemovewishListApi, getwishListApi } from "../Store/wishSlice";
+import { map } from "lodash";
 
 const Wishlist = () => {
   const {wishList}=useSelector((state)=>state.wishList)
@@ -11,7 +11,11 @@ const Wishlist = () => {
   const dispatch = useDispatch()
    useEffect(()=>{
     dispatch(getwishListApi())
+    window.scrollTo(0, 0);
    },[])
+   const handleRemoveItem=(ItemId)=>{
+    dispatch(RemovewishListApi(ItemId))
+   }
   return (
     <>
       <Meta title={"WishList"} />
@@ -19,29 +23,32 @@ const Wishlist = () => {
       <div className="wishlist-wrapper home-wrapper-2 py-5">
         <div className="container-xxl">
           <div className="row">
+          {map(wishList?.[0]?.products, (wishItem) => (
             <div className="col-3">
+           
               <div className="wishlist-card position-relative">
-                <img
+                <img onClick={()=>handleRemoveItem(wishItem?._id)}
                   src="images/cross.svg"
                   alt="cross"
-                  className="position-absolute cross img-fluid"
+                  className=" cross img-fluid"
                 />
                 <div className="wishlist-card-image">
                   <img
-                    src="images/watch.jpg"
+                    src={wishItem?.images?.[0]?.url}
                     alt="watch"
                     className="img-fluid w-100"
                   />
                 </div>
                 <div className="py-3 px-3">
                   <h5 className="title">
-                    Honer t1 8 gb ram 7inch wuth wifi tablet
+                    {wishItem?.name}
                   </h5>
-                  <h6 className="price">$ 100</h6>
+                  <h6 className="price">{wishItem?.price?.actualPrice}</h6>
                 </div>
               </div>
+              
             </div>
-           
+            ))}
            
           </div>
         </div>

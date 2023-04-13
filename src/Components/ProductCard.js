@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
-import wish from "../images/wish.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { map } from "lodash";
 
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RemovewishListApi, addwishListApi } from "../Store/wishSlice";
-import { style } from "@mui/system";
+
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
+  // const [wish,setWish]=useState(Heart)
+  // const {wishList}=useSelector((state)=>state.wishList)
 
   const dispatch = useDispatch();
   console.log("singleProduct", props.product);
@@ -33,8 +33,15 @@ const ProductCard = (props) => {
       setSelectedProductId(productId)
       dispatch(addwishListApi(productId))
     }
-    // dispatch(addwishListApi({productId}))
   };
+// useEffect(()=>{
+// const existingwishItem = wishList?.[0]?.products.find((item) => item?._id === selectedProductId);
+//   if(existingwishItem){
+//     setWish(RedHeart)
+//   }else{
+//     setWish(Heart)
+//   }
+// },[])
 
   return (
     <>
@@ -49,6 +56,7 @@ const ProductCard = (props) => {
             <img
               style={{ width: "20px" }}
               onClick={() => handleWishClick(product._id)}
+              // src={wish}
               src={selectedProductId === product._id ? RedHeart : Heart}
               alt="wishlist"
             />
