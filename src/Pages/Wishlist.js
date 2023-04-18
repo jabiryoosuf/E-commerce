@@ -6,16 +6,22 @@ import { RemovewishListApi, getwishListApi } from "../Store/wishSlice";
 import { map } from "lodash";
 
 const Wishlist = () => {
-  const {wishList}=useSelector((state)=>state.wishList)
-  console.log(wishList);
+
+  const {wishlist} = useSelector((state)=> state.wishList)
+  console.log(wishlist);
   const dispatch = useDispatch()
-   useEffect(()=>{
+
+  useEffect(()=>{
     dispatch(getwishListApi())
     window.scrollTo(0, 0);
    },[])
-   const handleRemoveItem=(ItemId)=>{
-    dispatch(RemovewishListApi(ItemId))
+
+   const handleRemoveItem =(ItemId)=>{
+    dispatch(RemovewishListApi(ItemId)).then(()=>{
+      dispatch(getwishListApi())
+    })
    }
+
   return (
     <>
       <Meta title={"WishList"} />
@@ -23,8 +29,8 @@ const Wishlist = () => {
       <div className="wishlist-wrapper home-wrapper-2 py-5">
         <div className="container-xxl">
           <div className="row">
-          {map(wishList?.[0]?.products, (wishItem) => (
-            <div className="col-3">
+          {map(wishlist?.products,(wishItem) => (
+            <div className="col-3" key={wishItem._id}>
            
               <div className="wishlist-card position-relative">
                 <img onClick={()=>handleRemoveItem(wishItem?._id)}

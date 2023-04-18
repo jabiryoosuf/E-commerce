@@ -9,15 +9,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi, getcartApi } from "../Store/CartSlice";
-import { addwishListApi } from "../Store/wishSlice";
+import {
+  RemovewishListApi,
+  addwishListApi,
+  getwishListApi,
+} from "../Store/wishSlice";
+import Heart from "../images/heart.png";
+import RedHeart from "../images/heart (1).png";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [wishColor, setWishColor] = useState(false);
   const [orderedProduct, setOrderedProduct] = useState(true);
 
-  const { singleproduct, cartItems } = useSelector((state) => ({
+  const { singleproduct, cartItems, wishlist } = useSelector((state) => ({
     singleproduct: state.products.singleproduct,
     cartItems: state.cart.cartItems,
+    wishlist: state.wishList.wishlist,
   }));
   const params = useParams();
   const navigate = useNavigate();
@@ -25,38 +33,56 @@ const SingleProduct = () => {
   const product = params.id;
 
   const productImage = singleproduct?.images?.[0]?.url;
-
+  const wishlistProducts = wishlist?.products;
   useEffect(() => {
     dispatch(SingleProductApi(product));
-  }, []);
+    dispatch(getwishListApi())
+    window.scrollTo(0, 0);
+  }, [dispatch, product]);
+  let existingwishlistItem;
+  useEffect(() => {
+    if (wishlist?.products) {
+      existingwishlistItem = wishlist.products.find((item) => item._id === product)
+      setWishColor(existingwishlistItem ? true : false);
+    }
+  },[wishlist, product]);
 
   const AddtoCart = async (e) => {
-    console.log(cartItems?.[0]?.items?._id);
     if (sessionStorage.role === "user") {
-      const existingCartItem = cartItems.find((item) => item?.items?.[0]?.product?._id === product);
+      const existingCartItem = cartItems.find(
+        (item) => item?.items?.[0]?.product?._id === product
+      );
       if (existingCartItem) {
         alert("Product already exist");
       } else {
-        dispatch(cartApi({ product, quantity, navigate }))
+        dispatch(cartApi({ product, quantity, navigate }));
       }
     } else {
       navigate("/login");
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const AddtoWishList = () => {
+    dispatch(addwishListApi(product)).then(() => {
+    setWishColor(true);
+  });
+  };
 
-const AddtoWishList =()=>{
-  dispatch(addwishListApi(product))
-}
+  const handleRemoveItem = () => {
+    dispatch(
+      
+      (product)).then(() => {
+      setWishColor(false);
+    });
+  };
+
   return (
     <>
       <Meta title={"SingleProduct"} />
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container xxl">
+  
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
@@ -115,7 +141,7 @@ const AddtoWishList =()=>{
                 </div>
                 <div className="border-bottom py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Type:</h3>{" "}
+                    <h3 className="product-heading">Type:</h3>
                     <p className="product-data">Watch</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -192,7 +218,22 @@ const AddtoWishList =()=>{
                     </div>
                     <div>
                       <Link to="">
-                        <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" />
+                        {/* <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" /> */}
+                        {wishColor ? (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={handleRemoveItem}
+                            src={RedHeart}
+                            alt="wishlist"
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={AddtoWishList}
+                            src={Heart}
+                            alt="wishlist"
+                          />
+                        )}
                         Add to Wishlist
                       </Link>
                     </div>
@@ -263,8 +304,7 @@ const AddtoWishList =()=>{
                     <div>
                       <a
                         className="text-dark text-decoration-underline"
-                        href=""
-                      >
+                        href=" ">
                         write a review
                       </a>
                     </div>
@@ -292,7 +332,8 @@ const AddtoWishList =()=>{
                           placeholder="comment"
                           cols="30"
                           rows="3"
-                        ></textarea>
+
+></textarea>
                       </div>
                       <div className="d-flex justify-content-end">
                         <button className="button border-0">
@@ -323,5 +364,6 @@ const AddtoWishList =()=>{
     </>
   );
 };
+
 
 export default SingleProduct;
