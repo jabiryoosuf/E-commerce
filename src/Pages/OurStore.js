@@ -4,11 +4,14 @@ import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
 import Color from "../Components/Color";
+import { useSelector } from "react-redux";
+import { map } from "lodash";
 
 const OurStore = () => {
   const [grid,setGrid]=useState(4);
-  // const gridSetter=(i)
-  // alert (grid)
+
+  const { allproduct } = useSelector((state) => state.products);
+
   return (
     <div>
 
@@ -278,10 +281,9 @@ const OurStore = () => {
               </div>
               <div className="product-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
-                < ProductCard grid={grid}/>
+                {map(allproduct, (product) => (
+                <ProductCard product={product} grid={grid}/>
+                ))}
 
                 </div>
               </div>

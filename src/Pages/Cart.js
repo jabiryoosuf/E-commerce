@@ -9,21 +9,65 @@ import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Box, Modal, Typography } from "@mui/material";
+import { Button } from "react-bootstrap";
 
 const Cart = () => {
+  const [open, setOpen] = useState(false);
+  const [cartId, setCartId] = useState(null);
   const dispatch = useDispatch();
-  
-  const { totalPrice,cartItems } = useSelector((state) => state.cart);
 
+  const { totalPrice, cartItems } = useSelector((state) => state.cart);
+console.log(cartItems);
   const deleteCartItem = (cartItemId) => {
     dispatch(RemoveCartApi(cartItemId)).then(() => {
       dispatch(getcartApi());
     });
   };
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+  };
+
   return (
     <>
       <Meta title={"Cart"} />
       <BreadCrumb title="Cart" />
+      <div>
+        <Modal
+          open={open}
+          onClose={() => setOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Delete Confirm
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Are you sure to delete
+            </Typography>
+            <Button onClick={() => setOpen(false)}>cancel</Button>
+            <Button
+              onClick={() =>{ deleteCartItem(cartId);setOpen(false)}}
+              style={{
+                color: "white",
+                background: "red",
+                border: "none",
+                marginLeft: "5px",
+              }}
+            >
+              delete
+            </Button>
+          </Box>
+        </Modal>
+      </div>
       <section className="cart-wrapper home-wrapper-2 py-5">
         {cartItems.length === 0 ? (
           <>
@@ -54,19 +98,19 @@ const Cart = () => {
                     <div className="cart-col-1 d-flex gap-15 align-items-center">
                       <div className="w-25">
                         <img
-                          src={cartItem?.product?.images?.[0]?.url}
+                          src={cartItem?.items?.[0]?.product?.images?.[0]?.url}
                           className="img-fluid"
                           alt="product name"
                         />
                       </div>
                       <div className="w-75">
-                        <p>{cartItem?.product?.name}</p>
-                        <p>{cartItem?.product?.brand}:</p>
+                        <p>{cartItem?.items?.[0]?.product?.name}</p>
+                        <p>{cartItem?.items?.[0]?.product?.brand}:</p>
                       </div>
                     </div>
                     <div className="cart-col-2">
                       <h5 className="price">
-                        $ {cartItem?.product?.price?.actualPrice}
+                        $ {cartItem?.items?.[0]?.product?.price?.actualPrice}
                       </h5>
                     </div>
 
@@ -76,7 +120,7 @@ const Cart = () => {
                           className="form-control"
                           type="number"
                           name=""
-                          defaultValue={cartItem?.quantity}
+                          defaultValue={cartItem?.items?.[0]?.quantity}
                           min={1}
                           max={10}
                           id=""
@@ -86,14 +130,18 @@ const Cart = () => {
                         <MdDelete
                           style={{ cursor: "pointer", fontSize: "30px" }}
                           className="text-danger"
-                          onClick={() => deleteCartItem(cartItem._id)}
+                          // onClick={() => deleteCartItem(cartItem._id)}
+                          onClick={() => {
+                            setOpen(true);
+                            setCartId(cartItem?._id);
+                          }}
                         />
                       </div>
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
-                        {cartItem?.quantity *
-                          cartItem?.product?.price?.actualPrice}
+                        {cartItem?.items?.[0]?.quantity *
+                          cartItem?.items?.[0]?.product?.price?.actualPrice}
                       </h5>
                     </div>
                   </div>

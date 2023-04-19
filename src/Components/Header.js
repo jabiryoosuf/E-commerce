@@ -12,13 +12,15 @@ const Header = () => {
   const dispatch = useDispatch();
   const [totalCartPrice, setTotalCartPrice] = useState(0);
   const { cartItems } = useSelector((state) => state.cart);
+
   const totalCartItems= cartItems.length
 
   let totalPrice = 0;
   useEffect(() => {
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
-      totalPrice += item?.quantity * item?.product?.price?.actualPrice;
+      totalPrice += item?.items[0]?.quantity * item?.items?.[0]?.product?.price?.actualPrice;
+      
     }
     setTotalCartPrice(totalPrice);
     dispatch(totalCartAmount(totalPrice))
@@ -177,7 +179,7 @@ const Header = () => {
                 <div className="menu-link">
                   <div className="d-flex align-item-center gap-5 mt-2">
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="/store">Our Store</NavLink>
+                    <NavLink to="/ourstore">Our Store</NavLink>
                     <NavLink to="/blogs">Blogs</NavLink>
                     <NavLink to="/contact">Contact</NavLink>
                   </div>

@@ -12,11 +12,12 @@ import { cartApi } from "../Store/CartSlice";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
-  // const [products, setProducts] = useState();
   const [orderedProduct, setOrderedProduct] = useState(true);
 
-  const { singleproduct } = useSelector((state) => state.products);
-
+  const { singleproduct, cartItems } = useSelector((state) => ({
+    singleproduct: state.products.singleproduct,
+    cartItems: state.cart.cartItems,
+  }));
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,25 +29,24 @@ const SingleProduct = () => {
     dispatch(SingleProductApi(product));
   }, []);
 
-  const AddtoCart =async(e) => {
-    e.preventDefault();
-    // const product = {product: productId,quantity};
-    // setProducts({ products: product })
-      //  console.log(products);
-    await dispatch(cartApi({product,quantity,navigate}))
-    
-  
- 
+  const AddtoCart = async (e) => {
+    console.log(cartItems?.[0]?.items?._id);
+    if (sessionStorage.role === "user") {
+      const existingCartItem = cartItems.find((item) => item?.items?.[0]?.product?._id === product);
+      if (existingCartItem) {
+        alert("Product already exist");
+      } else {
+        dispatch(cartApi({ product, quantity, navigate }));
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
-  // console.log(products);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const uploadcart=()=>{
-    
-
-  }
+  const uploadcart = () => {};
 
   return (
     <>
@@ -168,9 +168,7 @@ const SingleProduct = () => {
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
-                        onChange={(e) =>
-                          setQuantity(e.target.value)
-                        }
+                        onChange={(e) => setQuantity(e.target.value)}
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">

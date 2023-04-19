@@ -9,10 +9,10 @@ export const loginApi = createAsyncThunk(
     const result = await axiosApi.post("/login/mail", login);
     console.log(result)
     if (result?.data?.token) {
-      localStorage.setItem("token", result.data.token);
+      sessionStorage.setItem("token", result.data.token);
     }
     if (result?.data?.role) {
-      localStorage.setItem("role", result.data.role);
+      sessionStorage.setItem("role", result.data.role);
     }
     if (result.data.role==='admin') {
       navigate("/admin");
