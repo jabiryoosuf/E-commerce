@@ -69,7 +69,7 @@ const Cart = () => {
   
   return (
     <>
-     <Dialog
+     <Dialog 
         open={open}
         onClose={()=>handleClose}
         aria-labelledby="alert-dialog-title"

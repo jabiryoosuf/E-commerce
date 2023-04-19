@@ -3,35 +3,56 @@ import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import wish from "../images/wish.svg";
-import wishlist from "../images/wishlist.svg";
-import watch from "../images/watch.jpg";
-import watch2 from "../images/watch-2.avif";
+
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { map } from "lodash";
+import heart from '../images/heart.png'
+import redHeart from '../images/redHeart.png'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { RemovewishListApi, addwishListApi } from "../Store/WishlistSlice";
+import { logDOM } from "@testing-library/react";
 
 const ProductCard = (props) => {
-  // console.log("singleProduct", props.product);
+
+   const [selectedProductId,setSelectedProductId]=useState(null)
+  
+ const dispatch=useDispatch()
+   console.log("singleProduct", props.product);
   const { grid } = props;
+
+    const handleWishClick=(wishproductId)=>{
+        console.log('fdf');
+      if(selectedProductId===wishproductId){
+        setSelectedProductId(null)
+        dispatch(RemovewishListApi(wishproductId))
+      }else{
+         setSelectedProductId(wishproductId)
+         dispatch(addwishListApi(wishproductId))
+      }
+    }
   let location = useLocation();
   console.log(props.product);
   return (
     <>
-      {map(props.product, (product) => (
+      {map(props.product, (product, _id) => (
         <div
-          className={` ${
-            location.pathname == "/store" ? `gr-${grid}` : "col-3"
+          key={_id}
+          className={`product-card position-relative ${
+            location.pathname === "/ourstore" ? `gr-${grid}` : "col-3"
           }`}
         >
-          <Link to={`/product/${product._id}`} className="product-card position-relative">
-            <div className="wishlist-icon position-absolute">
-              {/* <Link> */}
-                <img src={wish} alt="wishlist" />
-              {/* </Link> */}
-            </div>
-
+          <div className="wishlist-icon position-absolute">
+            {/* <Link> */}
+            <img onClick={()=>handleWishClick(product?._id)}
+             style={{ width: "20px" }}
+             src={selectedProductId===product?._id?redHeart:heart} alt="wishlist" />
+            {/* </Link> */}
+          </div>
+          <Link to={`/product/${product?._id}`}>
             <div className="product-image">
-              <img 
+              <img
                 src={product?.images?.[0]?.url}
                 className="img-fluid"
                 alt="product-img"

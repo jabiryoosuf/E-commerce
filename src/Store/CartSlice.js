@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { axiosApi } from "./axios-method";
+import { toast } from "react-toastify";
    
 
   //add to cart item
@@ -61,6 +62,7 @@ const cartSlice = createSlice({
       state.loading = false;
       state.cartItems = action.payload;
       console.log("cartItems success");
+      toast.success("item added to cart")
       state.error = false;
     },
     [cartApi.rejected]: (state, action) => {

@@ -12,43 +12,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi } from "../Store/CartSlice";
-import { addwishlistApi } from "../Store/WishlistSlice";
-
+import { addwishListApi } from "../Store/WishlistSlice";
+import {  redHeart} from "../images/redHeart.png";
 const SingleProduct = () => {
-  
   const [quantity, setQuantity] = useState(1);
 
-
   const params = useParams();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = params.id;
+   const[heart,setHeart]=useState()
 
-  const { singleproduct,getcartitems } = useSelector((state) =>({
-    singleproduct:state.products.singleproduct,
-    getcartitems:state.cart.getcartitems
-  }))
-  console.log(singleproduct); 
-console.log(getcartitems);
-
+  const { singleproduct, getcartitems ,wishList} = useSelector((state) => ({
+    singleproduct: state.products.singleproduct,
+    getcartitems: state.cart.getcartitems,
+    wishList:state.wishlist.wishList
+  }));
+  console.log(singleproduct);
+  console.log(getcartitems);
+  console.log(wishList);  
+  
   const productImage = singleproduct?.images?.[0]?.url;
   console.log(productImage);
+   
 
   // const handleQty = (e) => {
-   
+
   //   setQty({...qty,quantity:e.target.value });
- 
+
   // };
-  useEffect(() =>  {
-    
-     dispatch(SingleProductApi(product));
-     ;
-  },[]);
+  useEffect(() => {
+    dispatch(SingleProductApi(product));
+  }, []);
 
   console.log("QTY", quantity);
   console.log(product);
 
   const AddtoCart = async (e) => {
+     
     console.log(getcartitems?.[0]?.product?._id);
     if (sessionStorage.role === "user") {
       const existingCartItem = getcartitems.find(
@@ -56,23 +57,22 @@ console.log(getcartitems);
       );
       if (existingCartItem) {
         // If the product already exists in the cart, update the quantity
-       alert("product already in cart")
-        
+        alert("product already in cart");
       } else {
         // If the product does not exist in the cart, add a new item
-        dispatch(cartApi({  quantity, product ,navigate }))
-       console.log(product);
-        
+        dispatch(cartApi({ quantity, product, navigate }));
+        console.log(product);
       }
-      
     } else {
       navigate("/login");
     }
   };
-   
-  const addToWishlist=(product)=>{
-    dispatch(addwishlistApi({product,navigate}))
-  }
+
+  const addToWishlist =()=>{
+       
+     dispatch(addwishListApi({ product, navigate }));
+    
+  };
 
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const props = {
@@ -194,27 +194,23 @@ console.log(getcartitems);
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div> */}
                   <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-2">
-                    <h3 className="product-heading">
-                      Quantity:
-                    </h3>{" "}
+                    <h3 className="product-heading">Quantity:</h3>{" "}
                     <div className="">
-                      <input 
-                       onChange={(e)=>setQuantity(e.target.value)}
+                      <input
+                        onChange={(e) => setQuantity(e.target.value)}
                         type="number"
                         name="quantity"
                         min={1}
                         max={10}
                         value={quantity}
-                      
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
-                    
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
                       <button
-                        onClick={()=>AddtoCart(singleproduct._id)}
+                        onClick={ AddtoCart}
                         className="button border-0 "
                         type="submit"
                       >
@@ -233,11 +229,14 @@ console.log(getcartitems);
                         Add to Compare
                       </a>
                     </div>
-                    <div>
-                      <a href="">
-                        <AiOutlineHeart onClick={()=>addToWishlist(product)}  className="fs-5 me-2" />
+                    
+                        <AiOutlineHeart
+                          onClick={addToWishlist}
+                          className="fs-5 me-2"
+                         
+                        />
                         Add to Wishlist
-                      </a>
+                   
                     </div>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -268,8 +267,9 @@ console.log(getcartitems);
             </div>
           </div>
         </div>
-      </div>
+      
       <section className="description-wrapper py-5 home-wrapper-2">
+        <>
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -280,6 +280,7 @@ console.log(getcartitems);
             </div>
           </div>
         </div>
+        </>
       </section>
       <h4 id="review" className="mb-2">
         Customer Reviews
@@ -319,7 +320,7 @@ console.log(getcartitems);
                     <h4 className="mb-2">Write a Review</h4>
                     <form action="" className="d-flex flex-column gap-15">
                       <div>
-                        <ReactStars
+                        <ReactStars  
                           count={5}
                           size={24}
                           value="3"
@@ -329,7 +330,7 @@ console.log(getcartitems);
                       </div>
 
                       <div>
-                        <textarea
+                        <textarea 
                           name=""
                           id=""
                           className="w-100 form-control"
@@ -363,6 +364,7 @@ console.log(getcartitems);
             <ProductCard />
           </div>
         </div>
+        
       </section>
     </>
   );

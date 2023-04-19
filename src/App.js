@@ -34,6 +34,8 @@ import { useEffect } from "react";
 import { getCartItemsAPi } from "./Store/CartSlice";
 import { useDispatch } from "react-redux";
 import { allproductsApi } from "./Store/ProductSlice";
+import UserProfile from "./Pages/UserProfile";
+
 
 function App() {
   const dispatch=useDispatch()
@@ -41,6 +43,7 @@ function App() {
   useEffect(() => {
     dispatch(getCartItemsAPi());
     dispatch(allproductsApi())
+ 
   }, []);
   return (
 
@@ -102,6 +105,7 @@ function App() {
           )}
         </Routes>
       </BrowserRouter>
+        {/* <UserProfile/> */}
     </div>
   );
 }

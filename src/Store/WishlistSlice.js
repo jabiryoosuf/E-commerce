@@ -1,38 +1,95 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
+import { toast } from "react-toastify";
+const initialState = {
+  loading: false,
+  error: false,
+  wishList:[],
+};
 
-  
+// add to wishList
 
-
-  export const  addwishlistApi=createAsyncThunk('wishlist/addwishlistApi',async({productId,navigate})=>{
-    const response=await axiosApi.post('/wishlist/admin/new')
-    console.log(response);
+export const addwishListApi = createAsyncThunk(
+  "wishlist/addwishListApi",
+  async ({product,navigate}) => {
+    console.log(product);
+    const responds = await axiosApi.post('/wishlist/admin/new',{products:product});
     navigate('/wishlist')
-    return response.data
-  })
+    return responds.data;
+
+  }
+);
+
+// get all wishList
+
+export const getwishListApi = createAsyncThunk(
+  "wishlist/ getwishListApi",
+  async () => {
+    const responds = await axiosApi.get('/wishlist/user/all');
+    console.log(responds);
+    return responds.data;
+  }
+);
+
+// Remove form wishList
+
+export const RemovewishListApi = createAsyncThunk(
+  "wishlist/RemovewishListApi",
+  async (wishproductId) => {
+    console.log(wishproductId);
+    const responds = await axiosApi.put(`/wishlist/user/remove/${wishproductId}`);
+    console.log(responds);
+    return responds.data;
+  }
+);
+
+const wishSlice = createSlice({
+  name: "wishlist",
+  initialState,
+  reducers: {},
+  extraReducers: {
+
+    // add to wishList
+
+    [addwishListApi.pending]: (state) => {
+      state.loading = true;
+      console.log("wishList pending");
+    },
+    [addwishListApi.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.error = false;
+      console.log("wishList success");
+      state.wishList=action.payload
+      toast.success("item added to wishlist")
+      
+    },
+    [addwishListApi.rejected]: (state) => {
+      state.loading = false;
+      state.error = true;
+      console.log("wishList failed");
+    },
+
+    // //get all wishList items
+
+    [getwishListApi.pending]: (state) => {
+      state.loading = true;
+      console.log("wishList pending");
+    },
+    [getwishListApi.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.wishList = action.payload;
+      state.error = false;
+      console.log("wishList success");
+    },
+    [getwishListApi.rejected]: (state) => {
+      state.loading = false;
+      state.error = true;
+      console.log("wishList failed");
+    },
+    [RemovewishListApi.fulfilled]:()=>{
+      toast.success("item removed from wishlist")}
   
-const initialState={
-    wishlist:{}
-}
+  }
+});
 
-  
-const wishListSlice=createSlice({
-     name:'wishlist',
- initialState,
-    reducers:{},
-    extraReducers:{
-        [addwishlistApi.pending]:()=>{
-         console.log("task pending");
-        },
-        [addwishlistApi.fulfilled]:(state,action)=>{
-            state.wishlist=action.payload
-            console.log("item addedd to wishlist");
-        },
-        [addwishlistApi.rejected]:()=>{
-            console.log("task rejected");
-        }
-    }
-})
-export default wishListSlice.reducer
-
-
+export default wishSlice.reducer;

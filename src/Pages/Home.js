@@ -230,13 +230,13 @@ useEffect(() => {
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
             </div>
-           
-            {map(allproduct,(product)=>(
-            
+            <div className="d-flex gap-10 flex-wrap">
+            {map(allproduct, (product) => (
               <ProductCard product={product} />
             ))}
 
           </div>
+        </div>
         </div>
       </section>
       <section className="famous-wrapper py-5 home-wrapper-2">

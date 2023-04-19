@@ -54,15 +54,15 @@ export const resetpasswordApi = createAsyncThunk(
   }
 );
 
-// export const logOutApi=createAsyncThunk('auth/logOutApi',async(navigate)=>{
-//   const token=sessionStorage.getItem('token')
-//   const role=sessionStorage.getItem('role')
-//   const res=await axiosApi.get('/logout',token,role)
-//   sessionStorage.removeItem('token')
-//   sessionStorage.removeItem('role')
-//   console.log(res);
-//   navigate('/')
-// })
+export const logOutApi=createAsyncThunk('auth/logOutApi',async(navigate)=>{
+  const token=sessionStorage.getItem('token')
+  const role=sessionStorage.getItem('role')
+  const res=await axiosApi.get('/logout',token,role)
+  sessionStorage.removeItem('token')
+  sessionStorage.removeItem('role')
+  console.log(res);
+  navigate('/')
+})
 
 const initialState = {
   token: "",
@@ -81,7 +81,7 @@ const authSlice = createSlice({
     [loginApi.fulfilled]: (state, action) => {
       state.token = action.payload.token;
       console.log("login fullfilled");
-      toast.success("login succes", { autoClose: 1000 });
+      toast.success("login successfull", { autoClose: 1000 });
     },
     [loginApi.rejected]: (state, action) => {
       console.log("login rejected");
@@ -124,14 +124,14 @@ const authSlice = createSlice({
     [resetpasswordApi.rejected]: () => {
       console.log("task rejected");
     },
-    // [logOutApi.fulfilled]:()=>{
-    //   console.log("logout success");
-    //   toast.success("Successfully logedOut", { autoClose: 1000 });
-    // },
-    // [logOutApi.rejected]:()=>{
-    //   console.log("rejected");
-    //   toast.error("Logout rejected", { autoClose: 1000 });
-    // }
+    [logOutApi.fulfilled]:()=>{
+      console.log("logout success");
+      toast.success("Successfully logedOut", { autoClose: 1000 });
+    },
+    [logOutApi.rejected]:()=>{
+      console.log("rejected");
+      toast.error("Logout rejected", { autoClose: 1000 });
+    }
 
   },
 });
