@@ -1,39 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
-import wish from "../images/wish.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { map } from "lodash";
 
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { RemovewishListApi, addwishListApi } from "../Store/wishSlice";
-import { style } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { RemovewishListApi, addwishListApi, getwishListApi } from "../Store/wishSlice";
+
 
 const ProductCard = (props) => {
-  const [selectedProductId, setSelectedProductId] = useState(null);
-
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [wishList, setWishList] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getwishListApi())
+  }, [dispatch]);
+
+  const { wishlist,allproduct } = useSelector((state) => ({
+    wishlist: state.wishList.wishlist,
+    allproduct: state.products.allproduct,
+  }));
+  const wishlistProducts = wishlist?.products;
+
+
   console.log("singleProduct", props.product);
 
   const { grid } = props;
   let location = useLocation();
   console.log(props.product);
 
-  const handleWishClick = (productId) => {
-    console.log(productId);
-    if(selectedProductId === productId){
-      setSelectedProductId(null)
-      dispatch(RemovewishListApi(productId))
-    } else{
-      setSelectedProductId(productId)
-      dispatch(addwishListApi(productId))
-    }
-    // dispatch(addwishListApi({productId}))
+  
+  const AddtoWishList = (product) => {
+    dispatch(addwishListApi(product)).then(() => {
+  });
+  };
+
+  const handleRemoveItem = (product) => {
+    dispatch(RemovewishListApi(product)).then(() => {
+    });
   };
 
   return (
@@ -46,12 +55,27 @@ const ProductCard = (props) => {
           }`}
         >
           <div className="wishlist-icon position-absolute">
-            <img
+          <img
               style={{ width: "20px" }}
-              onClick={() => handleWishClick(product._id)}
-              src={selectedProductId === product._id ? RedHeart : Heart}
+              onClick={isInWishlist ? handleRemoveItem : AddtoWishList}
+              src={wishlistProducts.includes(product._id) ? RedHeart : Heart}
               alt="wishlist"
             />
+              {/* {wishColor ? (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={()=>handleWishClick(_id)}
+                            src={RedHeart}
+                            alt="wishlist"
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={()=>handleWishClick(_id)}
+                            src={Heart}
+                            alt="wishlist"
+                          />
+                        )} */}
           </div>
           <Link to={`/product/${product._id}`}>
             <div className="product-image ">

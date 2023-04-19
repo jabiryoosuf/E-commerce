@@ -7,16 +7,25 @@ import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { cartApi } from "../Store/CartSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { cartApi, getcartApi } from "../Store/CartSlice";
+import {
+  RemovewishListApi,
+  addwishListApi,
+  getwishListApi,
+} from "../Store/wishSlice";
+import Heart from "../images/heart.png";
+import RedHeart from "../images/heart (1).png";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
+  const [wishColor, setWishColor] = useState(false);
   const [orderedProduct, setOrderedProduct] = useState(true);
 
-  const { singleproduct, cartItems } = useSelector((state) => ({
+  const { singleproduct, cartItems, wishlist } = useSelector((state) => ({
     singleproduct: state.products.singleproduct,
     cartItems: state.cart.cartItems,
+    wishlist: state.wishList.wishlist,
   }));
   const params = useParams();
   const navigate = useNavigate();
@@ -24,15 +33,25 @@ const SingleProduct = () => {
   const product = params.id;
 
   const productImage = singleproduct?.images?.[0]?.url;
-
+  const wishlistProducts = wishlist?.products;
   useEffect(() => {
     dispatch(SingleProductApi(product));
-  }, []);
+    dispatch(getwishListApi())
+    window.scrollTo(0, 0);
+  }, [dispatch, product]);
+  let existingwishlistItem;
+  useEffect(() => {
+    if (wishlist?.products) {
+      existingwishlistItem = wishlist.products.find((item) => item._id === product)
+      setWishColor(existingwishlistItem ? true : false);
+    }
+  },[wishlist, product]);
 
   const AddtoCart = async (e) => {
-    console.log(cartItems?.[0]?.items?._id);
     if (sessionStorage.role === "user") {
-      const existingCartItem = cartItems.find((item) => item?.items?.[0]?.product?._id === product);
+      const existingCartItem = cartItems.find(
+        (item) => item?.items?.[0]?.product?._id === product
+      );
       if (existingCartItem) {
         alert("Product already exist");
       } else {
@@ -43,10 +62,19 @@ const SingleProduct = () => {
     }
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const uploadcart = () => {};
+  const AddtoWishList = () => {
+    dispatch(addwishListApi(product)).then(() => {
+    setWishColor(true);
+  });
+  };
+
+  const handleRemoveItem = () => {
+    dispatch(
+      
+      (product)).then(() => {
+      setWishColor(false);
+    });
+  };
 
   return (
     <>
@@ -54,6 +82,7 @@ const SingleProduct = () => {
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container xxl">
+  
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
@@ -112,7 +141,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="border-bottom py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Type:</h3>{" "}
+                    <h3 className="product-heading">Type:</h3>
                     <p className="product-data">Watch</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -130,8 +159,8 @@ const SingleProduct = () => {
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
                     <p className="product-data">
-                      {singleproduct?.quantity > 0
-                        ? singleproduct?.quantity
+                      {singleproduct?.stock > 0
+                        ? singleproduct?.stock
                         : "out of stock"}
                     </p>
                   </div>
@@ -182,16 +211,31 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex align-items-center gap-15">
                     <div>
-                      <a href="">
+                      <Link to="">
                         <TbGitCompare className="fs-5 me-2" />
                         Add to Compare
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a href="">
-                        <AiOutlineHeart className="fs-5 me-2" />
+                      <Link to="">
+                        {/* <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" /> */}
+                        {wishColor ? (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={handleRemoveItem}
+                            src={RedHeart}
+                            alt="wishlist"
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={AddtoWishList}
+                            src={Heart}
+                            alt="wishlist"
+                          />
+                        )}
                         Add to Wishlist
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -260,8 +304,7 @@ const SingleProduct = () => {
                     <div>
                       <a
                         className="text-dark text-decoration-underline"
-                        href=""
-                      >
+                        href=" ">
                         write a review
                       </a>
                     </div>
@@ -289,7 +332,8 @@ const SingleProduct = () => {
                           placeholder="comment"
                           cols="30"
                           rows="3"
-                        ></textarea>
+
+></textarea>
                       </div>
                       <div className="d-flex justify-content-end">
                         <button className="button border-0">
@@ -320,5 +364,6 @@ const SingleProduct = () => {
     </>
   );
 };
+
 
 export default SingleProduct;

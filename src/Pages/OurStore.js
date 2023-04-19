@@ -6,12 +6,16 @@ import ProductCard from "../Components/ProductCard";
 import Color from "../Components/Color";
 import { useSelector } from "react-redux";
 import { map } from "lodash";
+import { useEffect } from "react";
 
 const OurStore = () => {
   const [grid,setGrid]=useState(4);
 
   const { allproduct } = useSelector((state) => state.products);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
 

@@ -5,8 +5,13 @@ import { AiOutlineHome } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
 import { BsInfoCircleFill } from "react-icons/bs";
+import { useEffect } from "react";
 
 const Contact = () => {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Meta title={"Contact Us"} />

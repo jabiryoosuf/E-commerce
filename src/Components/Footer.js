@@ -97,7 +97,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-12">
               <p className="text-center mb-0 text-white">
-                &copy: {new Date().getFullYear()}:powered by jabir
+                &copy: {new Date().getFullYear()}:powered by ismail
               </p>
             </div>
           </div>

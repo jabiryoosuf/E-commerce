@@ -34,6 +34,8 @@ import { useEffect } from "react";
 import { getcartApi } from "./Store/CartSlice";
 import { useDispatch } from "react-redux";
 import { allproductsApi } from "./Store/ProductSlice";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const dispatch = useDispatch()
@@ -42,7 +44,9 @@ function App() {
     dispatch(allproductsApi());
 },[]);
   return (
+
     <div className="App">
+
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
