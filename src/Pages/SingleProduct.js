@@ -32,18 +32,23 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const product = params.id;
 
+console.log(wishlist); 
+console.log(cartItems); 
+
   const productImage = singleproduct?.images?.[0]?.url;
-  const wishlistProducts = wishlist?.products;
+
   useEffect(() => {
     dispatch(SingleProductApi(product));
     dispatch(getwishListApi())
     window.scrollTo(0, 0);
   }, [dispatch, product]);
-  let existingwishlistItem;
+
   useEffect(() => {
-    if (wishlist?.products) {
-      existingwishlistItem = wishlist.products.find((item) => item._id === product)
-      setWishColor(existingwishlistItem ? true : false);
+    if (wishlist) {
+    const existingwishlistItem = wishlist.find((item) => item?.product?._id === product)
+      if (existingwishlistItem) {
+      setWishColor(true)
+    }
     }
   },[wishlist, product]);
 
@@ -62,19 +67,18 @@ const SingleProduct = () => {
     }
   };
 
-  const AddtoWishList = () => {
+  const 
+  
+  AddtoWishList = () => {
     dispatch(addwishListApi(product)).then(() => {
     setWishColor(true);
+    if(wishColor===true){
+      setWishColor(false);
+    }
   });
   };
 
-  const handleRemoveItem = () => {
-    dispatch(
-      
-      (product)).then(() => {
-      setWishColor(false);
-    });
-  };
+
 
   return (
     <>
@@ -218,11 +222,10 @@ const SingleProduct = () => {
                     </div>
                     <div>
                       <Link to="">
-                        {/* <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" /> */}
                         {wishColor ? (
                           <img
                             style={{ width: "20px" }}
-                            onClick={handleRemoveItem}
+                            onClick={AddtoWishList}
                             src={RedHeart}
                             alt="wishlist"
                           />

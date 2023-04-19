@@ -12,9 +12,7 @@ const initialState = {
 
 export const addwishListApi = createAsyncThunk("wish/addwishListApi",async (productId) => {
     console.log(productId);
-    const responds = await axiosApi.post(`/wishlist/admin/new`, {
-      products: productId,
-    });
+    const responds = await axiosApi.post(`/wishlist/admin/new`,{product: productId,});
     return responds.data;
   }
 );
@@ -34,7 +32,7 @@ export const getwishListApi = createAsyncThunk(
 export const RemovewishListApi = createAsyncThunk(
   "wish/addwishListApi",
   async (productId) => {
-    const responds = await axiosApi.put(`/wishlist/user/remove/${productId}`);
+    const responds = await axiosApi.delete(`/wishlist/user/${productId}`);
     return responds.data;
   }
 );

@@ -9,24 +9,25 @@ import { map } from "lodash";
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
 import { useDispatch, useSelector } from "react-redux";
-import { RemovewishListApi, addwishListApi, getwishListApi } from "../Store/wishSlice";
-
+import {
+  RemovewishListApi,
+  addwishListApi,
+  getwishListApi,
+} from "../Store/wishSlice";
 
 const ProductCard = (props) => {
-  const [isInWishlist, setIsInWishlist] = useState(false);
-  const [wishList, setWishList] = useState([]);
+  const [selectedProductId, setSelectedProductId] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getwishListApi())
+    dispatch(getwishListApi());
   }, [dispatch]);
 
-  const { wishlist,allproduct } = useSelector((state) => ({
+  const { wishlist, allproduct } = useSelector((state) => ({
     wishlist: state.wishList.wishlist,
     allproduct: state.products.allproduct,
   }));
-  const wishlistProducts = wishlist?.products;
-
+  const wishlistProducts = wishlist?.product;
 
   console.log("singleProduct", props.product);
 
@@ -34,48 +35,32 @@ const ProductCard = (props) => {
   let location = useLocation();
   console.log(props.product);
 
-  
-  const AddtoWishList = (product) => {
-    dispatch(addwishListApi(product)).then(() => {
-  });
-  };
+  const handleWishClick=(wishproductId)=>{
+        
+    if(selectedProductId===wishproductId){
+      setSelectedProductId(null)
+      dispatch(addwishListApi(wishproductId))
+    }else{
+       setSelectedProductId(wishproductId)
+       dispatch(addwishListApi(wishproductId))
 
-  const handleRemoveItem = (product) => {
-    dispatch(RemovewishListApi(product)).then(() => {
-    });
-  };
+       
+    }
+  }
 
   return (
     <>
-      {map(props.product, (product,_id) => (
+      {map(props.product, (product, _id) => (
         <div
           key={_id}
           className={`product-card position-relative ${
-            location.pathname == "/ourstore" ? `gr-${grid}`  : "col-3" 
+            location.pathname == "/ourstore" ? `gr-${grid}` : "col-3"
           }`}
         >
           <div className="wishlist-icon position-absolute">
-          <img
-              style={{ width: "20px" }}
-              onClick={isInWishlist ? handleRemoveItem : AddtoWishList}
-              src={wishlistProducts.includes(product._id) ? RedHeart : Heart}
-              alt="wishlist"
-            />
-              {/* {wishColor ? (
-                          <img
-                            style={{ width: "20px" }}
-                            onClick={()=>handleWishClick(_id)}
-                            src={RedHeart}
-                            alt="wishlist"
-                          />
-                        ) : (
-                          <img
-                            style={{ width: "20px" }}
-                            onClick={()=>handleWishClick(_id)}
-                            src={Heart}
-                            alt="wishlist"
-                          />
-                        )} */}
+          <img onClick={()=>handleWishClick(product?._id)}
+             style={{ width: "20px" }}
+             src={selectedProductId===product?._id? RedHeart: Heart} alt="wishlist" />
           </div>
           <Link to={`/product/${product._id}`}>
             <div className="product-image ">
