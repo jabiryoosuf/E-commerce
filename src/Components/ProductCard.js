@@ -58,7 +58,7 @@ const ProductCard = (props) => {
           <img
               style={{ width: "20px" }}
               onClick={isInWishlist ? handleRemoveItem : AddtoWishList}
-              src={wishlistProducts.includes(product._id) ? RedHeart : Heart}
+              src={wishlist.includes(product._id) ? RedHeart : Heart}
               alt="wishlist"
             />
               {/* {wishColor ? (

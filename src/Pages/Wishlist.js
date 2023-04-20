@@ -29,7 +29,7 @@ const Wishlist = () => {
       <div className="wishlist-wrapper home-wrapper-2 py-5">
         <div className="container-xxl">
           <div className="row">
-          {map(wishlist?.products,(wishItem) => (
+          {map(wishlist,(wishItem) => (
             <div className="col-3" key={wishItem._id}>
            
               <div className="wishlist-card position-relative">
@@ -40,7 +40,7 @@ const Wishlist = () => {
                 />
                 <div className="wishlist-card-image">
                   <img
-                    src={wishItem?.images?.[0]?.url}
+                    src={wishItem?.product?.images?.[0]?.url}
                     alt="watch"
                     className="img-fluid w-100"
                   />
@@ -49,7 +49,7 @@ const Wishlist = () => {
                   <h5 className="title">
                     {wishItem?.name}
                   </h5>
-                  <h6 className="price">{wishItem?.price?.actualPrice}</h6>
+                  <h6 className="price">{wishItem?.product?.price?.actualPrice}</h6>
                 </div>
               </div>
               
