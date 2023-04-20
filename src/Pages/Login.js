@@ -1,35 +1,27 @@
 import React, { useState } from "react";
 import Meta from "../Components/Meta";
-import BreadCrumb from "../Components/BreadCrumb";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginApi } from "../Store/authSlice";
+import { getcartApi } from "../Store/CartSlice";
   
 const Login = () => {
   const [login,setLogin]=useState({})
    const dispatch=useDispatch()
    const navigate=useNavigate()
 
-  const handleChange=(e)=>{
-      setLogin({
-        ...login,
-        [e.target.name]:e.target.value
-        
-      })
-  }
   const handleLoginSubmit=(e)=>{
 
     e.preventDefault()
-    dispatch(loginApi({login,navigate}))
+    dispatch(loginApi({login,navigate})).then(()=>{
+      dispatch(getcartApi())
+    })
       
   }
     
-
-  
   return (
     <>
-
       <Meta title={"Login"} />
       <div className="login-wrapper home-wrapper-2 py-5">
       <div className="container-xxl">

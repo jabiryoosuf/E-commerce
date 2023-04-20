@@ -44,7 +44,6 @@ const ProductCard = (props) => {
        setSelectedProductId(wishproductId)
        dispatch(addwishListApi(wishproductId))
 
-       
     }
   }
 
