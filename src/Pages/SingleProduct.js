@@ -32,20 +32,27 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const product = params.id;
 
+  console.log(wishlist);
+  console.log(cartItems);
+
   const productImage = singleproduct?.images?.[0]?.url;
-  const wishlistProducts = wishlist?.products;
+
   useEffect(() => {
     dispatch(SingleProductApi(product));
-    dispatch(getwishListApi())
+    dispatch(getwishListApi());
     window.scrollTo(0, 0);
   }, [dispatch, product]);
-  let existingwishlistItem;
+
   useEffect(() => {
-    if (wishlist?.products) {
-      existingwishlistItem = wishlist.products.find((item) => item._id === product)
-      setWishColor(existingwishlistItem ? true : false);
+    if (wishlist) {
+      const existingwishlistItem = wishlist.find(
+        (item) => item?.product?._id === product
+      );
+      if (existingwishlistItem) {
+        setWishColor(true);
+      }
     }
-  },[wishlist, product]);
+  }, [wishlist, product]);
 
   const AddtoCart = async (e) => {
     if (sessionStorage.role === "user") {
@@ -64,15 +71,10 @@ const SingleProduct = () => {
 
   const AddtoWishList = () => {
     dispatch(addwishListApi(product)).then(() => {
-    setWishColor(true);
-  });
-  };
-
-  const handleRemoveItem = () => {
-    dispatch(
-      
-      (product)).then(() => {
-      setWishColor(false);
+      setWishColor(true);
+      if (wishColor === true) {
+        setWishColor(false);
+      }
     });
   };
 
@@ -82,7 +84,6 @@ const SingleProduct = () => {
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container xxl">
-  
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
@@ -135,9 +136,6 @@ const SingleProduct = () => {
                     />
                     <p className="mb-0 t-review">(2 reviews)</p>
                   </div>
-                  <a className="review-btn" href="#review">
-                    write areview
-                  </a>
                 </div>
                 <div className="border-bottom py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -201,10 +199,10 @@ const SingleProduct = () => {
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button onClick={AddtoCart} className="button border-0 ">
+                      <button style={{backgroundColor:"#febd69",color:"black"}} onClick={AddtoCart} className="button border-0 ">
                         Add to Cart
                       </button>
-                      <button className="button signup border-0">
+                      <button style={{backgroundColor:"#febd69",color:"black"}}  className="button signup border-0">
                         Buy It Now
                       </button>
                     </div>
@@ -218,11 +216,10 @@ const SingleProduct = () => {
                     </div>
                     <div>
                       <Link to="">
-                        {/* <AiOutlineHeart onClick={AddtoWishList} className="fs-5 me-2" /> */}
                         {wishColor ? (
                           <img
                             style={{ width: "20px" }}
-                            onClick={handleRemoveItem}
+                            onClick={AddtoWishList}
                             src={RedHeart}
                             alt="wishlist"
                           />
@@ -279,9 +276,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      <h4 id="review" className="mb-2">
-        Customer Reviews
-      </h4>
+
       <section className="reviews-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
@@ -289,6 +284,9 @@ const SingleProduct = () => {
               <div className="review-inner-wrapper">
                 <div className="review-head d-flex justify-content-between ">
                   <div>
+                    <h4 id="review" className="fs-5">
+                      Customer Reviews
+                    </h4>
                     <div className="d-flex align-items-center gap-10">
                       <ReactStars
                         count={5}
@@ -304,7 +302,8 @@ const SingleProduct = () => {
                     <div>
                       <a
                         className="text-dark text-decoration-underline"
-                        href=" ">
+                        href=" "
+                      >
                         write a review
                       </a>
                     </div>
@@ -332,8 +331,7 @@ const SingleProduct = () => {
                           placeholder="comment"
                           cols="30"
                           rows="3"
-
-></textarea>
+                        ></textarea>
                       </div>
                       <div className="d-flex justify-content-end">
                         <button className="button border-0">
@@ -364,6 +362,5 @@ const SingleProduct = () => {
     </>
   );
 };
-
 
 export default SingleProduct;

@@ -47,7 +47,7 @@ const Wishlist = () => {
                 </div>
                 <div className="py-3 px-3">
                   <h5 className="title">
-                    {wishItem?.name}
+                    {wishItem?.product?.name}
                   </h5>
                   <h6 className="price">{wishItem?.product?.price?.actualPrice}</h6>
                 </div>

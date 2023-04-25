@@ -144,6 +144,18 @@ margin-left: 475px;
 footer part */
 footer {
   background-color: var(--color-232f3e);
+  font-size: 12px;
+  
+}
+footer .input-group{
+  height:33;
+}
+footer .form-control{
+  font-size: 14px;
+}
+.footer-top-data img{
+  width: 20px;
+
 }
 footer:not(:first-child) {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -309,6 +321,8 @@ card.product-card .product-image {
 }
 .product-card .product-image img {
   object-fit: contain;
+  /* object-fit: cover; */
+
   height: 100%;
 }
 .product-card:hover .action-bar {

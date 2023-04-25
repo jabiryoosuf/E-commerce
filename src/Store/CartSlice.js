@@ -94,6 +94,7 @@ const cartSlice = createSlice({
     [RemoveCartApi.fulfilled]: (state, action) => {
       state.loading = false;
       console.log("Remove cartItems success");
+      toast.success("remove from cart", { autoClose: 1000 })
       state.error = false;
     },
     [RemoveCartApi.rejected]: (state, action) => {
