@@ -10,6 +10,7 @@ import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
 import { Box, Modal, Typography } from "@mui/material";
 import { Button } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
@@ -25,6 +26,7 @@ const Cart = () => {
 
   const deleteCartItem = (cartItemId) => {
     dispatch(RemoveCartApi(cartItemId)).then(() => {
+      toast.error("Remove cart success", { autoClose: 1000 })
       dispatch(getcartApi());
     });
   };
@@ -59,7 +61,7 @@ const Cart = () => {
             </Typography>
             <Button onClick={() => setOpen(false)}>cancel</Button>
             <Button
-              onClick={() =>{ deleteCartItem(cartId);setOpen(false)}}
+              onClick={()=>{ deleteCartItem(cartId); setOpen(false);}}
               style={{
                 color: "white",
                 background: "red",
@@ -114,7 +116,7 @@ const Cart = () => {
                     </div>
                     <div className="cart-col-2">
                       <h5 className="price">
-                        $ {cartItem?.items?.[0]?.product?.price?.actualPrice}
+                      ₹ {cartItem?.items?.[0]?.product?.price?.actualPrice}
                       </h5>
                     </div>
 
@@ -144,7 +146,7 @@ const Cart = () => {
                     </div>
                     <div className="cart-col-4">
                       <h5 className="price">
-                        {cartItem?.items?.[0]?.quantity *
+                      ₹ {cartItem?.items?.[0]?.quantity *
                           cartItem?.items?.[0]?.product?.price?.actualPrice}
                       </h5>
                     </div>
@@ -159,7 +161,7 @@ const Cart = () => {
                     <div className="d-flex flex-column align-items-end">
                       <h4>Sub Total : {totalPrice}</h4>
                       <p>Taxes and shipping calculated at checkout</p>
-                      <Link to="/checkout" className="button">
+                      <Link to="/checkout" className="button" style={{background:"#febd69",color:"#232f3e"}}>
                         Check Out
                       </Link>
                     </div>

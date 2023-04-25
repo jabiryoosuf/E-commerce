@@ -14,6 +14,7 @@ import {
   addwishListApi,
   getwishListApi,
 } from "../Store/wishSlice";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -35,17 +36,15 @@ const ProductCard = (props) => {
   let location = useLocation();
   console.log(props.product);
 
-  const handleWishClick=(wishproductId)=>{
-        
-    if(selectedProductId===wishproductId){
-      setSelectedProductId(null)
-      dispatch(addwishListApi(wishproductId))
-    }else{
-       setSelectedProductId(wishproductId)
-       dispatch(addwishListApi(wishproductId))
-
+  const handleWishClick = (wishproductId) => {
+    if (selectedProductId === wishproductId) {
+      setSelectedProductId(null);
+      dispatch(addwishListApi(wishproductId));
+    } else {
+      setSelectedProductId(wishproductId);
+      dispatch(addwishListApi(wishproductId));
     }
-  }
+  };
 
   return (
     <>
@@ -57,13 +56,17 @@ const ProductCard = (props) => {
           }`}
         >
           <div className="wishlist-icon position-absolute">
-          <img onClick={()=>handleWishClick(product?._id)}
-             style={{ width: "20px" }}
-             src={selectedProductId===product?._id? RedHeart: Heart} alt="wishlist" />
+            <img
+              onClick={() => handleWishClick(product?._id)}
+              style={{ width: "20px" }}
+              src={selectedProductId === product?._id ? RedHeart : Heart}
+              alt="wishlist"
+            />
           </div>
           <Link to={`/product/${product._id}`}>
             <div className="product-image ">
               <img
+                style={{ height: "250px" }}
                 src={product?.images?.[0]?.url}
                 className="img-fluid"
                 alt="product-img"
@@ -72,7 +75,7 @@ const ProductCard = (props) => {
 
             <div className="product-details">
               <h6>{product?.name}</h6>
-              <h5 className="product-title">{product.description}</h5>
+              {/* <h5 className="product-title">{product.description}</h5> */}
               <ReactStars
                 count={5}
                 size={24}
@@ -89,10 +92,26 @@ const ProductCard = (props) => {
                 itaque accusamus provident cumque ullam beatae nesciunt
                 similique quibusdam, ea quae, animi vero ratione perspiciatis!
               </p>
+              <div style={{ display: "flex" }}>
+                <p className="price">₹ {product.price?.actualPrice}</p>
+                <button className="card-button"
+                  style={{
+                    // background: "#232f3e",
+                    // color: "white",
+                    border: "none",
+                    width: "100px",
+                    height: "30px",
+                    borderRadius: "12px",
+                    fontSize: "10px",
+                    marginLeft: "100px",
 
-              <p className="price">{product.price?.actualPrice}</p>
+                  }}
+                >
+                  Add to cart
+                </button>
+              </div>
             </div>
-            <div className="action-bar position-absolute">
+            {/* <div className="action-bar position-absolute">
               <div className="d-flex flex-column">
                 <Link>
                   <img src={prodcompare} alt="addcart" />
@@ -105,7 +124,7 @@ const ProductCard = (props) => {
                   <img src={addcart} alt="addcart" />
                 </Link>
               </div>
-            </div>
+            </div> */}
           </Link>
         </div>
       ))}

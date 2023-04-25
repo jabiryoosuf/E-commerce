@@ -136,10 +136,10 @@ const Header = () => {
                   >
                     <img src={cartImg} alt="" />
                     <div className="Header-Text d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">
+                      <span className="badge bg-white text-dark mb-4">
                         {totalCartItems}
                       </span>
-                      <p className="Header-Text mb-0">$ {totalCartPrice}</p>
+                      {/* <p className="Header-Text mb-0">$ {totalCartPrice}</p> */}
                     </div>
                   </Link>
                 </div>

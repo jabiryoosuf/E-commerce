@@ -56,9 +56,9 @@ const cartSlice = createSlice({
       console.log("add cartItems pending");
     },
     [cartApi.fulfilled]: (state, action) => {
+      state.loading = false;
       console.log("add cartItems success");
       toast.success("added to cart success", { autoClose: 1000 })
-      state.loading = false;
       state.error = false;
     },
     [cartApi.rejected]: (state, action) => {

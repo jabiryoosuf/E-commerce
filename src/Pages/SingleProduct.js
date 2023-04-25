@@ -4,18 +4,14 @@ import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { TbGitCompare } from "react-icons/tb";
-import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi, getcartApi } from "../Store/CartSlice";
-import {
-  RemovewishListApi,
-  addwishListApi,
-  getwishListApi,
-} from "../Store/wishSlice";
+import { addwishListApi, getwishListApi } from "../Store/wishSlice";
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -32,25 +28,27 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const product = params.id;
 
-console.log(wishlist); 
-console.log(cartItems); 
+  console.log(wishlist);
+  console.log(cartItems);
 
   const productImage = singleproduct?.images?.[0]?.url;
 
   useEffect(() => {
     dispatch(SingleProductApi(product));
-    dispatch(getwishListApi())
+    dispatch(getwishListApi());
     window.scrollTo(0, 0);
   }, [dispatch, product]);
 
   useEffect(() => {
     if (wishlist) {
-    const existingwishlistItem = wishlist.find((item) => item?.product?._id === product)
+      const existingwishlistItem = wishlist.find(
+        (item) => item?.product?._id === product
+      );
       if (existingwishlistItem) {
-      setWishColor(true)
+        setWishColor(true);
+      }
     }
-    }
-  },[wishlist, product]);
+  }, [wishlist, product]);
 
   const AddtoCart = async (e) => {
     if (sessionStorage.role === "user") {
@@ -61,24 +59,25 @@ console.log(cartItems);
         alert("Product already exist");
       } else {
         dispatch(cartApi({ product, quantity, navigate }));
+        toast.success("Add to cart success", { autoClose: 1000 });
+        dispatch(getcartApi());
       }
     } else {
       navigate("/login");
     }
   };
 
-  const 
-  
-  AddtoWishList = () => {
-    dispatch(addwishListApi(product)).then(() => {
-    setWishColor(true);
-    if(wishColor===true){
-      setWishColor(false);
+  const AddtoWishList = () => {
+    dispatch(addwishListApi(product));
+    if (wishColor === false) {
+      setWishColor(true);
+      toast.success("successfully add to wishList", { autoClose: 1000 });
     }
-  });
+    if (wishColor === true) {
+      setWishColor(false);
+      toast.error("Remove wishlist success", { autoClose: 1000 });
+    }
   };
-
-
 
   return (
     <>
@@ -86,7 +85,6 @@ console.log(cartItems);
       <BreadCrumb title="SingleProduct" />
       <div className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container xxl">
-  
           <div className="row">
             <div className="col-6">
               <div className="main-product-image">
@@ -128,7 +126,7 @@ console.log(cartItems);
                   <h3 className="title">{singleproduct?.name}</h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$ {singleproduct?.price?.actualPrice}</p>
+                  <p className="price">₹ {singleproduct?.price?.actualPrice}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -168,7 +166,7 @@ console.log(cartItems);
                         : "out of stock"}
                     </p>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-2">
+                  {/* <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
                     <div className="d-flex flex-wrap gap-15">
                       <span className="badge border border-1 bg-white text-dark borde-secondary">
@@ -185,7 +183,7 @@ console.log(cartItems);
                         XXL
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div>
@@ -205,7 +203,11 @@ console.log(cartItems);
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button onClick={AddtoCart} className="button border-0 ">
+                      <button
+                        style={{ background: "#febd69", color: "#232f3e" }}
+                        onClick={AddtoCart}
+                        className="button border-0 "
+                      >
                         Add to Cart
                       </button>
                       <button className="button signup border-0">
@@ -282,9 +284,7 @@ console.log(cartItems);
           </div>
         </div>
       </section>
-      <h4 id="review" className="mb-2">
-        Customer Reviews
-      </h4>
+
       <section className="reviews-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
@@ -292,6 +292,9 @@ console.log(cartItems);
               <div className="review-inner-wrapper">
                 <div className="review-head d-flex justify-content-between ">
                   <div>
+                    <h4 id="review" className="mb-2">
+                      Customer Reviews
+                    </h4>
                     <div className="d-flex align-items-center gap-10">
                       <ReactStars
                         count={5}
@@ -307,7 +310,8 @@ console.log(cartItems);
                     <div>
                       <a
                         className="text-dark text-decoration-underline"
-                        href=" ">
+                        href=" "
+                      >
                         write a review
                       </a>
                     </div>
@@ -335,8 +339,7 @@ console.log(cartItems);
                           placeholder="comment"
                           cols="30"
                           rows="3"
-
-></textarea>
+                        ></textarea>
                       </div>
                       <div className="d-flex justify-content-end">
                         <button className="button border-0">
@@ -367,6 +370,5 @@ console.log(cartItems);
     </>
   );
 };
-
 
 export default SingleProduct;
