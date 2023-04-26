@@ -15,7 +15,7 @@ import cartImg from "../images/cart.svg"
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [ setTotalCartPrice] = useState(0);
+  // const [ totalCartPrice,setTotalCartPrice] = useState(0);
   const { cartItems } = useSelector((state) => state.cart);
 
   const totalCartItems = cartItems.length;
@@ -28,7 +28,7 @@ const Header = () => {
         item?.items[0]?.quantity *
         item?.items?.[0]?.product?.price?.actualPrice;
     }
-    setTotalCartPrice(totalPrice);
+    // setTotalCartPrice(totalPrice);
     dispatch(totalCartAmount(totalPrice));
   });
   const ScrollTop = () => {

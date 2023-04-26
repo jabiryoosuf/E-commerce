@@ -36,6 +36,7 @@ export const RemoveCartApi = createAsyncThunk(
   "wish/addwishListApi",
   async (cartItemId) => {
     const responds = await axiosApi.delete(`/cart/admin/${cartItemId}`);
+    console.log(responds);
     return responds.data;
   }
 );
@@ -75,7 +76,7 @@ const cartSlice = createSlice({
     },
     [getcartApi.fulfilled]: (state, action) => {
       state.loading = false;
-      state.cartItems = action.payload;
+     state.cartItems=action.payload
       console.log("cartItems success");
       state.error = false;
     },
@@ -93,7 +94,11 @@ const cartSlice = createSlice({
     },
     [RemoveCartApi.fulfilled]: (state, action) => {
       state.loading = false;
+      const cartItemId = action.payload._id;
+      console.log(cartItemId);
+      state.cartItems = state.cartItems.filter(product => product._id !== cartItemId);
       console.log("Remove cartItems success");
+      toast.success("Remove cart success", { autoClose: 1000 })
       state.error = false;
     },
     [RemoveCartApi.rejected]: (state, action) => {

@@ -4,11 +4,11 @@ import BreadCrumb from "../Components/BreadCrumb";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RemoveCartApi, cartApi, getcartApi } from "../Store/CartSlice";
+import { RemoveCartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Input, Modal, Typography } from "@mui/material";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
@@ -21,15 +21,12 @@ const Cart = () => {
   const { totalPrice, cartItems } = useSelector((state) => state.cart);
   
   useEffect(() => {
-    dispatch(cartApi())
+    dispatch(getcartApi())
     window.scrollTo(0,0);
   },[]);
 
   const deleteCartItem = (cartItemId) => {
-    dispatch(RemoveCartApi(cartItemId)).then(() => {
-      toast.error("Remove cart success", { autoClose: 1000 })
-      dispatch(getcartApi());
-    });
+    dispatch(RemoveCartApi(cartItemId))
   };
   const style = {
     position: "absolute",
