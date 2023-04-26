@@ -8,13 +8,14 @@ import { RemoveCartApi, cartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
-import { Box, Modal, Typography } from "@mui/material";
+import { Box, Input, Modal, Typography } from "@mui/material";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);
   const [cartId, setCartId] = useState(null);
+  const [ productQuantity,setProductQuantity]=useState()
   const dispatch = useDispatch();
 
   const { totalPrice, cartItems } = useSelector((state) => state.cart);
@@ -126,9 +127,9 @@ const Cart = () => {
                           className="form-control"
                           type="number"
                           name=""
-                          defaultValue={cartItem?.items?.[0]?.quantity}
                           min={1}
                           max={10}
+                          defaultValue={cartItem?.items?.[0]?.quantity}
                           id=""
                         />
                       </div>

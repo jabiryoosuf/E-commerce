@@ -312,8 +312,9 @@ footer .input-group-text {
   /* margin: 10px; */
   width: 300px;
 }
-card.product-card .product-image {
+card .product-card .product-image {
   height: 270px;
+  width: 100%;
 }
 .product-card .product-image img {
   object-fit: contain;

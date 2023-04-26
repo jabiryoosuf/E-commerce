@@ -30,7 +30,7 @@ const Header = () => {
     }
     setTotalCartPrice(totalPrice);
     dispatch(totalCartAmount(totalPrice));
-  },);
+  });
   const ScrollTop = () => {
     window.scrollTo(0, 0);
   };

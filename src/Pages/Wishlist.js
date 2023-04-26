@@ -42,6 +42,7 @@ const Wishlist = () => {
                 />
                 <div className="wishlist-card-image">
                   <img
+                  style={{height:"250px"}}
                     src={wishItem?.product?.images?.[0]?.url}
                     alt="watch"
                     className="img-fluid w-100"

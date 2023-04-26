@@ -7,14 +7,32 @@ import Color from "../Components/Color";
 import { useSelector } from "react-redux";
 import { map } from "lodash";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const OurStore = () => {
   const [grid,setGrid]=useState(4);
-
+ 
   const { allproduct } = useSelector((state) => state.products);
 
+const products=allproduct.Products
+
+  const getRandomObject = (array) => {
+    const randomObject = array[Math.floor(Math.random() * array?.length)];
+    return randomObject;
+  };
+  const [randomData, setRandomData] = useState();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if(products?.length >0){
+      const array = getRandomObject(products)
+      setRandomData(array)
+    }
+  }, [products])
+  
+
+
+  useEffect(() => {
+    window.scrollTo(0,0);
   }, []);
   return (
     <div>
@@ -174,17 +192,19 @@ const OurStore = () => {
               <div className="filter-card mb-3">
                 <h3 className="filter-title">Random Products</h3>
                 <div>
+                <Link to={`/product/${randomData?._id}`}>
+                {/* {map(randomData,(product) => ( */}
                   <div className="random-product mb-3 d-flex">
                     <div className="w-50">
                       <img
-                        src="images/watch.jpg"
+                        src={randomData?.images?.[0]?.url}
                         className="img-fluid"
                         alt="watch"
                       />
                     </div>
                     <div className="w-50">
                       <h5>
-                        Kids Headphones Bulk 10 Pack Multi Colored For Student
+                      {randomData?.name}
                       </h5>
                       <ReactStars
                         count={5}
@@ -193,31 +213,11 @@ const OurStore = () => {
                         edit={false}
                         activeColor="#ffd700"
                       />
-                      <p>$300</p>
+                      <p>₹ {randomData?.price?.actualPrice}</p>
                     </div>
                   </div>
-                  <div className="random-product d-flex">
-                    <div className="w-50">
-                      <img
-                        src="images/watch.jpg"
-                        className="img-fluid"
-                        alt="watch"
-                      />
-                    </div>
-                    <div className="w-50">
-                      <h5>
-                        Kids Headphones Bulk 10 Pack Multi Colored For Student
-                      </h5>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        value="3"
-                        edit={false}
-                        activeColor="#ffd700"
-                      />
-                      <p>$300</p>
-                    </div>
-                  </div>
+                  </Link>
+
                 </div>
               </div>
             </div>
@@ -285,7 +285,7 @@ const OurStore = () => {
               </div>
               <div className="product-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                {map(allproduct, (product) => (
+                {map(allproduct,(product) => (
                 <ProductCard product={product} grid={grid}/>
                 ))}
 

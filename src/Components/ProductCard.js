@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import prodcompare from "../images/prodcompare.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
@@ -15,21 +15,26 @@ import {
   getwishListApi,
 } from "../Store/wishSlice";
 import { hover } from "@testing-library/user-event/dist/hover";
+import { width } from "@mui/system";
+import { toast } from "react-toastify";
+import { cartApi, getcartApi } from "../Store/CartSlice";
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getwishListApi());
   }, [dispatch]);
 
-  const { wishlist, allproduct } = useSelector((state) => ({
+  const { wishlist,cartItems, allproduct } = useSelector((state) => ({
     wishlist: state.wishList.wishlist,
+    cartItems: state.cart.cartItems,
     allproduct: state.products.allproduct,
   }));
   const wishlistProducts = wishlist?.product;
-
+const navigate = useNavigate()
   console.log("singleProduct", props.product);
 
   const { grid } = props;
@@ -43,6 +48,22 @@ const ProductCard = (props) => {
     } else {
       setSelectedProductId(wishproductId);
       dispatch(addwishListApi(wishproductId));
+    }
+  };
+  const AddtoCart = (productId) => {
+    console.log(productId);
+    if (sessionStorage.role === "user") {
+      const existingCartItem = cartItems.find(
+        (item) => item?.items?.[0]?.product?._id === productId
+      )
+      if (existingCartItem) {
+        alert("Product already exist")
+      } else {
+        dispatch(cartApi({ productId, quantity, navigate }));
+        toast.success("Add to cart success",{ autoClose: 1000 });
+      }
+    } else {
+      navigate("/login");
     }
   };
 
@@ -63,10 +84,10 @@ const ProductCard = (props) => {
               alt="wishlist"
             />
           </div>
-          <Link to={`/product/${product._id}`}>
-            <div className="product-image ">
+          <Link to={`/product/${product._id}`} style={{width: "100%"}}>
+            <div className="product-image" >
               <img
-                style={{ height: "250px" }}
+                style={{ height: "250px", width:"100%" }}
                 src={product?.images?.[0]?.url}
                 className="img-fluid"
                 alt="product-img"
@@ -95,6 +116,7 @@ const ProductCard = (props) => {
               <div style={{ display: "flex" }}>
                 <p className="price">₹ {product.price?.actualPrice}</p>
                 <button className="card-button"
+                onClick={()=>AddtoCart(product._id)}
                   style={{
                     // background: "#232f3e",
                     // color: "white",
