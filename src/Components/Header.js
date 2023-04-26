@@ -139,7 +139,7 @@ const Header = () => {
                       <span className="badge bg-white text-dark">
                         {totalCartItems}
                       </span>
-                      <p className="Header-Text mb-0">$ {totalCartPrice}</p>
+                      {/* <p className="Header-Text mb-0">$ {totalCartPrice}</p> */}
                     </div>
                   </Link>
                 </div>

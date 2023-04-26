@@ -101,7 +101,6 @@ const ProductCard = (props) => {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      justifyContent: "center",
                       width: "120px",
                       height: "30px",
                       marginLeft: "100px",
@@ -114,7 +113,7 @@ const ProductCard = (props) => {
                 </p>
               </div>
             </div>
-            <div className="action-bar position-absolute">
+            {/* <div className="action-bar position-absolute">
               <div className="d-flex flex-column">
                 <Link>
                   <img src={prodcompare} alt="addcart" />
@@ -127,7 +126,7 @@ const ProductCard = (props) => {
                   <img src={addcart} alt="addcart" />
                 </Link>
               </div>
-            </div>
+            </div> */}
           </Link>
         </div>
       ))}
