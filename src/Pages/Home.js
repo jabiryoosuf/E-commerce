@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../Components/BlogCard";
 import ProductCard from "../Components/ProductCard";
 import SpecialProduct from "../Components/SpecialProduct";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
+import { allproductsApi } from "../Store/ProductSlice";
 
 
 const Home = () => {
+  const dispatch = useDispatch()
   const { allproduct } = useSelector((state) => state.products);
   console.log(allproduct);
 
-
+useEffect(()=>{
+  dispatch(allproductsApi());
+},[dispatch])
   return (
     <>
  

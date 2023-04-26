@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import Meta from "../Components/Meta";
 import BreadCrumb from "../Components/BreadCrumb";
 import { useDispatch, useSelector } from "react-redux";
-import { RemovewishListApi, addwishListApi, getwishListApi } from "../Store/wishSlice";
+import { RemovewishListApi, getwishListApi } from "../Store/wishSlice";
 import { map } from "lodash";
-import { toast } from "react-toastify";
 
 const Wishlist = () => {
 
   const {wishlist} = useSelector((state)=> state.wishList)
-  console.log(wishlist);
   const dispatch = useDispatch()
 
   useEffect(()=>{
@@ -18,10 +16,7 @@ const Wishlist = () => {
    },[])
 
    const handleRemoveItem =(ItemId)=>{
-    dispatch(RemovewishListApi(ItemId)).then(()=>{
-      toast.error("Remove wishlist success", { autoClose: 1000 })
-      dispatch(getwishListApi())
-    })
+    dispatch(RemovewishListApi(ItemId))
    }
 
   return (

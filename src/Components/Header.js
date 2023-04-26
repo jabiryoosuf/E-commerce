@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { totalCartAmount } from "../Store/CartSlice";
+import { getcartApi, totalCartAmount } from "../Store/CartSlice";
 import compareImg from "../images/compare.svg"
 import wishlistImg from "../images/wishlist.svg"
 import userImg from "../images/user.svg"
@@ -16,19 +16,27 @@ import cartImg from "../images/cart.svg"
 const Header = () => {
   const dispatch = useDispatch();
   // const [ totalCartPrice,setTotalCartPrice] = useState(0);
-  const { cartItems } = useSelector((state) => state.cart);
+
+  const {cartItems,token } = useSelector((state) => ({
+    cartItems: state.cart.cartItems,
+    token: state.auth.token,
+  }));
 
   const totalCartItems = cartItems.length;
 
   let totalPrice = 0;
+  useEffect(()=>{
+    dispatch(getcartApi())
+  },[dispatch,token])
+  
   useEffect(() => {
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
       totalPrice +=
         item?.items[0]?.quantity *
         item?.items?.[0]?.product?.price?.actualPrice;
+        
     }
-    // setTotalCartPrice(totalPrice);
     dispatch(totalCartAmount(totalPrice));
   });
   const ScrollTop = () => {

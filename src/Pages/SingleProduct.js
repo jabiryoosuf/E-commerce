@@ -59,8 +59,7 @@ const SingleProduct = () => {
         alert("Product already exist");
       } else {
         dispatch(cartApi({ product, quantity, navigate }));
-        toast.success("Add to cart success", { autoClose: 1000 });
-        dispatch(getcartApi());
+        // dispatch(getcartApi());
       }
     } else {
       navigate("/login");
@@ -71,11 +70,11 @@ const SingleProduct = () => {
     dispatch(addwishListApi(product));
     if (wishColor === false) {
       setWishColor(true);
-      toast.success("successfully add to wishList", { autoClose: 1000 });
+      // toast.success("successfully add to wishList", { autoClose: 1000 });
     }
     if (wishColor === true) {
       setWishColor(false);
-      toast.error("Remove wishlist success", { autoClose: 1000 });
+      // toast.error("Remove wishlist success", { autoClose: 1000 });
     }
   };
 

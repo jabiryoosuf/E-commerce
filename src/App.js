@@ -38,11 +38,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(getcartApi())
-    dispatch(allproductsApi());
-},[]);
+
   return (
 
     <div className="App">

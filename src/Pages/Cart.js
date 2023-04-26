@@ -24,6 +24,7 @@ const Cart = () => {
     dispatch(getcartApi())
     window.scrollTo(0,0);
   },[]);
+  
 
   const deleteCartItem = (cartItemId) => {
     dispatch(RemoveCartApi(cartItemId))

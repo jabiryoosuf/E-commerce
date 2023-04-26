@@ -50,6 +50,7 @@ const cartSlice = createSlice({
     },
   },
   extraReducers: {
+    
     // add to cart
 
     [cartApi.pending]: (state) => {
@@ -58,8 +59,8 @@ const cartSlice = createSlice({
     },
     [cartApi.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log("add cartItems success");
       toast.success("added to cart success", { autoClose: 1000 })
+      console.log("add cartItems success");
       state.error = false;
     },
     [cartApi.rejected]: (state, action) => {

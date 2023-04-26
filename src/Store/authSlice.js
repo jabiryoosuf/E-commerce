@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { getcartApi } from "./CartSlice";
 
 export const loginApi = createAsyncThunk(
- 
+
   "auth/loginApi",
   async ({ login, navigate }) => {
     const result = await axiosApi.post("/login/mail", login);
@@ -58,7 +58,6 @@ export const resetpasswordApi = createAsyncThunk(
 );
 
 const initialState = {
-  
   token: "",
   user: {},
   email: {},
@@ -67,9 +66,9 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  
   reducers: {},
   extraReducers: {
+  
     [loginApi.pending]: (state, action) => {
       console.log("login pending");
     },
