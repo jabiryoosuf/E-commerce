@@ -15,7 +15,7 @@ import cartImg from "../images/cart.svg"
 
 const Header = () => {
   const dispatch = useDispatch();
-  const [totalCartPrice, setTotalCartPrice] = useState(0);
+  const [ setTotalCartPrice] = useState(0);
   const { cartItems } = useSelector((state) => state.cart);
 
   const totalCartItems = cartItems.length;

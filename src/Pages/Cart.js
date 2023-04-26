@@ -8,7 +8,7 @@ import { RemoveCartApi, cartApi, getcartApi } from "../Store/CartSlice";
 import { map } from "lodash";
 import emptycart from "../images/emptycart.gif";
 import { useState } from "react";
-import { Box, Input, Modal, Typography } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 
