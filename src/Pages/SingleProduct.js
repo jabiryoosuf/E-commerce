@@ -4,18 +4,14 @@ import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { TbGitCompare } from "react-icons/tb";
-import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi, getcartApi } from "../Store/CartSlice";
-import {
-  RemovewishListApi,
-  addwishListApi,
-  getwishListApi,
-} from "../Store/wishSlice";
+import { addwishListApi, getwishListApi } from "../Store/wishSlice";
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -63,6 +59,8 @@ const SingleProduct = () => {
         alert("Product already exist");
       } else {
         dispatch(cartApi({ product, quantity, navigate }));
+        toast.success("Add to cart success", { autoClose: 1000 });
+        dispatch(getcartApi());
       }
     } else {
       navigate("/login");
@@ -70,12 +68,15 @@ const SingleProduct = () => {
   };
 
   const AddtoWishList = () => {
-    dispatch(addwishListApi(product)).then(() => {
+    dispatch(addwishListApi(product));
+    if (wishColor === false) {
       setWishColor(true);
-      if (wishColor === true) {
-        setWishColor(false);
-      }
-    });
+      toast.success("successfully add to wishList", { autoClose: 1000 });
+    }
+    if (wishColor === true) {
+      setWishColor(false);
+      toast.error("Remove wishlist success", { autoClose: 1000 });
+    }
   };
 
   return (
@@ -125,7 +126,7 @@ const SingleProduct = () => {
                   <h3 className="title">{singleproduct?.name}</h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$ {singleproduct?.price?.actualPrice}</p>
+                  <p className="price">₹ {singleproduct?.price?.actualPrice}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -162,7 +163,7 @@ const SingleProduct = () => {
                         : "out of stock"}
                     </p>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-2">
+                  {/* <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
                     <div className="d-flex flex-wrap gap-15">
                       <span className="badge border border-1 bg-white text-dark borde-secondary">
@@ -179,7 +180,7 @@ const SingleProduct = () => {
                         XXL
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div>
@@ -199,7 +200,11 @@ const SingleProduct = () => {
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button style={{backgroundColor:"#febd69",color:"black"}} onClick={AddtoCart} className="button border-0 ">
+                      <button
+                        style={{ background: "#febd69", color: "#232f3e" }}
+                        onClick={AddtoCart}
+                        className="button border-0 "
+                      >
                         Add to Cart
                       </button>
                       <button style={{backgroundColor:"#febd69",color:"black"}}  className="button signup border-0">
@@ -284,7 +289,7 @@ const SingleProduct = () => {
               <div className="review-inner-wrapper">
                 <div className="review-head d-flex justify-content-between ">
                   <div>
-                    <h4 id="review" className="fs-5">
+                    <h4 id="review" className="mb-2">
                       Customer Reviews
                     </h4>
                     <div className="d-flex align-items-center gap-10">

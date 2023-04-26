@@ -255,6 +255,14 @@ footer .input-group-text {
 .categories > div {
   border-right: 1px solid var(--color-ededed);
 }
+.card-button{
+  background-color: #232f3e;
+  color: white;
+}
+.card-button:hover{
+  background-color: #febd69;
+  color: #232f3e;
+}
 
 /* homw wrapperd3 end */
 

@@ -12,14 +12,10 @@ const Login = () => {
    const navigate=useNavigate()
 
   const handleLoginSubmit=(e)=>{
-
     e.preventDefault()
-    dispatch(loginApi({login,navigate})).then(()=>{
-      dispatch(getcartApi())
-    })
-      
+    dispatch(loginApi({login,navigate}))
+  
   }
-    
   return (
     <>
       <Meta title={"Login"} />

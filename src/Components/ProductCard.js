@@ -14,6 +14,7 @@ import {
   addwishListApi,
   getwishListApi,
 } from "../Store/wishSlice";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const ProductCard = (props) => {
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -75,8 +76,6 @@ const ProductCard = (props) => {
             <div className="product-details">
               <h6>{product?.name}</h6>
               {/* <h5 className="product-title">{product.description}</h5> */}
-              <h5 className="product-title"></h5>
-
               <ReactStars
                 count={5}
                 size={24}
@@ -95,22 +94,22 @@ const ProductCard = (props) => {
                 similique quibusdam, ea quae, animi vero ratione perspiciatis!
               </p>
               <div style={{ display: "flex" }}>
-                <p  className="price">
-                  ₹ {product.price?.actualPrice}
-                  <button
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      width: "120px",
-                      height: "30px",
-                      marginLeft: "100px",
-                      fontSize: "10px",
-                    }}
-                    className="button border-0 "
-                  >
-                    Add to Cart
-                  </button>
-                </p>
+                <p className="price">₹ {product.price?.actualPrice}</p>
+                <button className="card-button"
+                  style={{
+                    // background: "#232f3e",
+                    // color: "white",
+                    border: "none",
+                    width: "100px",
+                    height: "30px",
+                    borderRadius: "12px",
+                    fontSize: "10px",
+                    marginLeft: "100px",
+
+                  }}
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
             {/* <div className="action-bar position-absolute">

@@ -2,8 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import { axiosApi } from "./axios-method";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { getcartApi } from "./CartSlice";
 
 export const loginApi = createAsyncThunk(
+ 
   "auth/loginApi",
   async ({ login, navigate }) => {
     const result = await axiosApi.post("/login/mail", login);
@@ -55,6 +58,7 @@ export const resetpasswordApi = createAsyncThunk(
 );
 
 const initialState = {
+  
   token: "",
   user: {},
   email: {},
@@ -63,6 +67,7 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  
   reducers: {},
   extraReducers: {
     [loginApi.pending]: (state, action) => {
@@ -71,7 +76,7 @@ const authSlice = createSlice({
     [loginApi.fulfilled]: (state, action) => {
       state.token = action.payload.token;
       console.log("login fullfilled");
-      toast.success("login succes", { autoClose: 1000 });
+      toast.success("login success", { autoClose: 1000 })
     },
     [loginApi.rejected]: (state, action) => {
       console.log("login rejected");
