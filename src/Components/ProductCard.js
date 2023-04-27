@@ -7,31 +7,27 @@ import wish from "../images/wish.svg";
 import addcart from "../images/add-cart.svg";
 import view from "../images/view.svg";
 import { map } from "lodash";
-import heart from '../images/heart.png'
-import redHeart from '../images/redHeart.png'
+import heart from "../images/heart.png";
+import redHeart from "../images/redHeart.png";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { RemovewishListApi, addwishListApi } from "../Store/WishlistSlice";
+import { addwishListApi } from "../Store/WishlistSlice";
 import { logDOM } from "@testing-library/react";
 
 const ProductCard = (props) => {
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
-   const [selectedProductId,setSelectedProductId]=useState(null)
-  
- const dispatch=useDispatch()
-   console.log("singleProduct", props.product);
+  const dispatch = useDispatch();
+  console.log("singleProduct", props.product);
   const { grid } = props;
 
-    const handleWishClick=(wishproductId)=>{
-        console.log('fdf');
-      if(selectedProductId===wishproductId){
-        setSelectedProductId(null)
-        dispatch(RemovewishListApi(wishproductId))
-      }else{
-         setSelectedProductId(wishproductId)
-         dispatch(addwishListApi(wishproductId))
-      }
-    }
+  const handleWishClick = (wishproductId) => {
+    if (selectedProductId === wishproductId) {
+      setSelectedProductId(null);
+      dispatch(addwishListApi(wishproductId));
+    } else setSelectedProductId(wishproductId);
+    dispatch(addwishListApi(wishproductId));
+  };
   let location = useLocation();
   console.log(props.product);
   return (
@@ -45,9 +41,12 @@ const ProductCard = (props) => {
         >
           <div className="wishlist-icon position-absolute">
             {/* <Link> */}
-            <img onClick={()=>handleWishClick(product?._id)}
-             style={{ width: "20px" }}
-             src={selectedProductId===product?._id?redHeart:heart} alt="wishlist" />
+            <img
+              onClick={() => handleWishClick(product?._id)}
+              style={{ width: "20px" }}
+              src={selectedProductId === product?._id ? redHeart : heart}
+              alt="wishlist"
+            />
             {/* </Link> */}
           </div>
           <Link to={`/product/${product?._id}`}>
@@ -61,7 +60,7 @@ const ProductCard = (props) => {
 
             <div className="product-details">
               <h6>{product?.name}</h6>
-              <h5 className="product-title">{product.description}</h5>
+              {/* <h5 className="product-title">{product.description}</h5> */}
               <ReactStars
                 count={5}
                 size={24}
@@ -78,21 +77,25 @@ const ProductCard = (props) => {
                 itaque accusamus provident cumque ullam beatae nesciunt
                 similique quibusdam, ea quae, animi vero ratione perspiciatis!
               </p>
-
-              <p className="price">{product.price?.actualPrice}</p>
-            </div>
-            <div className="action-bar position-absolute">
-              <div className="d-flex flex-column">
-                <Link>
-                  <img src={prodcompare} alt="addcart" />
-                </Link>
-                <Link>
-                  <img src={view} alt="addcart" />
-                </Link>
-
-                <Link>
-                  <img src={addcart} alt="addcart" />
-                </Link>
+              <div style={{ dispaly: "flex"  }}>
+                <p className="price">{product.price?.actualPrice}</p>
+                <button
+                  className="card button"
+                  style={{
+                    border: "none",
+                    width: "100px",
+                    height: "30px",
+                    borderRadius: "12px",
+                    fontSize: "10px",
+                    marginLeft: "120px",
+                    paddingTop:"2px",
+                    maxLines:"25px"
+                    
+                    //  textAlign:'center'
+                  }}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </Link>

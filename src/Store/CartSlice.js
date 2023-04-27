@@ -48,9 +48,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
       
-      totalCartAmt:(state,action)=>{
-        state.subtotal=action .payload
-      }
+      // totalCartAmt:(state,action)=>{
+      //   state.subtotal=action .payload
+      // }
 
   },
   extraReducers: {
@@ -80,6 +80,12 @@ const cartSlice = createSlice({
       state.error = action.error;
       console.log("cartItems rejected");
     },
+    [deleteCartApi.fulfilled]:(state,action)=>{
+      state.loading=false
+      state.error=false
+      console.log("successfully deleted");
+      toast.success('successfully deleted from cart')
+    }
   },
 });
 export const { totalCartAmt } = cartSlice.actions;

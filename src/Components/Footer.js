@@ -6,13 +6,13 @@ import newsletter from "../images/newsletter.png"
 const Footer = () => {
   return (
     <>
-      <footer className="py-4">
+      <footer className="py-2">
         <div className="container-xxl">
           <div className="row align-item-center">
             <div className="col-5">
-              <div className="footer-top-data d-flex gap-30 align-item-center">
+              <div className="footer-top-data d-flex gap-30 align-item-center ">
                 <img src={newsletter} alt="newsletter" />
-                <h2 className="mb-0 text-white">SignUp for Newsletter </h2>
+                <h2 className="mb-0 text-white fs-3">SignUp for Newsletter </h2>
               </div>
             </div>
             <div className="col-7">
@@ -97,7 +97,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-12">
               <p className="text-center mb-0 text-white">
-                &copy: {new Date().getFullYear()}:powered by jabir
+                &copy: {new Date().getFullYear()} : powered by Shahma
               </p>
             </div>
           </div>

@@ -23,7 +23,8 @@ const Cart = () => {
    
   const [open, setOpen] = useState(false);
   const [cartId,setCartId]=useState(null)
-  const {getcartitems,subtotal } = useSelector((state) => state.cart);
+  const[total,setTotal]=useState()
+  const {getcartitems } = useSelector((state) => state.cart);
    
   console.log( getcartitems);
 
@@ -53,18 +54,18 @@ const Cart = () => {
     })
      
   }
-  // useEffect(() => {
-  //   let subtotal = 0;
-  //   for (let i = 0; i < getcartitems.length; i++) {
-  //     const item = getcartitems[i];
-  //     if (item?.product && item.product.price && item.quantity) { 
-  //       subtotal += item.product.price.actualPrice * item.quantity;
-  //     }
+  useEffect(() => {
+    let subtotal = 0;
+    for (let i = 0; i < getcartitems.length; i++) {
+      const item = getcartitems[i];
+      if (item?.items?.[0]?.product && item?.items?.[0]?.product.price && item?.items?.[0]?.quantity) { 
+        subtotal += item?.items?.[0]?.product.price.actualPrice * item?.items?.[0]?.quantity;
+      }
      
-  //   }
-  //   setTotal(subtotal);
+    }
+    setTotal(subtotal);
     
-  // }, [getcartitems]);
+  }, [getcartitems]);
     
   
   return (
@@ -158,7 +159,7 @@ const Cart = () => {
                   Continue To Shopping
                 </Link>
                 <div className="d-flex flex-column align-items-end">
-                  <h4>Sub Total:{subtotal}</h4>
+                  <h4>Sub Total:{total}</h4>
                   <p>Taxes and shipping calculated at checkout</p>
                   <Link to="/checkout" className="button">
                     Check Out

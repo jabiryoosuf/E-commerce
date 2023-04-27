@@ -24,19 +24,19 @@ const Header = () => {
     let itemCount=getcartitems.length
     console.log(itemCount);
 
-    useEffect(() => {
-      let subtotal = 0;
-      for (let i = 0; i < getcartitems.length; i++) {
-        const item = getcartitems[i];
-        // if (item?.product && item.product.price && item.quantity) { 
-          subtotal += item?.items?.[0]?.product?.price?.actualPrice * item?.items?.[0]?.quantity;
-        // }
+    // useEffect(() => {
+    //   let subtotal = 0;
+    //   for (let i = 0; i < getcartitems.length; i++) {
+    //     const item = getcartitems[i];
+    //     // if (item?.product && item.product.price && item.quantity) { 
+    //       subtotal += item?.items?.[0]?.product?.price?.actualPrice * item?.items?.[0]?.quantity;
+    //     // }
        
-      }
-      setTotal(subtotal);
-      dispatch(totalCartAmt(subtotal))
+    //   }
+    //   setTotal(subtotal);
+    //   dispatch(totalCartAmt(subtotal))
       
-    }, [getcartitems]);
+    // }, [getcartitems]);
 
 
 
@@ -136,9 +136,9 @@ const Header = () => {
                   <Link to="/cart" className="d-flex align-items-center gap-10 text-white">
                    
                     <img src="images/cart.svg" alt="" />
-                    <div className="d-flex flex-column gap-10">
+                    <div className="d-flex flex-column gap-10" >
                       <span className="badge bg-white text-dark">{itemCount}</span>
-                      <p className="mb-0">$ {total}</p>
+                      {/* <p className="mb-0">$ {total}</p> */}
                     </div>
                     
                   </Link>

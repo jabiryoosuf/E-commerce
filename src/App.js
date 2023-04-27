@@ -93,7 +93,7 @@ function App() {
                   path="/admincalander"
                   element={<Admincalander />}
                 ></Route>
-
+                  
                 <Route
                   path="/updateproduct/:id"
                   element={<Upateproduct />}
@@ -105,9 +105,9 @@ function App() {
           )}
         </Routes>
       </BrowserRouter>
-        {/* <UserProfile/> */}
+         {/* <UserProfile/>  */}
     </div>
   );
 }
-
+ 
 export default App;

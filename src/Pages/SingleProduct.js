@@ -12,29 +12,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { cartApi } from "../Store/CartSlice";
-import { addwishListApi } from "../Store/WishlistSlice";
-import {  redHeart} from "../images/redHeart.png";
-const SingleProduct = () => {
-  const [quantity, setQuantity] = useState(1);
+import { RemovewishListApi, addwishListApi } from "../Store/WishlistSlice";
+import heart from "../images/heart.png";
+import redHeart from "../images/redHeart.png";
 
+const SingleProduct = () => {
+
+
+  const [quantity, setQuantity] = useState(1);
+  const [wishColor, setWishColor] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = params.id;
-   const[heart,setHeart]=useState()
-
-  const { singleproduct, getcartitems ,wishList} = useSelector((state) => ({
+  
+  const { singleproduct, getcartitems, wishList } = useSelector((state) => ({
     singleproduct: state.products.singleproduct,
     getcartitems: state.cart.getcartitems,
-    wishList:state.wishlist.wishList
+    wishList: state.wishlist.wishList,
   }));
   console.log(singleproduct);
   console.log(getcartitems);
-  console.log(wishList);  
-  
+  console.log(wishList);
+
   const productImage = singleproduct?.images?.[0]?.url;
   console.log(productImage);
-   
 
   // const handleQty = (e) => {
 
@@ -42,14 +44,23 @@ const SingleProduct = () => {
 
   // };
   useEffect(() => {
-    dispatch(SingleProductApi(product));
-  }, []);
+    dispatch(SingleProductApi(product))
+  },[]);
+
+  useEffect(()=>{
+    if (wishList){
+     const existingWishItems = wishList.find((item) => item?.product?._id === product )
+      if(existingWishItems){
+        setWishColor(true)
+      }
+    }
+  },[wishList,product])
+
 
   console.log("QTY", quantity);
   console.log(product);
 
   const AddtoCart = async (e) => {
-     
     console.log(getcartitems?.[0]?.product?._id);
     if (sessionStorage.role === "user") {
       const existingCartItem = getcartitems.find(
@@ -68,12 +79,26 @@ const SingleProduct = () => {
     }
   };
 
-  const addToWishlist =()=>{
-       
-     dispatch(addwishListApi({ product, navigate }));
-    
-  };
 
+ 
+
+  const addToWishlist = () => {
+    dispatch(addwishListApi(product)).then(()=>{
+      setWishColor(true)
+      if (setWishColor===true){
+        setWishColor(false)
+      }
+    })
+  }
+  
+
+
+        // const handleRemoveItem=()=>{
+
+        //   dispatch(addwishListApi(product)).then(()=>[
+        //     setWishColor(false)
+        //   ])
+        // }
   const [orderedProduct, setOrderedProduct] = useState(true);
   // const props = {
   //   width: 500,
@@ -210,7 +235,7 @@ const SingleProduct = () => {
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
                       <button
-                        onClick={ AddtoCart}
+                        onClick={AddtoCart}
                         className="button border-0 "
                         type="submit"
                       >
@@ -229,57 +254,65 @@ const SingleProduct = () => {
                         Add to Compare
                       </a>
                     </div>
-                    
-                        <AiOutlineHeart
-                          onClick={addToWishlist}
-                          className="fs-5 me-2"
-                         
-                        />
+                    {wishColor ? (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={addToWishlist}
+                            src={redHeart}
+                            alt="wishlist"
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={addToWishlist}
+                            src={heart}
+                            alt="wishlist"
+                          />
+                        )}
                         Add to Wishlist
-                   
-                    </div>
                   </div>
-                  <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Shipping & Returns</h3>
-                    <p className="product-data">
-                      Free shipping and returns available on all orders! We ship
-                      all US domestic orders within 5-10 business days!
-                    </p>
-                  </div>
-                  <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Materials</h3>
-                    <p className="product-data">
-                      Running Shoes cushions your stride with soft foam to keep
-                      you running in comfort. Lightweight knit material wraps
-                      your foot in breathable support, while a minimalist design
-                      fits in just about anywhere your day takes you
-                    </p>
-                  </div>
-                  <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Care Instructions</h3>
-                    <p className="product-data">
-                      Use a soft damp cloth and a drop of mild soap to remove
-                      any haze. Air dry.
-                    </p>
-                  </div>
+                </div>
+                <div className="d-flex gap-10 align-items-center my-2">
+                  <h3 className="product-heading">Shipping & Returns</h3>
+                  <p className="product-data">
+                    Free shipping and returns available on all orders! We ship
+                    all US domestic orders within 5-10 business days!
+                  </p>
+                </div>
+                <div className="d-flex gap-10 align-items-center my-2">
+                  <h3 className="product-heading">Materials</h3>
+                  <p className="product-data">
+                    Running Shoes cushions your stride with soft foam to keep
+                    you running in comfort. Lightweight knit material wraps your
+                    foot in breathable support, while a minimalist design fits
+                    in just about anywhere your day takes you
+                  </p>
+                </div>
+                <div className="d-flex gap-10 align-items-center my-2">
+                  <h3 className="product-heading">Care Instructions</h3>
+                  <p className="product-data">
+                    Use a soft damp cloth and a drop of mild soap to remove any
+                    haze. Air dry.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      
+      </div>
+
       <section className="description-wrapper py-5 home-wrapper-2">
         <>
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="bg-white p-3">
-                <h4>Description</h4>
-                <p>{singleproduct?.description}</p>
+          <div className="container-xxl">
+            <div className="row">
+              <div className="col-12">
+                <div className="bg-white p-3">
+                  <h4>Description</h4>
+                  <p>{singleproduct?.description}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </>
       </section>
       <h4 id="review" className="mb-2">
@@ -320,7 +353,7 @@ const SingleProduct = () => {
                     <h4 className="mb-2">Write a Review</h4>
                     <form action="" className="d-flex flex-column gap-15">
                       <div>
-                        <ReactStars  
+                        <ReactStars
                           count={5}
                           size={24}
                           value="3"
@@ -330,7 +363,7 @@ const SingleProduct = () => {
                       </div>
 
                       <div>
-                        <textarea 
+                        <textarea
                           name=""
                           id=""
                           className="w-100 form-control"
@@ -364,10 +397,9 @@ const SingleProduct = () => {
             <ProductCard />
           </div>
         </div>
-        
       </section>
     </>
-  );
+  )
 };
 
 export default SingleProduct;

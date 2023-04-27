@@ -17,7 +17,7 @@ import { allproductsApi } from "../Store/ProductSlice";
 
 const Home = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const {allproduct}=useSelector((state)=>state.products)
   console.log(allproduct);
 
@@ -225,7 +225,7 @@ useEffect(() => {
         </div>
       </section>
       <section className="featured-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
+        <div className="container-xxl ">
           <div className="row">
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
@@ -321,7 +321,7 @@ useEffect(() => {
           </div>
         </div>
       </section>
-      <section className="popular-wrapper py-5 home-wrapper-2">
+      {/* <section className="popular-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -333,7 +333,7 @@ useEffect(() => {
             <ProductCard />
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xxl">
           <div className="row">
