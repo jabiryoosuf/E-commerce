@@ -22,7 +22,6 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
 import LayoutAdmin from "./Pages/Admin/layoutAdmin";
 import NotFound from "./Pages/NotFound";
@@ -30,10 +29,6 @@ import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
 import Adminmassage from "./Pages/Admin/Adminmassage";
 import Admincalander from "./Pages/Admin/Admincalander";
-import { useEffect } from "react";
-import { getcartApi } from "./Store/CartSlice";
-import { useDispatch } from "react-redux";
-import { allproductsApi } from "./Store/ProductSlice";
 import "react-toastify/dist/ReactToastify.css";
 
 
@@ -94,7 +89,6 @@ function App() {
             </>
           ) : (
             <Route path="*" element={<NotFound />} />
-            // <Route path="/" element={<Home />} />
           )}
         </Routes>
       </BrowserRouter>
