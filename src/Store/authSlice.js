@@ -75,7 +75,7 @@ const authSlice = createSlice({
     [loginApi.fulfilled]: (state, action) => {
       state.token = action.payload.token;
       console.log("login fullfilled");
-      toast.success("login success", { autoClose: 1000 })
+      toast.success("login success",{ autoClose: 1000 })
     },
     [loginApi.rejected]: (state, action) => {
       console.log("login rejected");
@@ -113,7 +113,6 @@ const authSlice = createSlice({
     },
     [resetpasswordApi.fulfilled]: (state, action) => {
       state.password = action.payload.password;
-
       toast.success("successfuly reset your paswword", { autoClose: 1000 });
     },
     [resetpasswordApi.rejected]: () => {

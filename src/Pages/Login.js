@@ -4,7 +4,6 @@ import Meta from "../Components/Meta";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginApi } from "../Store/authSlice";
-import { getcartApi } from "../Store/CartSlice";
   
 const Login = () => {
   const [login,setLogin]=useState({})

@@ -35,7 +35,6 @@ const Header = () => {
       totalPrice +=
         item?.items[0]?.quantity *
         item?.items?.[0]?.product?.price?.actualPrice;
-        
     }
     dispatch(totalCartAmount(totalPrice));
   });
@@ -57,6 +56,7 @@ const Header = () => {
         pauseOnHover
         theme="light"
         transition={Zoom}
+        
       />
       <header className="header-top-strip py-1">
         <div className="container-xxl">
