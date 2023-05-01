@@ -5,7 +5,6 @@ import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { useState } from "react";
 import { getcartApi, totalCartAmount } from "../Store/CartSlice";
 import compareImg from "../images/compare.svg"
 import wishlistImg from "../images/wishlist.svg"
@@ -32,9 +31,8 @@ const Header = () => {
   useEffect(() => {
     for (let i = 0; i < cartItems.length; i++) {
       const item = cartItems[i];
-      totalPrice +=
-        item?.items[0]?.quantity *
-        item?.items?.[0]?.product?.price?.actualPrice;
+      totalPrice += (Number(item?.items[0]?.quantity *
+        item?.items?.[0]?.product?.price?.actualPrice)) 
     }
     dispatch(totalCartAmount(totalPrice));
   });
@@ -44,7 +42,7 @@ const Header = () => {
 
   return (
     <>
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={1000}
         hideProgressBar={false}
@@ -56,8 +54,7 @@ const Header = () => {
         pauseOnHover
         theme="light"
         transition={Zoom}
-        
-      />
+      /> */}
       <header className="header-top-strip py-1">
         <div className="container-xxl">
           <div className="row mt-1">

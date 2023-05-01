@@ -51,7 +51,7 @@ const wishSlice = createSlice({
     },
     [addwishListApi.fulfilled]: (state, action) => {
       state.loading = false;
-      toast.success("successfully add to wishList", { autoClose: 1000 })
+      // toast.success("successfully add to wishList")
       console.log("wishList success");
       state.error = false;
     },
@@ -87,11 +87,12 @@ const wishSlice = createSlice({
       state.error = false;
       console.log("remove wishlist pending");
     },
+
     [RemovewishListApi.fulfilled]: (state, action) => {
       state.loading = false;
       const wishId = action.payload._id;
       state.wishlist = state.wishlist.filter(product => product._id !== wishId);
-      toast.error("Remove wishlist success", { autoClose: 1000 })
+      // toast.error("Remove wishlist success")
       console.log("Wishlist item Removed successfully");
       state.error = false;
     },

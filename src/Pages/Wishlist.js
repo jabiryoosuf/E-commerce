@@ -16,7 +16,9 @@ const Wishlist = () => {
    },[])
 
    const handleRemoveItem =(ItemId)=>{
-    dispatch(RemovewishListApi(ItemId))
+    if(ItemId){
+      dispatch(RemovewishListApi(ItemId))
+    }
    }
 
   return (

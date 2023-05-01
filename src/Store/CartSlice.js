@@ -59,7 +59,7 @@ const cartSlice = createSlice({
     },
     [cartApi.fulfilled]: (state, action) => {
       state.loading = false;
-      toast.success("added to cart success", { autoClose: 1000 })
+      // toast.success("added to cart success")
       console.log("add cartItems success");
       state.error = false;
     },
@@ -77,7 +77,7 @@ const cartSlice = createSlice({
     },
     [getcartApi.fulfilled]: (state, action) => {
       state.loading = false;
-     state.cartItems=action.payload
+      state.cartItems=action.payload
       console.log("cartItems success");
       state.error = false;
     },
@@ -96,10 +96,9 @@ const cartSlice = createSlice({
     [RemoveCartApi.fulfilled]: (state, action) => {
       state.loading = false;
       const cartItemId = action.payload._id;
-      console.log(cartItemId);
       state.cartItems = state.cartItems.filter(product => product._id !== cartItemId);
+      toast.success("Remove cart success")
       console.log("Remove cartItems success");
-      toast.success("Remove cart success", { autoClose: 1000 })
       state.error = false;
     },
     [RemoveCartApi.rejected]: (state, action) => {
@@ -109,5 +108,5 @@ const cartSlice = createSlice({
     },
   },
 });
-export const { totalCart,totalCartAmount } = cartSlice.actions;
+export const { totalCartAmount } = cartSlice.actions;
 export default cartSlice.reducer;

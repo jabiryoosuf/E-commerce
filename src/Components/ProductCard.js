@@ -45,7 +45,8 @@ const navigate = useNavigate()
     if (selectedProductId === wishproductId) {
       setSelectedProductId(null);
       dispatch(addwishListApi(wishproductId));
-    } else {
+    }
+     else {
       setSelectedProductId(wishproductId);
       dispatch(addwishListApi(wishproductId));
     }
