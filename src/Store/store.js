@@ -11,3 +11,5 @@ export const store = configureStore({
       wishList:Wishlistreducer
   },
 })
+
+

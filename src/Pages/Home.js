@@ -4,26 +4,22 @@ import Marquee from "react-fast-marquee";
 import BlogCard from "../Components/BlogCard";
 import ProductCard from "../Components/ProductCard";
 import SpecialProduct from "../Components/SpecialProduct";
-import service1 from "../images/service-02.png";
-import service2 from "../images/service-03.png";
-import service3 from "../images/service-04.png";
-import service4 from "../images/service-05.png";
-import service from "../images/service.png";
 import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
 import { allproductsApi } from "../Store/ProductSlice";
 
+
 const Home = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const { allproduct } = useSelector((state) => state.products);
   console.log(allproduct);
 
-  useEffect(() => {
-    dispatch(allproductsApi());
-  }, []);
-
+useEffect(()=>{
+  dispatch(allproductsApi());
+},[dispatch])
   return (
     <>
+ 
       <section className="home-wrapper-1 py-5">
         <div className="container-xxl">
           <div className="row">
@@ -226,10 +222,12 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
             </div>
-
+            
+            <div className="d-flex gap-10 flex-wrap">
             {map(allproduct, (product) => (
               <ProductCard product={product} />
             ))}
+          </div>
           </div>
         </div>
       </section>
@@ -315,22 +313,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="popular-wrapper py-5 home-wrapper-2">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <h3 className="section-heading">Our Popular Products</h3>
-            </div>
-            {/* <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard /> */}
-            {map(allproduct, (product) => (
-              <ProductCard product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
+ 
       <section className="marque-wrapper home-wrapper-2 py-5">
         <div className="container-xxl">
           <div className="row">

@@ -1,19 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./axios-method";
+import { toast } from "react-toastify";
 
 const initialState = {
   loading: false,
   error: false,
-  wishList: [],
+  wishlist:[]
 };
 
 // add to wishList
 
-export const addwishListApi = createAsyncThunk(
-  "wish/addwishListApi",
-  async (productId) => {
+export const addwishListApi = createAsyncThunk("wish/addwishListApi",async (productId) => {
     console.log(productId);
-    const responds = await axiosApi.post(`/wishlist/admin/new`,{product:productId});
+    const responds = await axiosApi.post(`/wishlist/admin/new`,{product: productId,});
     return responds.data;
   }
 );
@@ -21,10 +20,10 @@ export const addwishListApi = createAsyncThunk(
 // get all wishList
 
 export const getwishListApi = createAsyncThunk(
-  "wish/addwishListApi",
-  async () => {
-    const responds = await axiosApi.get(`/wishlist/admin/all`);
-    return responds.data;
+  "wish/getwishListApi",async () => {
+    const res = await axiosApi.get(`/wishlist/user/all`);
+    console.log(res.data);
+    return res.data;
   }
 );
 
@@ -33,17 +32,17 @@ export const getwishListApi = createAsyncThunk(
 export const RemovewishListApi = createAsyncThunk(
   "wish/addwishListApi",
   async (productId) => {
-    const responds = await axiosApi.delete(`/wishlist/admin/${productId}`);
+    const responds = await axiosApi.delete(`/wishlist/user/${productId}`);
     return responds.data;
   }
 );
+
 
 const wishSlice = createSlice({
   name: "wish",
   initialState,
   reducers: {},
   extraReducers: {
-
     // add to wishList
 
     [addwishListApi.pending]: (state) => {
@@ -52,8 +51,9 @@ const wishSlice = createSlice({
     },
     [addwishListApi.fulfilled]: (state, action) => {
       state.loading = false;
-      state.error = false;
+      // toast.success("successfully add to wishList")
       console.log("wishList success");
+      state.error = false;
     },
     [addwishListApi.rejected]: (state) => {
       state.loading = false;
@@ -67,16 +67,39 @@ const wishSlice = createSlice({
       state.loading = true;
       console.log("wishList pending");
     },
-    [getwishListApi.fulfilled]: (state, action) => {
+    [getwishListApi.fulfilled]: (state,action) => {
       state.loading = false;
-      state.wishList = action.payload;
-      state.error = false;
+      state.wishlist = action.payload;
       console.log("wishList success");
+      state.error = false;
+  
     },
     [getwishListApi.rejected]: (state) => {
       state.loading = false;
       state.error = true;
       console.log("wishList failed");
+    },
+
+    // Remove from wishList
+
+    [RemovewishListApi.pending]: (state, action) => {
+      state.loading = true;
+      state.error = false;
+      console.log("remove wishlist pending");
+    },
+
+    [RemovewishListApi.fulfilled]: (state, action) => {
+      state.loading = false;
+      const wishId = action.payload._id;
+      state.wishlist = state.wishlist.filter(product => product._id !== wishId);
+      // toast.error("Remove wishlist success")
+      console.log("Wishlist item Removed successfully");
+      state.error = false;
+    },
+    [RemovewishListApi.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = true;
+      console.log("Remove wishlist item rejected");
     },
   },
 });

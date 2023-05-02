@@ -4,49 +4,79 @@ import BreadCrumb from "../Components/BreadCrumb";
 import ProductCard from "../Components/ProductCard";
 import ReactStars from "react-rating-stars-component";
 import { TbGitCompare } from "react-icons/tb";
-import { AiOutlineHeart } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleProductApi } from "../Store/ProductSlice";
-import { useNavigate, useParams } from "react-router-dom";
-import { cartApi } from "../Store/CartSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { cartApi, getcartApi } from "../Store/CartSlice";
+import { addwishListApi, getwishListApi } from "../Store/wishSlice";
+import Heart from "../images/heart.png";
+import RedHeart from "../images/heart (1).png";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
-  // const [products, setProducts] = useState();
+  const [wishColor, setWishColor] = useState(false);
   const [orderedProduct, setOrderedProduct] = useState(true);
 
-  const { singleproduct } = useSelector((state) => state.products);
-
+  const { singleproduct, cartItems, wishlist } = useSelector((state) => ({
+    singleproduct: state.products.singleproduct,
+    cartItems: state.cart.cartItems,
+    wishlist: state.wishList.wishlist,
+  }));
   const params = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const product = params.id;
 
+  console.log(wishlist);
+  console.log(cartItems);
+
   const productImage = singleproduct?.images?.[0]?.url;
 
   useEffect(() => {
     dispatch(SingleProductApi(product));
-  }, []);
+    dispatch(getwishListApi());
+    window.scrollTo(0, 0);
+  }, [dispatch, product]);
 
-  const AddtoCart =async(e) => {
-    e.preventDefault();
-    // const product = {product: productId,quantity};
-    // setProducts({ products: product })
-      //  console.log(products);
-    await dispatch(cartApi({product,quantity,navigate}))
-    
-  
- 
+  useEffect(() => {
+    if (wishlist) {
+      const existingwishlistItem = wishlist.find(
+        (item) => item?.product?._id === product
+      );
+      if (existingwishlistItem) {
+        setWishColor(true);
+      }
+    }
+  }, [wishlist, product]);
+
+  const AddtoCart = async (e) => {
+    if (sessionStorage.role === "user") {
+      const existingCartItem = cartItems.find(
+        (item) => item?.items?.[0]?.product?._id === product
+      );
+      if (existingCartItem) {
+        alert("Product already exist");
+      } else {
+        dispatch(cartApi({ product, quantity, navigate }));
+        // dispatch(getcartApi());
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
-  // console.log(products);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const uploadcart=()=>{
-    
-
-  }
+  const AddtoWishList = () => {
+    dispatch(addwishListApi(product));
+    if (wishColor === false) {
+      setWishColor(true);
+      // toast.success("successfully add to wishList", { autoClose: 1000 });
+    }
+    if (wishColor === true) {
+      setWishColor(false);
+      // toast.error("Remove wishlist success", { autoClose: 1000 });
+    }
+  };
 
   return (
     <>
@@ -95,7 +125,7 @@ const SingleProduct = () => {
                   <h3 className="title">{singleproduct?.name}</h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$ {singleproduct?.price?.actualPrice}</p>
+                  <p className="price">₹ {singleproduct?.price?.actualPrice}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -112,7 +142,7 @@ const SingleProduct = () => {
                 </div>
                 <div className="border-bottom py-3">
                   <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Type:</h3>{" "}
+                    <h3 className="product-heading">Type:</h3>
                     <p className="product-data">Watch</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -130,12 +160,12 @@ const SingleProduct = () => {
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
                     <p className="product-data">
-                      {singleproduct?.quantity > 0
-                        ? singleproduct?.quantity
+                      {singleproduct?.stock > 0
+                        ? singleproduct?.stock
                         : "out of stock"}
                     </p>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-2">
+                  {/* <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Size:</h3>
                     <div className="d-flex flex-wrap gap-15">
                       <span className="badge border border-1 bg-white text-dark borde-secondary">
@@ -152,7 +182,7 @@ const SingleProduct = () => {
                         XXL
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
                     <h3 className="product-heading">Color:</h3>{" "}
                   </div>
@@ -168,13 +198,15 @@ const SingleProduct = () => {
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
-                        onChange={(e) =>
-                          setQuantity(e.target.value)
-                        }
+                        onChange={(e) => setQuantity(e.target.value)}
                       />
                     </div>
                     <div className="d-flex align-items-center gap-10 ms-5">
-                      <button onClick={AddtoCart} className="button border-0 ">
+                      <button
+                        style={{ background: "#febd69", color: "#232f3e" }}
+                        onClick={AddtoCart}
+                        className="button border-0 "
+                      >
                         Add to Cart
                       </button>
                       <button className="button signup border-0">
@@ -184,16 +216,30 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex align-items-center gap-15">
                     <div>
-                      <a href="">
+                      <Link to="">
                         <TbGitCompare className="fs-5 me-2" />
                         Add to Compare
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a href="">
-                        <AiOutlineHeart className="fs-5 me-2" />
+                      <Link to="">
+                        {wishColor ? (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={AddtoWishList}
+                            src={RedHeart}
+                            alt="wishlist"
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px" }}
+                            onClick={AddtoWishList}
+                            src={Heart}
+                            alt="wishlist"
+                          />
+                        )}
                         Add to Wishlist
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
@@ -237,9 +283,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      <h4 id="review" className="mb-2">
-        Customer Reviews
-      </h4>
+
       <section className="reviews-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
@@ -247,6 +291,9 @@ const SingleProduct = () => {
               <div className="review-inner-wrapper">
                 <div className="review-head d-flex justify-content-between ">
                   <div>
+                    <h4 id="review" className="mb-2">
+                      Customer Reviews
+                    </h4>
                     <div className="d-flex align-items-center gap-10">
                       <ReactStars
                         count={5}
@@ -262,7 +309,7 @@ const SingleProduct = () => {
                     <div>
                       <a
                         className="text-dark text-decoration-underline"
-                        href=""
+                        href=" "
                       >
                         write a review
                       </a>

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosApi } from "./axios-method";
+import { BASICURL, axiosApi } from "./axios-method";
+import axios from "axios";
 
 export const addproductApi = createAsyncThunk(
   "products/addproductApi",
@@ -17,7 +18,8 @@ export const addproductApi = createAsyncThunk(
 export const allproductsApi = createAsyncThunk(
   "products/allproductApi",
   async () => {
-    const response = await axiosApi.get("/product/admin/all");
+    // const response = await axiosApi.get("/product/admin/all");
+    const response = await axios.get(`${BASICURL}/product/admin/all`);
     console.log(response);
     return response.data;
   }
@@ -34,7 +36,8 @@ export const DeleteProductApi = createAsyncThunk(
 );
 
 export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(product)=>{
-   const response = await axiosApi.get(`/product/admin/${product}`)
+  //  const response = await axiosApi.get(`/product/admin/${product}`)
+   const response = await axios.get(`${BASICURL}/product/admin/${product}`)
    console.log(response);
    return response.data
 })

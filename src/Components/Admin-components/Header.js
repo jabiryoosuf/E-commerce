@@ -1,4 +1,3 @@
-import { width } from "@mui/system"
 import avatar from "../../images/Profile.png"
 import React from 'react'
 

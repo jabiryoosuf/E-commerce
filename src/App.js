@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
@@ -22,7 +22,6 @@ import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUp";
 import DashboardHome from "./Pages/Admin/Dashboard-home";
 import Allproduct from "./Pages/Admin/Allproduct";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import AddProducts from "./Pages/Admin/AddProducts";
 import LayoutAdmin from "./Pages/Admin/layoutAdmin";
 import NotFound from "./Pages/NotFound";
@@ -30,9 +29,15 @@ import Upateproduct from "./Pages/Admin/Upateproduct";
 import Adminprofile from "./Pages/Admin/Adminprofile";
 import Adminmassage from "./Pages/Admin/Adminmassage";
 import Admincalander from "./Pages/Admin/Admincalander";
+import "react-toastify/dist/ReactToastify.css";
+
+
 function App() {
+
   return (
+
     <div className="App">
+
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
@@ -41,6 +46,7 @@ function App() {
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/store" eleme nt={<OurStore />}></Route>
             <Route path="/product/:id" element={<SingleProduct />}></Route>
+            <Route path="/ourstore" element={<OurStore />}></Route>
             <Route path="/blogs" element={<Blogs />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
             <Route path="/checkout" element={<Checkout />}></Route>
@@ -59,13 +65,12 @@ function App() {
             <Route path="/shipping-policy" element={<ShipingPolicy />}></Route>
             <Route path="/Privacy-policy" element={<PrivacyPolicy />}></Route>
             <Route path="/shipping-policy" element={<ShipingPolicy />}></Route>
-            
           </Route>
 
           <Route path="/reset-password/:id" element={<ResetPassword />}></Route>
-          {localStorage.role === "admin" ? (
+          {sessionStorage.role === "admin" ? (
             <>
-              <Route element={<LayoutAdmin/>}>
+              <Route element={<LayoutAdmin />}>
                 <Route path="/admin" element={<DashboardHome />} />
                 <Route path="/allproducts" element={<Allproduct />} />
                 <Route path="/addproducts" element={<AddProducts />}></Route>
@@ -84,7 +89,6 @@ function App() {
             </>
           ) : (
             <Route path="*" element={<NotFound />} />
-            // <Route path="/" element={<Home />} />
           )}
         </Routes>
       </BrowserRouter>

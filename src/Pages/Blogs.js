@@ -2,9 +2,14 @@ import React from 'react'
 import BreadCrumb from "../Components/BreadCrumb";
 import Meta from "../Components/Meta";
 import BlogCard from '../Components/BlogCard';
+import { useEffect } from 'react';
 
 
 const Blogs = () => {
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
 
