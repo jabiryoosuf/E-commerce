@@ -4,14 +4,17 @@ import Meta from "../Components/Meta";
 import ReactStars from "react-rating-stars-component";
 import ProductCard from "../Components/ProductCard";
 import Color from "../Components/Color";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { allproductsApi } from "../Store/ProductSlice";
 
 const OurStore = () => {
   const [grid,setGrid]=useState(4);
- 
+ useEffect(()=>{
+  dispatch(allproductsApi());
+ },[])
   const { allproduct } = useSelector((state) => state.products);
 
 const products=allproduct.Products
@@ -21,13 +24,13 @@ const products=allproduct.Products
     return randomObject;
   };
   const [randomData, setRandomData] = useState();
-
+const dispatch = useDispatch()
   useEffect(() => {
     if(products?.length >0){
       const array = getRandomObject(products)
       setRandomData(array)
     }
-  }, [products])
+  }, [dispatch,products])
   
 
 

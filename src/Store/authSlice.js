@@ -4,11 +4,10 @@ import { axiosApi } from "./axios-method";
 import { toast } from "react-toastify";
 
 export const loginApi = createAsyncThunk(
-
   "auth/loginApi",
   async ({ login, navigate }) => {
     const result = await axiosApi.post("/login/mail", login);
-    console.log(result)
+    console.log(result);
     if (result?.data?.token) {
       sessionStorage.setItem("token", result.data.token);
     }
@@ -66,24 +65,13 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-  
     [loginApi.pending]: (state, action) => {
       console.log("login pending");
     },
     [loginApi.fulfilled]: (state, action) => {
       state.token = action.payload.token;
-      toast.success("login success",{
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
       console.log("login fullfilled");
-     
+      toast.success("login succes", { autoClose: 1000 });
     },
     [loginApi.rejected]: (state, action) => {
       console.log("login rejected");
@@ -121,6 +109,7 @@ const authSlice = createSlice({
     },
     [resetpasswordApi.fulfilled]: (state, action) => {
       state.password = action.payload.password;
+
       toast.success("successfuly reset your paswword", { autoClose: 1000 });
     },
     [resetpasswordApi.rejected]: () => {

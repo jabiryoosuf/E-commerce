@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Meta from "../Components/Meta";
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { forgotpassowrdApi } from '../Store/authSlice';
+import { forgotpassowrdApi } from '../Store/AuthSlice';
 
 const Forgotpassword = () => {
   const [email, setMail] = useState({});

@@ -30,7 +30,7 @@ useEffect(()=>{
                   className="img-fluid rounded-3"
                   alt="main banner"
                 />
-                <div className="main-banner-content position-absolute">
+                <div className="main-banner-contents position-absolute">
                   <h4>SUPERCHARGED FOR PROS</h4>
                   <h5>iPod s13+ pro</h5>
                   <p>From $999.00 or $41.62/mo.</p>
@@ -61,6 +61,7 @@ useEffect(()=>{
                     className="img-fluid rounded-3"
                     alt="main banner"
                   />
+                
                   <div className="small-banner-content position-absolute">
                     <h4>SUPERCHARGED </h4>
                     <h5>iPod s13+ pro</h5>

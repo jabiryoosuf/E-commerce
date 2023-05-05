@@ -4,6 +4,7 @@ import BreadCrumb from "../Components/BreadCrumb";
 import { useDispatch, useSelector } from "react-redux";
 import { RemovewishListApi, getwishListApi } from "../Store/wishSlice";
 import { map } from "lodash";
+import { Link } from "react-router-dom";
 
 const Wishlist = () => {
 
@@ -30,7 +31,7 @@ const Wishlist = () => {
           <div className="row">
           {map(wishlist,(wishItem) => (
             <div className="col-3" key={wishItem._id}>
-           
+           <Link to={`/product/${wishItem._id}`} >
               <div className="wishlist-card position-relative">
                 <img onClick={()=>handleRemoveItem(wishItem?._id)}
                   src="images/cross.svg"
@@ -52,7 +53,7 @@ const Wishlist = () => {
                   <h6 className="price">{wishItem?.product?.price?.actualPrice}</h6>
                 </div>
               </div>
-              
+              </Link>
             </div>
             ))}
            
