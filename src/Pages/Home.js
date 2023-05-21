@@ -225,9 +225,12 @@ useEffect(()=>{
             </div>
             
             <div className="d-flex gap-10 flex-wrap">
-            {map(allproduct, (product) => (
+            {/* {map(allproduct, (product) => (
               <ProductCard product={product} />
-            ))}
+            ))} */}
+            
+              <ProductCard />
+            
           </div>
           </div>
         </div>

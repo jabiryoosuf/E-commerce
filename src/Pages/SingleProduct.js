@@ -12,6 +12,7 @@ import { addwishListApi, getwishListApi } from "../Store/wishSlice";
 import Heart from "../images/heart.png";
 import RedHeart from "../images/heart (1).png";
 import { toast } from "react-toastify";
+import { map } from "lodash";
 
 const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
@@ -30,6 +31,7 @@ const SingleProduct = () => {
 
   console.log(wishlist);
   console.log(cartItems);
+  console.log(singleproduct);
 
   const productImage = singleproduct?.images?.[0]?.url;
 
@@ -103,10 +105,13 @@ const SingleProduct = () => {
                 </div>
               </div>
               <div className="other-product-image d-flex">
-                <div>
-                  <img src={productImage} alt="" className="img-fluid" />
+                {map(singleproduct?.images,(image)=>(
+                  <div>
+                  <img src={image.url} alt="" className="img-fluid" />
                 </div>
-                <div>
+                ))}
+                
+                {/* <div>
                   <img src={productImage} alt="" className="img-fluid" />
                 </div>
 
@@ -116,16 +121,16 @@ const SingleProduct = () => {
 
                 <div>
                   <img src={productImage} alt="" className="img-fluid" />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="col-6">
               <div className="main-product-details">
                 <div className="border-bottom">
-                  <h3 className="title">{singleproduct?.name}</h3>
+                  <h3 className="title">{singleproduct?.title}</h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">₹ {singleproduct?.price?.actualPrice}</p>
+                  <p className="price">₹ {singleproduct?.price}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -160,8 +165,8 @@ const SingleProduct = () => {
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>{" "}
                     <p className="product-data">
-                      {singleproduct?.stock > 0
-                        ? singleproduct?.stock
+                      {singleproduct?.quantity > 0
+                        ? singleproduct?.quantity
                         : "out of stock"}
                     </p>
                   </div>
@@ -184,7 +189,7 @@ const SingleProduct = () => {
                     </div>
                   </div> */}
                   <div className="d-flex gap-10 flex-column mt-2 mb-2">
-                    <h3 className="product-heading">Color:</h3>{" "}
+                    <h3 className="product-heading">Color: {singleproduct.color}</h3>{" "}
                   </div>
                   <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-2">
                     <h3 className="product-heading">Quantity:</h3>{" "}

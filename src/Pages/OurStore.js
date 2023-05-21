@@ -288,9 +288,10 @@ const dispatch = useDispatch()
               </div>
               <div className="product-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                {map(allproduct,(product) => (
+                {/* {map(allproduct,(product) => (
                 <ProductCard product={product} grid={grid}/>
-                ))}
+                ))} */}
+                <ProductCard grid={grid}/>
 
                 </div>
               </div>

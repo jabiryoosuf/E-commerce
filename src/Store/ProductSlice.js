@@ -37,7 +37,7 @@ export const DeleteProductApi = createAsyncThunk(
 
 export const SingleProductApi=createAsyncThunk("products/SingleProductApi",async(product)=>{
   //  const response = await axiosApi.get(`/product/admin/${product}`)
-   const response = await axios.get(`${BASICURL}/product/admin/${product}`)
+   const response = await axios.get(`${BASICURL}/api/product/${product}`)
    console.log(response);
    return response.data
 })

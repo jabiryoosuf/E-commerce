@@ -70,7 +70,7 @@ const navigate = useNavigate()
 
   return (
     <>
-      {map(props.product, (product, _id) => (
+      {map(allproduct, (product, _id) => (
         <div
           key={_id}
           className={`product-card position-relative ${
@@ -96,7 +96,7 @@ const navigate = useNavigate()
             </div>
 
             <div className="product-details">
-              <h6>{product?.name}</h6>
+              <h6>{product?.title}</h6>
               {/* <h5 className="product-title">{product.description}</h5> */}
               <ReactStars
                 count={5}
@@ -115,7 +115,7 @@ const navigate = useNavigate()
                 similique quibusdam, ea quae, animi vero ratione perspiciatis!
               </p>
               <div style={{ display: "flex" }}>
-                <p className="price">₹ {product.price?.actualPrice}</p>
+                <p className="price">₹ {product.price}</p>
                 <button className="card-button"
                 onClick={()=>AddtoCart(product._id)}
                   style={{
