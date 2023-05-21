@@ -6,7 +6,8 @@ import { toast } from "react-toastify";
 export const loginApi = createAsyncThunk(
   "auth/loginApi",
   async ({ login, navigate }) => {
-    const result = await axiosApi.post("/login/mail", login);
+    // const result = await axiosApi.post("/login/mail", login);
+    const result = await axiosApi.post("/api/user/login", login);
     console.log(result);
     if (result?.data?.token) {
       sessionStorage.setItem("token", result.data.token);
@@ -29,7 +30,7 @@ export const loginApi = createAsyncThunk(
 export const registerApi = createAsyncThunk(
   "auth/registerApi",
   async ({ data, navigate }) => {
-    const result = await axiosApi.post("/register/mail", data);
+    const result = await axiosApi.post("/api/user/registion", data);
     console.log(result);
     navigate("/login");
     return result.data;
@@ -39,7 +40,7 @@ export const forgotpassowrdApi = createAsyncThunk(
   "auth/forgotpassowrdApi",
   async (email) => {
     await toast.loading("sending Email...");
-    const result = await axiosApi.post("/forgot", email);
+    const result = await axiosApi.post("/forgot-password-token", email);
     toast.dismiss();
     console.log(result);
     return result.data;
@@ -49,7 +50,7 @@ export const forgotpassowrdApi = createAsyncThunk(
 export const resetpasswordApi = createAsyncThunk(
   "auth/resetpasswordApi",
   async ({ password, id }) => {
-    const result = await axiosApi.post(`password/reset/${id}`, password);
+    const result = await axiosApi.post(`/api/user/reset-password/${id}`, password);
     console.log(result);
   }
 );

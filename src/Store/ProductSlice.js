@@ -6,7 +6,7 @@ export const addproductApi = createAsyncThunk(
   "products/addproductApi",
   async ({ data, formData, navigate }) => {
     console.log(formData);
-    const response = await axiosApi.post("/product/admin/new", data);
+    const response = await axiosApi.post("/api/product/create-product", data);
     console.log(response);
     const productId = response.data._id;
     await axiosApi.post(`/productImage/admin/new/${productId}`, formData);
@@ -19,7 +19,7 @@ export const allproductsApi = createAsyncThunk(
   "products/allproductApi",
   async () => {
     // const response = await axiosApi.get("/product/admin/all");
-    const response = await axios.get(`${BASICURL}/product/admin/all`);
+    const response = await axios.get(`${BASICURL}/api/product`);
     console.log(response);
     return response.data;
   }
