@@ -16,7 +16,7 @@ export const cartApi = createAsyncThunk(
   "cart/cartApi",
   async ({ product, quantity, navigate }) => {
     // const res = await axiosApi.post("/cart/admin/new",{items:{ product, quantity }});
-    const res = await axiosApi.post("/cart",{items:{ product, quantity }});
+    const res = await axiosApi.post("/api/user/cart", product, {count:quantity} );
     console.log(res);
     await navigate("/cart");
     return res.data;
@@ -26,7 +26,7 @@ export const cartApi = createAsyncThunk(
 // get all  cart Items
 
 export const getcartApi = createAsyncThunk("cart/cartApi", async () => {
-  const res = await axiosApi.get(`/cart/user/all`);
+  const res = await axiosApi.get(`/api/user/get-cart`);
   console.log(res);
   return res.data;
 });

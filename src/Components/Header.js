@@ -21,7 +21,7 @@ const Header = () => {
     token: state.auth.token,
   }));
 
-  const totalCartItems = cartItems.length;
+  const totalCartItems = cartItems?.length;
 
   let totalPrice = 0;
   useEffect(()=>{
