@@ -33,6 +33,10 @@ const ProductCard = (props) => {
     cartItems: state.cart.cartItems,
     allproduct: state.products.allproduct,
   }));
+
+
+  console.log(allproduct);
+ 
   const wishlistProducts = wishlist?.product;
 const navigate = useNavigate()
   console.log("singleProduct", props.product);

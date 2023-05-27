@@ -15,7 +15,8 @@ const initialState = {
 export const cartApi = createAsyncThunk(
   "cart/cartApi",
   async ({ product, quantity, navigate }) => {
-    const res = await axiosApi.post("/cart/admin/new",{items:{ product, quantity }});
+    // const res = await axiosApi.post("/cart/admin/new",{items:{ product, quantity }});
+    const res = await axiosApi.post("/cart",{items:{ product, quantity }});
     console.log(res);
     await navigate("/cart");
     return res.data;

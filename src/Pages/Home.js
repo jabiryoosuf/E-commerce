@@ -7,6 +7,7 @@ import SpecialProduct from "../Components/SpecialProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { map } from "lodash";
 import { allproductsApi } from "../Store/ProductSlice";
+import { display } from "@mui/system";
 
 
 const Home = () => {
@@ -362,18 +363,7 @@ useEffect(()=>{
             </div>
           </div>
           <div className="row">
-            <div className="col-3">
               <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
           </div>
         </div>
       </section>
